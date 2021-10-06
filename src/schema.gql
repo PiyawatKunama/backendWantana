@@ -1,0 +1,204 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type SortClothe {
+  id: Int!
+  name: String!
+  clothes: [Clothe!]
+}
+
+type TypeClothe {
+  id: Int!
+  name: String!
+  clothes: [Clothe!]
+}
+
+type Clothe {
+  id: Int!
+  created_at: DateTime!
+  updated_at: DateTime!
+  typeClothe: TypeClothe!
+  sortClothe: SortClothe!
+  orders: [Order!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Employee {
+  id: Int!
+  idCard: Int!
+  firstName: String!
+  lastName: String!
+  address: String!
+  phoneNumber: Int!
+  email: String!
+  password: String!
+  role: role!
+  orders: [Order!]
+}
+
+enum role {
+  ADMIN
+  SUB_ADMIN
+}
+
+type Order {
+  id: Int!
+  status: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  clothes: [Clothe!]!
+  employee: Employee!
+  customer: Customer!
+}
+
+type Customer {
+  id: Int!
+  idCard: Int!
+  firstName: String!
+  lastName: String!
+  address: String!
+  phoneNumber: Int!
+  lineId: Int!
+  email: String!
+  password: String!
+  orders: [Order!]
+}
+
+type Query {
+  customers: [Customer!]!
+  customer(id: Int!): Customer!
+  employees: [Employee!]!
+  employee(id: Int!): Employee!
+  clothes: [Clothe!]!
+  clothe(id: Int!): Clothe!
+  typeClothes: [TypeClothe!]!
+  typeClothe(id: Int!): TypeClothe!
+  sortClothes: [SortClothe!]!
+  sortClothe(id: Int!): SortClothe!
+  orders: [Order!]!
+  order(id: Int!): Order!
+}
+
+type Mutation {
+  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
+  removeCustomer(id: Int!): Customer!
+  createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
+  updateEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
+  removeEmployee(id: Int!): Employee!
+  createClothe(createClotheInput: CreateClotheInput!): Clothe!
+  updateClothe(updateClotheInput: UpdateClotheInput!): Clothe!
+  removeClothe(id: Int!): Clothe!
+  createTypeClothe(createTypeClotheInput: CreateTypeClotheInput!): TypeClothe!
+  updateTypeClothe(updateTypeClotheInput: UpdateTypeClotheInput!): TypeClothe!
+  removeTypeClothe(id: Int!): TypeClothe!
+  createSortClothe(createSortClotheInput: CreateSortClotheInput!): SortClothe!
+  updateSortClothe(updateSortClotheInput: UpdateSortClotheInput!): SortClothe!
+  removeSortClothe(id: Int!): SortClothe!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  removeOrder(id: Int!): Order!
+}
+
+input CreateCustomerInput {
+  idCard: Int!
+  firstName: String!
+  lastName: String!
+  address: String!
+  phoneNumber: Int!
+  lineId: Int!
+  email: String!
+  password: String!
+}
+
+input UpdateCustomerInput {
+  idCard: Int
+  firstName: String
+  lastName: String
+  address: String
+  phoneNumber: Int
+  lineId: Int
+  email: String
+  password: String
+  id: Int!
+}
+
+input CreateEmployeeInput {
+  idCard: Int!
+  firstName: String!
+  lastName: String!
+  address: String!
+  phoneNumber: Int!
+  email: String!
+  password: String!
+  role: role!
+}
+
+input UpdateEmployeeInput {
+  idCard: Int
+  firstName: String
+  lastName: String
+  address: String
+  phoneNumber: Int
+  email: String
+  password: String
+  role: role
+  id: Int
+}
+
+input CreateClotheInput {
+  id: Float
+  typeClotheId: Int!
+  sortClotheId: Int!
+}
+
+input UpdateClotheInput {
+  id: Int!
+  typeClotheId: Int
+  sortClotheId: Int
+}
+
+input CreateTypeClotheInput {
+  name: String!
+}
+
+input UpdateTypeClotheInput {
+  name: String!
+  id: Int!
+}
+
+input CreateSortClotheInput {
+  name: String!
+}
+
+input UpdateSortClotheInput {
+  name: String!
+  id: Int!
+}
+
+input CreateOrderInput {
+  id: Float
+  role: status
+  clotheIds: [Int!]!
+  employeeId: Int!
+  customerId: Int!
+}
+
+enum status {
+  STATUS_DEFAULT
+  STATUS_ONE
+  STATUS_TWO
+}
+
+input UpdateOrderInput {
+  id: Int!
+  role: status
+  clotheIds: [Int!]
+  employeeId: Int
+  customerId: Int
+}
