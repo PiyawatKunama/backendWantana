@@ -4,22 +4,22 @@ const PORT = process.env.PORT;
 
 const https = require('https');
 const express = require('express');
-const appOriginal = express();
+const lineApp = express();
 const TOKEN =
   '4q3VKFP+VtVmHbT3pwi1NMBfS0XM/+mOsl/pjGi8706ZTZnfTzU/xApq8cGDCeTo7NPe8vMz4DNIOuncCHbvMnvOXuvPQ0enwcmmhgUFBP69jDS43cKrNK3zGQZ7aARoy55SOfFttTqsicRpJzrMbAdB04t89/1O/w1cDnyilFU=';
 
-appOriginal.use(express.json());
-appOriginal.use(
+lineApp.use(express.json());
+lineApp.use(
   express.urlencoded({
     extended: true,
   }),
 );
 
-appOriginal.get('/', (req, res) => {
+lineApp.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
-appOriginal.post('/webhook', function (req, res) {
+lineApp.post('/webhook', function (req, res) {
   res.send('https://linewantana.herokuapp.com/webhook');
 
   if (req.body.events[0].type === 'follow') {
