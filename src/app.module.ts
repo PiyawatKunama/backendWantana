@@ -12,28 +12,28 @@ import { TypeClothesModule } from './type-clothes/type-clothes.module';
 import { OrdersModule } from './orders/orders.module';
 
 @Module({
-  imports: [
-    GraphQLModule.forRoot({
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'wantana',
-      entities: ['dist/**/**.entity{.ts,.js}'],
-      synchronize: true,
-    }),
-    CustomersModule,
-    EmployeesModule,
-    ClothesModule,
-    SortClothesModule,
-    TypeClothesModule,
-    OrdersModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        GraphQLModule.forRoot({
+            autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        }),
+        TypeOrmModule.forRoot({
+            type: 'mysql',
+            host: 'localhost',
+            port: 3306,
+            username: 'root',
+            password: '',
+            database: 'wantana',
+            entities: ['dist/**/**.entity{.ts,.js}'],
+            synchronize: true,
+        }),
+        CustomersModule,
+        EmployeesModule,
+        ClothesModule,
+        SortClothesModule,
+        TypeClothesModule,
+        OrdersModule,
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}

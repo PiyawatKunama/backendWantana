@@ -2,6 +2,6 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateSortClotheInput {
-  @Field()
-  name: string;
+    @Field()
+    name: string;
 }

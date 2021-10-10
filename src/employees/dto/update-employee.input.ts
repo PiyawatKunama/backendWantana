@@ -4,30 +4,30 @@ import { Role } from '../enums/role';
 
 @InputType()
 export class UpdateEmployeeInput extends PartialType(CreateEmployeeInput) {
-  @Field(() => Int, { nullable: true })
-  id: number;
+    @Field(() => Int, { nullable: true })
+    id: number;
 
-  @Field(() => Int, { nullable: true })
-  idCard: number;
+    @Field(() => Int, { nullable: true })
+    idCard: number;
 
-  @Field({ nullable: true })
-  firstName: string;
+    @Field({ nullable: true })
+    firstName: string;
 
-  @Field({ nullable: true })
-  lastName: string;
+    @Field({ nullable: true })
+    lastName: string;
 
-  @Field({ nullable: true })
-  address: string;
+    @Field({ nullable: true })
+    address: string;
 
-  @Field(() => Int, { nullable: true })
-  phoneNumber: number;
+    @Field(() => Int, { nullable: true })
+    phoneNumber: number;
 
-  @Field({ nullable: true })
-  email: string;
+    @Field({ nullable: true })
+    email: string;
 
-  @Field({ nullable: true })
-  password: string;
+    @Field({ nullable: true })
+    password: string;
 
-  @Field(() => Role, { nullable: true })
-  role: Role;
+    @Field(() => Role, { nullable: true })
+    role: Role;
 }

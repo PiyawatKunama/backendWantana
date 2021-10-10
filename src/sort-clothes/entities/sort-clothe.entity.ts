@@ -5,15 +5,15 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 @ObjectType()
 export class SortClothe {
-  @PrimaryGeneratedColumn()
-  @Field(() => Int)
-  id: number;
+    @PrimaryGeneratedColumn()
+    @Field(() => Int)
+    id: number;
 
-  @Column()
-  @Field()
-  name: string;
+    @Column()
+    @Field()
+    name: string;
 
-  @OneToMany(() => Clothe, (clothe) => clothe.sortClothe)
-  @Field(() => [Clothe], { nullable: true })
-  clothes: Clothe[];
+    @OneToMany(() => Clothe, (clothe) => clothe.sortClothe)
+    @Field(() => [Clothe], { nullable: true })
+    clothes: Clothe[];
 }

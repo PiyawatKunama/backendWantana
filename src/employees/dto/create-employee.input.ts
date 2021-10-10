@@ -3,27 +3,27 @@ import { Role } from '../enums/role';
 
 @InputType()
 export class CreateEmployeeInput {
-  @Field(() => Int)
-  idCard: number;
+    @Field(() => Int)
+    idCard: number;
 
-  @Field()
-  firstName: string;
+    @Field()
+    firstName: string;
 
-  @Field()
-  lastName: string;
+    @Field()
+    lastName: string;
 
-  @Field()
-  address: string;
+    @Field()
+    address: string;
 
-  @Field(() => Int)
-  phoneNumber: number;
+    @Field(() => Int)
+    phoneNumber: number;
 
-  @Field()
-  email: string;
+    @Field()
+    email: string;
 
-  @Field()
-  password: string;
+    @Field()
+    password: string;
 
-  @Field(() => Role)
-  role: Role;
+    @Field(() => Role)
+    role: Role;
 }

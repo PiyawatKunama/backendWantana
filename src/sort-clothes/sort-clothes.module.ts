@@ -5,8 +5,8 @@ import { SortClothe } from './entities/sort-clothe.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SortClothe])],
-  providers: [SortClothesResolver, SortClothesService],
-  exports: [SortClothesService],
+    imports: [TypeOrmModule.forFeature([SortClothe])],
+    providers: [SortClothesResolver, SortClothesService],
+    exports: [SortClothesService],
 })
 export class SortClothesModule {}

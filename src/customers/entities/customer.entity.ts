@@ -5,43 +5,43 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 @ObjectType()
 export class Customer {
-  @PrimaryGeneratedColumn()
-  @Field(() => Int)
-  id: number;
+    @PrimaryGeneratedColumn()
+    @Field(() => Int)
+    id: number;
 
-  @Column()
-  @Field(() => Int)
-  idCard: number;
+    @Column()
+    @Field(() => Int)
+    idCard: number;
 
-  @Column()
-  @Field()
-  firstName: string;
+    @Column()
+    @Field()
+    firstName: string;
 
-  @Column()
-  @Field()
-  lastName: string;
+    @Column()
+    @Field()
+    lastName: string;
 
-  @Column()
-  @Field()
-  address: string;
+    @Column()
+    @Field()
+    address: string;
 
-  @Column()
-  @Field(() => Int)
-  phoneNumber: number;
+    @Column()
+    @Field(() => Int)
+    phoneNumber: number;
 
-  @Column()
-  @Field(() => Int)
-  lineId: number;
+    @Column()
+    @Field(() => Int)
+    lineId: number;
 
-  @Column()
-  @Field()
-  email: string;
+    @Column()
+    @Field()
+    email: string;
 
-  @Column()
-  @Field()
-  password: string;
+    @Column()
+    @Field()
+    password: string;
 
-  @OneToMany(() => Order, (order) => order.customer)
-  @Field(() => [Order], { nullable: true })
-  orders: Order[];
+    @OneToMany(() => Order, (order) => order.customer)
+    @Field(() => [Order], { nullable: true })
+    orders: Order[];
 }

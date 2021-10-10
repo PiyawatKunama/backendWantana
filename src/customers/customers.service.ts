@@ -8,30 +8,30 @@ import { Relations } from './relations';
 
 @Injectable()
 export class CustomersService {
-  constructor(
-    @InjectRepository(Customer)
-    private customersRepository: Repository<Customer>,
-  ) {}
+    constructor(
+        @InjectRepository(Customer)
+        private customersRepository: Repository<Customer>,
+    ) {}
 
-  async create(createCustomerInput: CreateCustomerInput): Promise<Customer> {
-    const newCustomer = this.customersRepository.create(createCustomerInput);
-    return await this.customersRepository.save(newCustomer);
-  }
+    async create(createCustomerInput: CreateCustomerInput): Promise<Customer> {
+        const newCustomer = this.customersRepository.create(createCustomerInput);
+        return await this.customersRepository.save(newCustomer);
+    }
 
-  async findAll(): Promise<Customer[]> {
-    return await this.customersRepository.find(Relations);
-  }
+    async findAll(): Promise<Customer[]> {
+        return await this.customersRepository.find(Relations);
+    }
 
-  async findOne(id: number): Promise<Customer> {
-    return await this.customersRepository.findOneOrFail(id, Relations);
-  }
+    async findOne(id: number): Promise<Customer> {
+        return await this.customersRepository.findOneOrFail(id, Relations);
+    }
 
-  async update(id: number, updateCustomerInput: UpdateCustomerInput) {
-    const updateCustomer = this.customersRepository.create(updateCustomerInput);
-    return await this.customersRepository.update(id, updateCustomer);
-  }
+    async update(id: number, updateCustomerInput: UpdateCustomerInput) {
+        const updateCustomer = this.customersRepository.create(updateCustomerInput);
+        return await this.customersRepository.update(id, updateCustomer);
+    }
 
-  async remove(id: number) {
-    return await this.customersRepository.delete(id);
-  }
+    async remove(id: number) {
+        return await this.customersRepository.delete(id);
+    }
 }

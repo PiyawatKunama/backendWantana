@@ -10,41 +10,41 @@ import { Relations } from './relations';
 
 @Injectable()
 export class ClothesService {
-  constructor(
-    @InjectRepository(Clothe)
-    private clothesRepository: Repository<Clothe>,
-    private typeClothesService: TypeClothesService,
-    private sortClothesService: SortClothesService,
-  ) {}
+    constructor(
+        @InjectRepository(Clothe)
+        private clothesRepository: Repository<Clothe>,
+        private typeClothesService: TypeClothesService,
+        private sortClothesService: SortClothesService,
+    ) {}
 
-  async create(createClotheInput: CreateClotheInput) {
-    const newClothe = this.clothesRepository.create(createClotheInput);
+    async create(createClotheInput: CreateClotheInput) {
+        const newClothe = this.clothesRepository.create(createClotheInput);
 
-    const typeClothe = await this.typeClothesService.findOne(
-      createClotheInput.typeClotheId,
-    );
-    newClothe.typeClothe = typeClothe;
+        const typeClothe = await this.typeClothesService.findOne(
+            createClotheInput.typeClotheId,
+        );
+        newClothe.typeClothe = typeClothe;
 
-    const sortClothe = await this.sortClothesService.findOne(
-      createClotheInput.sortClotheId,
-    );
-    newClothe.sortClothe = sortClothe;
-    return await this.clothesRepository.save(newClothe);
-  }
+        const sortClothe = await this.sortClothesService.findOne(
+            createClotheInput.sortClotheId,
+        );
+        newClothe.sortClothe = sortClothe;
+        return await this.clothesRepository.save(newClothe);
+    }
 
-  async findAll(): Promise<Clothe[]> {
-    return await this.clothesRepository.find(Relations);
-  }
+    async findAll(): Promise<Clothe[]> {
+        return await this.clothesRepository.find(Relations);
+    }
 
-  async findOne(id: number): Promise<Clothe> {
-    return await this.clothesRepository.findOneOrFail(id, Relations);
-  }
+    async findOne(id: number): Promise<Clothe> {
+        return await this.clothesRepository.findOneOrFail(id, Relations);
+    }
 
-  update(id: number, updateClotheInput: UpdateClotheInput) {
-    return `This action updates a #${id} clothe`;
-  }
+    update(id: number, updateClotheInput: UpdateClotheInput) {
+        return `This action updates a #${id} clothe`;
+    }
 
-  async remove(id: number) {
-    return await this.clothesRepository.delete(id);
-  }
+    async remove(id: number) {
+        return await this.clothesRepository.delete(id);
+    }
 }

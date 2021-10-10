@@ -1,1 +1,1 @@
-{"version":3,"file":"relations.js","sourceRoot":"","sources":["../../src/employees/relations.ts"],"names":[],"mappings":";;;AAAa,QAAA,SAAS,GAAG;IACvB,SAAS,EAAE,CAAC,QAAQ,CAAC;CACtB,CAAC"}
+{"version":3,"file":"relations.js","sourceRoot":"","sources":["../../src/employees/relations.ts"],"names":[],"mappings":";;;AAAa,QAAA,SAAS,GAAG;IACrB,SAAS,EAAE,CAAC,QAAQ,CAAC;CACxB,CAAC"}

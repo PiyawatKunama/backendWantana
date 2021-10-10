@@ -6,43 +6,43 @@ import { Role } from '../enums/role';
 @Entity()
 @ObjectType()
 export class Employee {
-  @PrimaryGeneratedColumn()
-  @Field(() => Int)
-  id: number;
+    @PrimaryGeneratedColumn()
+    @Field(() => Int)
+    id: number;
 
-  @Column()
-  @Field(() => Int)
-  idCard: number;
+    @Column()
+    @Field(() => Int)
+    idCard: number;
 
-  @Column()
-  @Field()
-  firstName: string;
+    @Column()
+    @Field()
+    firstName: string;
 
-  @Column()
-  @Field()
-  lastName: string;
+    @Column()
+    @Field()
+    lastName: string;
 
-  @Column()
-  @Field()
-  address: string;
+    @Column()
+    @Field()
+    address: string;
 
-  @Column()
-  @Field(() => Int)
-  phoneNumber: number;
+    @Column()
+    @Field(() => Int)
+    phoneNumber: number;
 
-  @Column()
-  @Field()
-  email: string;
+    @Column()
+    @Field()
+    email: string;
 
-  @Column()
-  @Field()
-  password: string;
+    @Column()
+    @Field()
+    password: string;
 
-  @Column()
-  @Field(() => Role)
-  role: Role;
+    @Column()
+    @Field(() => Role)
+    role: Role;
 
-  @OneToMany(() => Order, (order) => order.employee)
-  @Field(() => [Order], { nullable: true })
-  orders: Order[];
+    @OneToMany(() => Order, (order) => order.employee)
+    @Field(() => [Order], { nullable: true })
+    orders: Order[];
 }

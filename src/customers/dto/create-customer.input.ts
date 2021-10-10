@@ -2,27 +2,27 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateCustomerInput {
-  @Field(() => Int)
-  idCard: number;
+    @Field(() => Int)
+    idCard: number;
 
-  @Field()
-  firstName: string;
+    @Field()
+    firstName: string;
 
-  @Field()
-  lastName: string;
+    @Field()
+    lastName: string;
 
-  @Field()
-  address: string;
+    @Field()
+    address: string;
 
-  @Field(() => Int)
-  phoneNumber: number;
+    @Field(() => Int)
+    phoneNumber: number;
 
-  @Field(() => Int)
-  lineId: number;
+    @Field(() => Int)
+    lineId: number;
 
-  @Field()
-  email: string;
+    @Field()
+    email: string;
 
-  @Field()
-  password: string;
+    @Field()
+    password: string;
 }

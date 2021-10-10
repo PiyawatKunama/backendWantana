@@ -6,40 +6,40 @@ import { UpdateEmployeeInput } from './dto/update-employee.input';
 
 @Resolver(() => Employee)
 export class EmployeesResolver {
-  constructor(private readonly employeesService: EmployeesService) {}
+    constructor(private readonly employeesService: EmployeesService) {}
 
-  @Mutation(() => Employee)
-  createEmployee(
-    @Args('createEmployeeInput') createEmployeeInput: CreateEmployeeInput,
-  ) {
-    return this.employeesService.create(createEmployeeInput);
-  }
+    @Mutation(() => Employee)
+    createEmployee(
+        @Args('createEmployeeInput') createEmployeeInput: CreateEmployeeInput,
+    ) {
+        return this.employeesService.create(createEmployeeInput);
+    }
 
-  @Query(() => [Employee], { name: 'employees' })
-  findAll() {
-    return this.employeesService.findAll();
-  }
+    @Query(() => [Employee], { name: 'employees' })
+    findAll() {
+        return this.employeesService.findAll();
+    }
 
-  @Query(() => Employee, { name: 'employee' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.employeesService.findOne(id);
-  }
+    @Query(() => Employee, { name: 'employee' })
+    findOne(@Args('id', { type: () => Int }) id: number) {
+        return this.employeesService.findOne(id);
+    }
 
-  @Mutation(() => Employee)
-  async updateEmployee(
-    @Args('updateEmployeeInput') updateEmployeeInput: UpdateEmployeeInput,
-  ) {
-    await this.employeesService.update(
-      updateEmployeeInput.id,
-      updateEmployeeInput,
-    );
-    return await this.employeesService.findOne(updateEmployeeInput.id);
-  }
+    @Mutation(() => Employee)
+    async updateEmployee(
+        @Args('updateEmployeeInput') updateEmployeeInput: UpdateEmployeeInput,
+    ) {
+        await this.employeesService.update(
+            updateEmployeeInput.id,
+            updateEmployeeInput,
+        );
+        return await this.employeesService.findOne(updateEmployeeInput.id);
+    }
 
-  @Mutation(() => Employee)
-  async removeEmployee(@Args('id', { type: () => Int }) id: number) {
-    const removeData = await this.employeesService.findOne(id);
-    await this.employeesService.remove(id);
-    return removeData;
-  }
+    @Mutation(() => Employee)
+    async removeEmployee(@Args('id', { type: () => Int }) id: number) {
+        const removeData = await this.employeesService.findOne(id);
+        await this.employeesService.remove(id);
+        return removeData;
+    }
 }

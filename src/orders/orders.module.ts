@@ -8,12 +8,12 @@ import { EmployeesModule } from 'src/employees/employees.module';
 import { CustomersModule } from 'src/customers/customers.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Order]),
-    ClothesModule,
-    EmployeesModule,
-    CustomersModule,
-  ],
-  providers: [OrdersResolver, OrdersService],
+    imports: [
+        TypeOrmModule.forFeature([Order]),
+        ClothesModule,
+        EmployeesModule,
+        CustomersModule,
+    ],
+    providers: [OrdersResolver, OrdersService],
 })
 export class OrdersModule {}
