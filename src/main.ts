@@ -77,6 +77,10 @@ lineApp.post('/webhook', function (req, res) {
   }
 });
 
+lineApp.listen(process.env.PORT, () => {
+  console.log(`:${PORT}`);
+});
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(process.env.PORT);
