@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateOrderInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const status_1 = require("../enums/status");
-const class_validator_1 = require("class-validator");
 let CreateOrderInput = class CreateOrderInput {
 };
 __decorate([
@@ -20,7 +19,6 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateOrderInput.prototype, "id", void 0);
 __decorate([
-    (0, class_validator_1.IsEnum)(status_1.Status),
     (0, graphql_1.Field)(() => status_1.Status, { nullable: true }),
     __metadata("design:type", Number)
 ], CreateOrderInput.prototype, "role", void 0);

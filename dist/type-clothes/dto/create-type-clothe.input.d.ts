@@ -1,3 +1,3 @@
 export declare class CreateTypeClotheInput {
-  name: string;
+    name: string;
 }
