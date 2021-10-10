@@ -5,9 +5,13 @@ import { UpdateTypeClotheInput } from './dto/update-type-clothe.input';
 export declare class TypeClothesResolver {
     private readonly typeClothesService;
     constructor(typeClothesService: TypeClothesService);
-    createTypeClothe(createTypeClotheInput: CreateTypeClotheInput): Promise<TypeClothe>;
+    createTypeClothe(
+        createTypeClotheInput: CreateTypeClotheInput,
+    ): Promise<TypeClothe>;
     findAll(): Promise<TypeClothe[]>;
     findOne(id: number): Promise<TypeClothe>;
-    updateTypeClothe(updateTypeClotheInput: UpdateTypeClotheInput): Promise<TypeClothe>;
+    updateTypeClothe(
+        updateTypeClotheInput: UpdateTypeClotheInput,
+    ): Promise<TypeClothe>;
     removeTypeClothe(id: number): Promise<TypeClothe>;
 }

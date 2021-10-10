@@ -8,6 +8,9 @@ export declare class CustomersService {
     create(createCustomerInput: CreateCustomerInput): Promise<Customer>;
     findAll(): Promise<Customer[]>;
     findOne(id: number): Promise<Customer>;
-    update(id: number, updateCustomerInput: UpdateCustomerInput): Promise<import("typeorm").UpdateResult>;
-    remove(id: number): Promise<import("typeorm").DeleteResult>;
+    update(
+        id: number,
+        updateCustomerInput: UpdateCustomerInput,
+    ): Promise<import('typeorm').UpdateResult>;
+    remove(id: number): Promise<import('typeorm').DeleteResult>;
 }

@@ -8,10 +8,14 @@ export declare class ClothesService {
     private clothesRepository;
     private typeClothesService;
     private sortClothesService;
-    constructor(clothesRepository: Repository<Clothe>, typeClothesService: TypeClothesService, sortClothesService: SortClothesService);
+    constructor(
+        clothesRepository: Repository<Clothe>,
+        typeClothesService: TypeClothesService,
+        sortClothesService: SortClothesService,
+    );
     create(createClotheInput: CreateClotheInput): Promise<Clothe>;
     findAll(): Promise<Clothe[]>;
     findOne(id: number): Promise<Clothe>;
     update(id: number, updateClotheInput: UpdateClotheInput): string;
-    remove(id: number): Promise<import("typeorm").DeleteResult>;
+    remove(id: number): Promise<import('typeorm').DeleteResult>;
 }
