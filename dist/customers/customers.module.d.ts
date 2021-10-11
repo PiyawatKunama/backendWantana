@@ -1,1 +1,2 @@
-export declare class CustomersModule {}
+export declare class CustomersModule {
+}

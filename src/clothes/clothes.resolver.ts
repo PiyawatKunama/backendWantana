@@ -24,8 +24,11 @@ export class ClothesResolver {
     }
 
     @Mutation(() => Clothe)
-    updateClothe(@Args('updateClotheInput') updateClotheInput: UpdateClotheInput) {
-        return this.clothesService.update(updateClotheInput.id, updateClotheInput);
+    async updateClothe(
+        @Args('updateClotheInput') updateClotheInput: UpdateClotheInput,
+    ) {
+        await this.clothesService.update(updateClotheInput.id, updateClotheInput);
+        return await this.clothesService.findOne(updateClotheInput.id);
     }
 
     @Mutation(() => Clothe)

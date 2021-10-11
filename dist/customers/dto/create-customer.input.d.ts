@@ -4,7 +4,7 @@ export declare class CreateCustomerInput {
     lastName: string;
     address: string;
     phoneNumber: number;
-    lineId: number;
+    lineId: string;
     email: string;
     password: string;
 }

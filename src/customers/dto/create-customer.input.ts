@@ -17,8 +17,8 @@ export class CreateCustomerInput {
     @Field(() => Int)
     phoneNumber: number;
 
-    @Field(() => Int)
-    lineId: number;
+    @Field()
+    lineId: string;
 
     @Field()
     email: string;

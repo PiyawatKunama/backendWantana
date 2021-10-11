@@ -10,12 +10,7 @@ export declare class OrdersService {
     private clothesService;
     private employeesService;
     private customersService;
-    constructor(
-        ordersRepository: Repository<Order>,
-        clothesService: ClothesService,
-        employeesService: EmployeesService,
-        customersService: CustomersService,
-    );
+    constructor(ordersRepository: Repository<Order>, clothesService: ClothesService, employeesService: EmployeesService, customersService: CustomersService);
     create(createOrderInput: CreateOrderInput): Promise<Order>;
     findAll(): Promise<Order[]>;
     findOne(id: number): Promise<Order>;

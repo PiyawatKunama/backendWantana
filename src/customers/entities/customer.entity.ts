@@ -30,8 +30,12 @@ export class Customer {
     phoneNumber: number;
 
     @Column()
-    @Field(() => Int)
-    lineId: number;
+    @Field()
+    lineId: string;
+
+    @Column({ nullable: true })
+    @Field({ nullable: true })
+    lineUserId: string;
 
     @Column()
     @Field()

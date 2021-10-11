@@ -10,4 +10,5 @@ export declare class CustomersResolver {
     findOne(id: number): Promise<Customer>;
     updateCustomer(updateCustomerInput: UpdateCustomerInput): Promise<Customer>;
     removeCustomer(id: number): Promise<Customer>;
+    storeLineUserId(updateCustomerInput: UpdateCustomerInput): Promise<void>;
 }

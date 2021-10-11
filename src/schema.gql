@@ -63,7 +63,8 @@ type Customer {
   lastName: String!
   address: String!
   phoneNumber: Int!
-  lineId: Int!
+  lineId: String!
+  lineUserId: String
   email: String!
   password: String!
   orders: [Order!]
@@ -88,6 +89,7 @@ type Mutation {
   createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
   updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
   removeCustomer(id: Int!): Customer!
+  storeLineUserId(updateCustomerInput: UpdateCustomerInput!): Customer!
   createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
   updateEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
   removeEmployee(id: Int!): Employee!
@@ -111,7 +113,7 @@ input CreateCustomerInput {
   lastName: String!
   address: String!
   phoneNumber: Int!
-  lineId: Int!
+  lineId: String!
   email: String!
   password: String!
 }
@@ -122,10 +124,11 @@ input UpdateCustomerInput {
   lastName: String
   address: String
   phoneNumber: Int
-  lineId: Int
+  lineId: String
   email: String
   password: String
   id: Int!
+  lineUserId: String
 }
 
 input CreateEmployeeInput {

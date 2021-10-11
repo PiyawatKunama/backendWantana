@@ -40,8 +40,9 @@ export class ClothesService {
         return await this.clothesRepository.findOneOrFail(id, Relations);
     }
 
-    update(id: number, updateClotheInput: UpdateClotheInput) {
-        return `This action updates a #${id} clothe`;
+    async update(id: number, updateClotheInput: UpdateClotheInput) {
+        const updateClothe = this.clothesRepository.create(updateClotheInput);
+        return await this.clothesRepository.update(id, updateClothe);
     }
 
     async remove(id: number) {

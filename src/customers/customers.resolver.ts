@@ -42,4 +42,11 @@ export class CustomersResolver {
         await this.customersService.remove(id);
         return removeData;
     }
+
+    @Mutation(() => Customer)
+    async storeLineUserId(
+        @Args('updateCustomerInput') updateCustomerInput: UpdateCustomerInput,
+    ) {
+        await this.customersService.storeLineUserId(updateCustomerInput);
+    }
 }

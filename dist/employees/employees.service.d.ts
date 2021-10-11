@@ -8,9 +8,6 @@ export declare class EmployeesService {
     create(createEmployeeInput: CreateEmployeeInput): Promise<Employee>;
     findAll(): Promise<Employee[]>;
     findOne(id: number): Promise<Employee>;
-    update(
-        id: number,
-        updateEmployeeInput: UpdateEmployeeInput,
-    ): Promise<import('typeorm').UpdateResult>;
-    remove(id: number): Promise<import('typeorm').DeleteResult>;
+    update(id: number, updateEmployeeInput: UpdateEmployeeInput): Promise<import("typeorm").UpdateResult>;
+    remove(id: number): Promise<import("typeorm").DeleteResult>;
 }

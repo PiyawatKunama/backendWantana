@@ -21,12 +21,15 @@ export class UpdateCustomerInput extends PartialType(CreateCustomerInput) {
     @Field(() => Int, { nullable: true })
     phoneNumber: number;
 
-    @Field(() => Int, { nullable: true })
-    lineId: number;
+    @Field({ nullable: true })
+    lineId: string;
 
     @Field({ nullable: true })
     email: string;
 
     @Field({ nullable: true })
     password: string;
+
+    @Field({ nullable: true })
+    lineUserId: string;
 }

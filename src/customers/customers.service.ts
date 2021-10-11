@@ -34,4 +34,13 @@ export class CustomersService {
     async remove(id: number) {
         return await this.customersRepository.delete(id);
     }
+
+    async storeLineUserId(updateCustomerInput: UpdateCustomerInput) {
+        await this.customersRepository
+            .createQueryBuilder()
+            .update(Customer)
+            .set({ lineUserId: updateCustomerInput.lineUserId })
+            .where('lineId = :lineId', { lineId: updateCustomerInput.lineId })
+            .execute();
+    }
 }

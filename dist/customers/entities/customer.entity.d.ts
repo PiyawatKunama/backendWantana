@@ -6,7 +6,8 @@ export declare class Customer {
     lastName: string;
     address: string;
     phoneNumber: number;
-    lineId: number;
+    lineId: string;
+    lineUserId: string;
     email: string;
     password: string;
     orders: Order[];

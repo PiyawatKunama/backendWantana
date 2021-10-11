@@ -8,6 +8,6 @@ export declare class ClothesResolver {
     createClothe(createClotheInput: CreateClotheInput): Promise<Clothe>;
     findAll(): Promise<Clothe[]>;
     findOne(id: number): Promise<Clothe>;
-    updateClothe(updateClotheInput: UpdateClotheInput): string;
+    updateClothe(updateClotheInput: UpdateClotheInput): Promise<Clothe>;
     removeClothe(id: number): Promise<Clothe>;
 }
