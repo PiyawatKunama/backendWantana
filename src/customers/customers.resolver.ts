@@ -43,10 +43,11 @@ export class CustomersResolver {
         return removeData;
     }
 
-    @Mutation(() => Customer)
+    @Mutation(() => [Customer])
     async storeLineUserId(
         @Args('updateCustomerInput') updateCustomerInput: UpdateCustomerInput,
     ) {
         await this.customersService.storeLineUserId(updateCustomerInput);
+        return this.customersService.findAll();
     }
 }

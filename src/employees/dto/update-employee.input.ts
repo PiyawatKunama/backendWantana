@@ -7,8 +7,8 @@ export class UpdateEmployeeInput extends PartialType(CreateEmployeeInput) {
     @Field(() => Int, { nullable: true })
     id: number;
 
-    @Field(() => Int, { nullable: true })
-    idCard: number;
+    @Field({ nullable: true })
+    idCard: string;
 
     @Field({ nullable: true })
     firstName: string;
@@ -19,8 +19,8 @@ export class UpdateEmployeeInput extends PartialType(CreateEmployeeInput) {
     @Field({ nullable: true })
     address: string;
 
-    @Field(() => Int, { nullable: true })
-    phoneNumber: number;
+    @Field({ nullable: true })
+    phoneNumber: string;
 
     @Field({ nullable: true })
     email: string;

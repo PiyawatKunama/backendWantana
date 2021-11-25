@@ -23,8 +23,8 @@ __decorate([
 ], Employee.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, graphql_1.Field)(() => graphql_1.Int),
-    __metadata("design:type", Number)
+    (0, graphql_1.Field)(),
+    __metadata("design:type", String)
 ], Employee.prototype, "idCard", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
@@ -43,8 +43,8 @@ __decorate([
 ], Employee.prototype, "address", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, graphql_1.Field)(() => graphql_1.Int),
-    __metadata("design:type", Number)
+    (0, graphql_1.Field)(),
+    __metadata("design:type", String)
 ], Employee.prototype, "phoneNumber", void 0);
 __decorate([
     (0, typeorm_1.Column)(),

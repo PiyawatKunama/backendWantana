@@ -11,8 +11,8 @@ export class Employee {
     id: number;
 
     @Column()
-    @Field(() => Int)
-    idCard: number;
+    @Field()
+    idCard: string;
 
     @Column()
     @Field()
@@ -27,8 +27,8 @@ export class Employee {
     address: string;
 
     @Column()
-    @Field(() => Int)
-    phoneNumber: number;
+    @Field()
+    phoneNumber: string;
 
     @Column()
     @Field()

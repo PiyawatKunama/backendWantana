@@ -1,11 +1,11 @@
 import { Order } from 'src/orders/entities/order.entity';
 export declare class Customer {
     id: number;
-    idCard: number;
+    idCard: string;
     firstName: string;
     lastName: string;
     address: string;
-    phoneNumber: number;
+    phoneNumber: string;
     lineId: string;
     lineUserId: string;
     email: string;

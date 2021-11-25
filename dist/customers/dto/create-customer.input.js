@@ -14,8 +14,8 @@ const graphql_1 = require("@nestjs/graphql");
 let CreateCustomerInput = class CreateCustomerInput {
 };
 __decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int),
-    __metadata("design:type", Number)
+    (0, graphql_1.Field)(),
+    __metadata("design:type", String)
 ], CreateCustomerInput.prototype, "idCard", void 0);
 __decorate([
     (0, graphql_1.Field)(),
@@ -30,8 +30,8 @@ __decorate([
     __metadata("design:type", String)
 ], CreateCustomerInput.prototype, "address", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int),
-    __metadata("design:type", Number)
+    (0, graphql_1.Field)(),
+    __metadata("design:type", String)
 ], CreateCustomerInput.prototype, "phoneNumber", void 0);
 __decorate([
     (0, graphql_1.Field)(),

@@ -22,8 +22,8 @@ __decorate([
 ], Customer.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, graphql_1.Field)(() => graphql_1.Int),
-    __metadata("design:type", Number)
+    (0, graphql_1.Field)(),
+    __metadata("design:type", String)
 ], Customer.prototype, "idCard", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
@@ -42,8 +42,8 @@ __decorate([
 ], Customer.prototype, "address", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, graphql_1.Field)(() => graphql_1.Int),
-    __metadata("design:type", Number)
+    (0, graphql_1.Field)(),
+    __metadata("design:type", String)
 ], Customer.prototype, "phoneNumber", void 0);
 __decorate([
     (0, typeorm_1.Column)(),

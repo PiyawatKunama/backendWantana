@@ -30,11 +30,11 @@ scalar DateTime
 
 type Employee {
   id: Int!
-  idCard: Int!
+  idCard: String!
   firstName: String!
   lastName: String!
   address: String!
-  phoneNumber: Int!
+  phoneNumber: String!
   email: String!
   password: String!
   role: role!
@@ -58,11 +58,11 @@ type Order {
 
 type Customer {
   id: Int!
-  idCard: Int!
+  idCard: String!
   firstName: String!
   lastName: String!
   address: String!
-  phoneNumber: Int!
+  phoneNumber: String!
   lineId: String!
   lineUserId: String
   email: String!
@@ -89,7 +89,7 @@ type Mutation {
   createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
   updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
   removeCustomer(id: Int!): Customer!
-  storeLineUserId(updateCustomerInput: UpdateCustomerInput!): Customer!
+  storeLineUserId(updateCustomerInput: UpdateCustomerInput!): [Customer!]!
   createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
   updateEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
   removeEmployee(id: Int!): Employee!
@@ -108,22 +108,22 @@ type Mutation {
 }
 
 input CreateCustomerInput {
-  idCard: Int!
+  idCard: String!
   firstName: String!
   lastName: String!
   address: String!
-  phoneNumber: Int!
+  phoneNumber: String!
   lineId: String!
   email: String!
   password: String!
 }
 
 input UpdateCustomerInput {
-  idCard: Int
+  idCard: String
   firstName: String
   lastName: String
   address: String
-  phoneNumber: Int
+  phoneNumber: String
   lineId: String
   email: String
   password: String
@@ -132,22 +132,22 @@ input UpdateCustomerInput {
 }
 
 input CreateEmployeeInput {
-  idCard: Int!
+  idCard: String!
   firstName: String!
   lastName: String!
   address: String!
-  phoneNumber: Int!
+  phoneNumber: String!
   email: String!
   password: String!
   role: role!
 }
 
 input UpdateEmployeeInput {
-  idCard: Int
+  idCard: String
   firstName: String
   lastName: String
   address: String
-  phoneNumber: Int
+  phoneNumber: String
   email: String
   password: String
   role: role

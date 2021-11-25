@@ -19,8 +19,8 @@ __decorate([
     __metadata("design:type", Number)
 ], UpdateCustomerInput.prototype, "id", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int, { nullable: true }),
-    __metadata("design:type", Number)
+    (0, graphql_1.Field)({ nullable: true }),
+    __metadata("design:type", String)
 ], UpdateCustomerInput.prototype, "idCard", void 0);
 __decorate([
     (0, graphql_1.Field)({ nullable: true }),
@@ -35,8 +35,8 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateCustomerInput.prototype, "address", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int, { nullable: true }),
-    __metadata("design:type", Number)
+    (0, graphql_1.Field)({ nullable: true }),
+    __metadata("design:type", String)
 ], UpdateCustomerInput.prototype, "phoneNumber", void 0);
 __decorate([
     (0, graphql_1.Field)({ nullable: true }),

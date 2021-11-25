@@ -42,6 +42,7 @@ let CustomersResolver = class CustomersResolver {
     }
     async storeLineUserId(updateCustomerInput) {
         await this.customersService.storeLineUserId(updateCustomerInput);
+        return this.customersService.findAll();
     }
 };
 __decorate([
@@ -79,7 +80,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CustomersResolver.prototype, "removeCustomer", null);
 __decorate([
-    (0, graphql_1.Mutation)(() => customer_entity_1.Customer),
+    (0, graphql_1.Mutation)(() => [customer_entity_1.Customer]),
     __param(0, (0, graphql_1.Args)('updateCustomerInput')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [update_customer_input_1.UpdateCustomerInput]),

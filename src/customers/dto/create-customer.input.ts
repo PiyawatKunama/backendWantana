@@ -2,8 +2,8 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateCustomerInput {
-    @Field(() => Int)
-    idCard: number;
+    @Field()
+    idCard: string;
 
     @Field()
     firstName: string;
@@ -14,8 +14,8 @@ export class CreateCustomerInput {
     @Field()
     address: string;
 
-    @Field(() => Int)
-    phoneNumber: number;
+    @Field()
+    phoneNumber: string;
 
     @Field()
     lineId: string;

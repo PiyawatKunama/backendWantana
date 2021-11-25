@@ -10,8 +10,8 @@ export class Customer {
     id: number;
 
     @Column()
-    @Field(() => Int)
-    idCard: number;
+    @Field()
+    idCard: string;
 
     @Column()
     @Field()
@@ -26,8 +26,8 @@ export class Customer {
     address: string;
 
     @Column()
-    @Field(() => Int)
-    phoneNumber: number;
+    @Field()
+    phoneNumber: string;
 
     @Column()
     @Field()

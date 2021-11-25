@@ -6,8 +6,8 @@ export class UpdateCustomerInput extends PartialType(CreateCustomerInput) {
     @Field(() => Int)
     id: number;
 
-    @Field(() => Int, { nullable: true })
-    idCard: number;
+    @Field({ nullable: true })
+    idCard: string;
 
     @Field({ nullable: true })
     firstName: string;
@@ -18,8 +18,8 @@ export class UpdateCustomerInput extends PartialType(CreateCustomerInput) {
     @Field({ nullable: true })
     address: string;
 
-    @Field(() => Int, { nullable: true })
-    phoneNumber: number;
+    @Field({ nullable: true })
+    phoneNumber: string;
 
     @Field({ nullable: true })
     lineId: string;

@@ -1,9 +1,9 @@
 export declare class CreateCustomerInput {
-    idCard: number;
+    idCard: string;
     firstName: string;
     lastName: string;
     address: string;
-    phoneNumber: number;
+    phoneNumber: string;
     lineId: string;
     email: string;
     password: string;
