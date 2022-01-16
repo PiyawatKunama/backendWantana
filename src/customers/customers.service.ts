@@ -40,7 +40,7 @@ export class CustomersService {
             .createQueryBuilder()
             .update(Customer)
             .set({ lineUserId: updateCustomerInput.lineUserId })
-            .where('lineId = :lineId', { lineId: updateCustomerInput.lineId })
+            // .where('lineId = :lineId', { lineId: updateCustomerInput.lineId })
             .execute();
     }
 }

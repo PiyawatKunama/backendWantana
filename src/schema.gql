@@ -63,10 +63,8 @@ type Customer {
   lastName: String!
   address: String!
   phoneNumber: String!
-  lineId: String!
   lineUserId: String
   email: String!
-  password: String!
   orders: [Order!]
 }
 
@@ -113,9 +111,7 @@ input CreateCustomerInput {
   lastName: String!
   address: String!
   phoneNumber: String!
-  lineId: String!
   email: String!
-  password: String!
 }
 
 input UpdateCustomerInput {
@@ -124,9 +120,7 @@ input UpdateCustomerInput {
   lastName: String
   address: String
   phoneNumber: String
-  lineId: String
   email: String
-  password: String
   id: Int!
   lineUserId: String
 }

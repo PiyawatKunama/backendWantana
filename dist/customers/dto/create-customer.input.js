@@ -36,15 +36,7 @@ __decorate([
 __decorate([
     (0, graphql_1.Field)(),
     __metadata("design:type", String)
-], CreateCustomerInput.prototype, "lineId", void 0);
-__decorate([
-    (0, graphql_1.Field)(),
-    __metadata("design:type", String)
 ], CreateCustomerInput.prototype, "email", void 0);
-__decorate([
-    (0, graphql_1.Field)(),
-    __metadata("design:type", String)
-], CreateCustomerInput.prototype, "password", void 0);
 CreateCustomerInput = __decorate([
     (0, graphql_1.InputType)()
 ], CreateCustomerInput);

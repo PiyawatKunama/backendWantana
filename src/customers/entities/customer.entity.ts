@@ -29,9 +29,6 @@ export class Customer {
     @Field()
     phoneNumber: string;
 
-    @Column()
-    @Field()
-    lineId: string;
 
     @Column({ nullable: true })
     @Field({ nullable: true })
@@ -41,9 +38,6 @@ export class Customer {
     @Field()
     email: string;
 
-    @Column()
-    @Field()
-    password: string;
 
     @OneToMany(() => Order, (order) => order.customer)
     @Field(() => [Order], { nullable: true })

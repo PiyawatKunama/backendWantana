@@ -46,11 +46,6 @@ __decorate([
     __metadata("design:type", String)
 ], Customer.prototype, "phoneNumber", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    (0, graphql_1.Field)(),
-    __metadata("design:type", String)
-], Customer.prototype, "lineId", void 0);
-__decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     (0, graphql_1.Field)({ nullable: true }),
     __metadata("design:type", String)
@@ -60,11 +55,6 @@ __decorate([
     (0, graphql_1.Field)(),
     __metadata("design:type", String)
 ], Customer.prototype, "email", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    (0, graphql_1.Field)(),
-    __metadata("design:type", String)
-], Customer.prototype, "password", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => order_entity_1.Order, (order) => order.customer),
     (0, graphql_1.Field)(() => [order_entity_1.Order], { nullable: true }),

@@ -17,12 +17,9 @@ export class CreateCustomerInput {
     @Field()
     phoneNumber: string;
 
-    @Field()
-    lineId: string;
 
     @Field()
     email: string;
 
-    @Field()
-    password: string;
+    
 }

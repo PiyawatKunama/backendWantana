@@ -7,9 +7,7 @@ export declare class UpdateCustomerInput extends UpdateCustomerInput_base {
     lastName: string;
     address: string;
     phoneNumber: string;
-    lineId: string;
     email: string;
-    password: string;
     lineUserId: string;
 }
 export {};

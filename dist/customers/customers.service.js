@@ -44,7 +44,6 @@ let CustomersService = class CustomersService {
             .createQueryBuilder()
             .update(customer_entity_1.Customer)
             .set({ lineUserId: updateCustomerInput.lineUserId })
-            .where('lineId = :lineId', { lineId: updateCustomerInput.lineId })
             .execute();
     }
 };
