@@ -4,18 +4,21 @@
 
 type SortClothe {
   id: Int!
+  key: String
   name: String!
   clothes: [Clothe!]
 }
 
 type TypeClothe {
   id: Int!
+  key: String
   name: String!
   clothes: [Clothe!]
 }
 
 type Clothe {
   id: Int!
+  key: String
   created_at: DateTime!
   updated_at: DateTime!
   typeClothe: TypeClothe!
@@ -30,6 +33,7 @@ scalar DateTime
 
 type Employee {
   id: Int!
+  key: String
   idCard: String!
   firstName: String!
   lastName: String!
@@ -48,6 +52,7 @@ enum role {
 
 type Order {
   id: Int!
+  key: String
   status: String!
   created_at: DateTime!
   updated_at: DateTime!
@@ -58,6 +63,7 @@ type Order {
 
 type Customer {
   id: Int!
+  key: String
   idCard: String!
   firstName: String!
   lastName: String!
@@ -66,6 +72,13 @@ type Customer {
   lineUserId: String
   email: String!
   orders: [Order!]
+}
+
+type NotificationMassage {
+  id: Int!
+  key: String
+  status: Float!
+  Massage: String
 }
 
 type Query {
@@ -81,6 +94,8 @@ type Query {
   sortClothe(id: Int!): SortClothe!
   orders: [Order!]!
   order(id: Int!): Order!
+  notificationMassages: [NotificationMassage!]!
+  getNotificationMassage(id: Int!): NotificationMassage!
 }
 
 type Mutation {
@@ -103,6 +118,9 @@ type Mutation {
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   removeOrder(id: Int!): Order!
+  createNotificationMassage(createNotificationMassageInput: CreateNotificationMassageInput!): NotificationMassage!
+  updateNotificationMassage(updateNotificationMassageInput: UpdateNotificationMassageInput!): NotificationMassage!
+  removeNotificationMassage(id: Int!): NotificationMassage!
 }
 
 input CreateCustomerInput {
@@ -198,4 +216,17 @@ input UpdateOrderInput {
   clotheIds: [Int!]
   employeeId: Int
   customerId: Int
+}
+
+input CreateNotificationMassageInput {
+  key: String
+  status: Float!
+  Massage: String
+}
+
+input UpdateNotificationMassageInput {
+  key: String
+  status: Float!
+  Massage: String
+  id: Int!
 }

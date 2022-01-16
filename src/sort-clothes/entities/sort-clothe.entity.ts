@@ -9,6 +9,10 @@ export class SortClothe {
     @Field(() => Int)
     id: number;
 
+    @Column({ nullable: true })
+    @Field({ nullable: true })
+    key?: string;
+
     @Column()
     @Field()
     name: string;

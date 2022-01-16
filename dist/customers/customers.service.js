@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomersService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const generateKey_1 = require("../global/generateKey");
 const typeorm_2 = require("typeorm");
 const customer_entity_1 = require("./entities/customer.entity");
 const relations_1 = require("./relations");
@@ -24,6 +25,11 @@ let CustomersService = class CustomersService {
     }
     async create(createCustomerInput) {
         const newCustomer = this.customersRepository.create(createCustomerInput);
+        const findLastRecord = await this.customersRepository.find({
+            order: { id: 'DESC' },
+            take: 1,
+        });
+        newCustomer.key = (0, generateKey_1.default)(findLastRecord, 'CU');
         return await this.customersRepository.save(newCustomer);
     }
     async findAll() {

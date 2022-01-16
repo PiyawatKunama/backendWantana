@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import generateKey from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateCustomerInput } from './dto/create-customer.input';
 import { UpdateCustomerInput } from './dto/update-customer.input';
@@ -15,6 +16,14 @@ export class CustomersService {
 
     async create(createCustomerInput: CreateCustomerInput): Promise<Customer> {
         const newCustomer = this.customersRepository.create(createCustomerInput);
+
+        const findLastRecord = await this.customersRepository.find({
+            order: { id: 'DESC' },
+            take: 1,
+        });
+
+        newCustomer.key = generateKey(findLastRecord, 'CU');
+
         return await this.customersRepository.save(newCustomer);
     }
 

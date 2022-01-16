@@ -16,6 +16,7 @@ exports.EmployeesService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const customer_entity_1 = require("../customers/entities/customer.entity");
+const generateKey_1 = require("../global/generateKey");
 const typeorm_2 = require("typeorm");
 const employee_entity_1 = require("./entities/employee.entity");
 const relations_1 = require("./relations");
@@ -25,6 +26,11 @@ let EmployeesService = class EmployeesService {
     }
     async create(createEmployeeInput) {
         const newEmployee = this.employeesRepository.create(createEmployeeInput);
+        const findLastRecord = await this.employeesRepository.find({
+            order: { id: 'DESC' },
+            take: 1,
+        });
+        newEmployee.key = (0, generateKey_1.default)(findLastRecord, 'EM');
         return await this.employeesRepository.save(newEmployee);
     }
     async findAll() {

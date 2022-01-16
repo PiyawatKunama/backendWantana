@@ -18,6 +18,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const clothes_service_1 = require("../clothes/clothes.service");
 const customers_service_1 = require("../customers/customers.service");
 const employees_service_1 = require("../employees/employees.service");
+const generateKey_1 = require("../global/generateKey");
 const typeorm_2 = require("typeorm");
 const order_entity_1 = require("./entities/order.entity");
 const relations_1 = require("./relations");
@@ -40,6 +41,11 @@ let OrdersService = class OrdersService {
         newOrder.customer = customer_type;
         const employee_type = await this.employeesService.findOne(createOrderInput.employeeId);
         newOrder.employee = employee_type;
+        const findLastRecord = await this.ordersRepository.find({
+            order: { id: 'DESC' },
+            take: 1,
+        });
+        newOrder.key = (0, generateKey_1.default)(findLastRecord, 'OD');
         return await this.ordersRepository.save(newOrder);
     }
     async findAll() {

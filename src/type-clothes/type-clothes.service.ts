@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import generateKey from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateTypeClotheInput } from './dto/create-type-clothe.input';
 import { UpdateTypeClotheInput } from './dto/update-type-clothe.input';
@@ -15,6 +16,14 @@ export class TypeClothesService {
     async create(createTypeClotheInput: CreateTypeClotheInput): Promise<TypeClothe> {
         const newTypeClothe =
             this.typeClothesRepository.create(createTypeClotheInput);
+
+        const findLastRecord = await this.typeClothesRepository.find({
+            order: { id: 'DESC' },
+            take: 1,
+        });
+
+        newTypeClothe.key = generateKey(findLastRecord, 'TC');
+
         return await this.typeClothesRepository.save(newTypeClothe);
     }
 

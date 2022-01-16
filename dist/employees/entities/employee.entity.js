@@ -22,6 +22,11 @@ __decorate([
     __metadata("design:type", Number)
 ], Employee.prototype, "id", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    (0, graphql_1.Field)({ nullable: true }),
+    __metadata("design:type", String)
+], Employee.prototype, "key", void 0);
+__decorate([
     (0, typeorm_1.Column)(),
     (0, graphql_1.Field)(),
     __metadata("design:type", String)

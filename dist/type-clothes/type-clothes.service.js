@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeClothesService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const generateKey_1 = require("../global/generateKey");
 const typeorm_2 = require("typeorm");
 const type_clothe_entity_1 = require("./entities/type-clothe.entity");
 let TypeClothesService = class TypeClothesService {
@@ -23,6 +24,11 @@ let TypeClothesService = class TypeClothesService {
     }
     async create(createTypeClotheInput) {
         const newTypeClothe = this.typeClothesRepository.create(createTypeClotheInput);
+        const findLastRecord = await this.typeClothesRepository.find({
+            order: { id: 'DESC' },
+            take: 1,
+        });
+        newTypeClothe.key = (0, generateKey_1.default)(findLastRecord, 'TC');
         return await this.typeClothesRepository.save(newTypeClothe);
     }
     async findAll() {

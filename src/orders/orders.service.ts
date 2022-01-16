@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ClothesService } from 'src/clothes/clothes.service';
 import { CustomersService } from 'src/customers/customers.service';
 import { EmployeesService } from 'src/employees/employees.service';
+import generateKey from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
@@ -42,6 +43,13 @@ export class OrdersService {
         );
 
         newOrder.employee = employee_type;
+
+        const findLastRecord = await this.ordersRepository.find({
+            order: { id: 'DESC' },
+            take: 1,
+        });
+
+        newOrder.key = generateKey(findLastRecord, 'OD');
 
         return await this.ordersRepository.save(newOrder);
     }

@@ -9,6 +9,10 @@ export class Customer {
     @Field(() => Int)
     id: number;
 
+    @Column({ nullable: true })
+    @Field({ nullable: true })
+    key?: string;
+
     @Column()
     @Field()
     idCard: string;
@@ -29,7 +33,6 @@ export class Customer {
     @Field()
     phoneNumber: string;
 
-
     @Column({ nullable: true })
     @Field({ nullable: true })
     lineUserId: string;
@@ -37,7 +40,6 @@ export class Customer {
     @Column()
     @Field()
     email: string;
-
 
     @OneToMany(() => Order, (order) => order.customer)
     @Field(() => [Order], { nullable: true })

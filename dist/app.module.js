@@ -19,6 +19,7 @@ const clothes_module_1 = require("./clothes/clothes.module");
 const sort_clothes_module_1 = require("./sort-clothes/sort-clothes.module");
 const type_clothes_module_1 = require("./type-clothes/type-clothes.module");
 const orders_module_1 = require("./orders/orders.module");
+const notification_massage_module_1 = require("./notification-massage/notification-massage.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -29,11 +30,11 @@ AppModule = __decorate([
             }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
-                host: 'us-cdbr-east-04.cleardb.com',
+                host: '127.0.0.1',
                 port: 3306,
-                username: 'b1a623a0292efa',
-                password: '0b7a7510',
-                database: 'heroku_e6a785bcde0c62a',
+                username: 'root',
+                password: '',
+                database: 'wantana',
                 entities: ['dist/**/**.entity{.ts,.js}'],
                 synchronize: true,
             }),
@@ -43,6 +44,7 @@ AppModule = __decorate([
             sort_clothes_module_1.SortClothesModule,
             type_clothes_module_1.TypeClothesModule,
             orders_module_1.OrdersModule,
+            notification_massage_module_1.NotificationMassageModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

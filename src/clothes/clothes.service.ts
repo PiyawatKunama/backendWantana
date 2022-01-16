@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import generateKey from 'src/global/generateKey';
 import { SortClothesService } from 'src/sort-clothes/sort-clothes.service';
 import { TypeClothesService } from 'src/type-clothes/type-clothes.service';
-import { Repository } from 'typeorm';
+import { Entity, Repository } from 'typeorm';
 import { CreateClotheInput } from './dto/create-clothe.input';
 import { UpdateClotheInput } from './dto/update-clothe.input';
 import { Clothe } from './entities/clothe.entity';
 import { Relations } from './relations';
 
+@Entity()
 @Injectable()
 export class ClothesService {
     constructor(
@@ -29,6 +31,14 @@ export class ClothesService {
             createClotheInput.sortClotheId,
         );
         newClothe.sortClothe = sortClothe;
+
+        const findLastRecord = await this.clothesRepository.find({
+            order: { id: 'DESC' },
+            take: 1,
+        });
+
+        newClothe.key = generateKey(findLastRecord, 'CL');
+
         return await this.clothesRepository.save(newClothe);
     }
 

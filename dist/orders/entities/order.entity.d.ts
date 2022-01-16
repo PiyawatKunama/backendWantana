@@ -3,6 +3,7 @@ import { Customer } from 'src/customers/entities/customer.entity';
 import { Employee } from 'src/employees/entities/employee.entity';
 export declare class Order {
     id: number;
+    key?: string;
     status: string;
     created_at: Date;
     updated_at: Date;

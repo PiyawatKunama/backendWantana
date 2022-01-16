@@ -10,6 +10,10 @@ export class Employee {
     @Field(() => Int)
     id: number;
 
+    @Column({ nullable: true })
+    @Field({ nullable: true })
+    key?: string;
+
     @Column()
     @Field()
     idCard: string;

@@ -4,6 +4,7 @@ import { SortClothe } from 'src/sort-clothes/entities/sort-clothe.entity';
 import { TypeClothe } from 'src/type-clothes/entities/type-clothe.entity';
 import {
     BeforeInsert,
+    Column,
     CreateDateColumn,
     Entity,
     JoinTable,
@@ -18,6 +19,10 @@ export class Clothe {
     @PrimaryGeneratedColumn()
     @Field(() => Int)
     id: number;
+
+    @Column({ nullable: true })
+    @Field({ nullable: true })
+    key?: string;
 
     @CreateDateColumn({
         type: 'timestamp',

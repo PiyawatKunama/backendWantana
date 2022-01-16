@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Customer } from 'src/customers/entities/customer.entity';
+import generateKey from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateEmployeeInput } from './dto/create-employee.input';
 import { UpdateEmployeeInput } from './dto/update-employee.input';
@@ -16,6 +17,13 @@ export class EmployeesService {
 
     async create(createEmployeeInput: CreateEmployeeInput): Promise<Employee> {
         const newEmployee = this.employeesRepository.create(createEmployeeInput);
+        const findLastRecord = await this.employeesRepository.find({
+            order: { id: 'DESC' },
+            take: 1,
+        });
+
+        newEmployee.key = generateKey(findLastRecord, 'EM');
+
         return await this.employeesRepository.save(newEmployee);
     }
 

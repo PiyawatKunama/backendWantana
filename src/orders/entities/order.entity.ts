@@ -11,7 +11,6 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Status } from '../enums/status';
 
 @Entity()
 @ObjectType()
@@ -19,6 +18,10 @@ export class Order {
     @PrimaryGeneratedColumn()
     @Field(() => Int)
     id: number;
+
+    @Column({ nullable: true })
+    @Field({ nullable: true })
+    key?: string;
 
     @Column()
     @Field()
