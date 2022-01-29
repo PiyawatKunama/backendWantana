@@ -12,9 +12,9 @@ export class UpdateNotificationMassageInput extends PartialType(
     @Field({ nullable: true })
     key?: string;
 
-    @Field(() => Status)
+    @Field(() => Status, { nullable: true })
     status?: Status;
 
     @Field({ nullable: true })
-    Massage: string;
+    Massage?: string;
 }

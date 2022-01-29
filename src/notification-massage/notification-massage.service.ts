@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Status } from 'src/global/enum/status';
 import generateKey from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateNotificationMassageInput } from './dto/create-notification-massage.input';
@@ -48,5 +49,14 @@ export class NotificationMassageService {
 
     async remove(id: number) {
         return await this.notificationMassageRepository.delete(id);
+    }
+
+    async getMassageByStatus(status: Status) {
+        const notificationMassage = await this.notificationMassageRepository.findOne(
+            {
+                where: { status },
+            },
+        );
+        return notificationMassage.Massage;
     }
 }

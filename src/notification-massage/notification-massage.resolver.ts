@@ -3,6 +3,7 @@ import { NotificationMassageService } from './notification-massage.service';
 import { NotificationMassage } from './entities/notification-massage.entity';
 import { CreateNotificationMassageInput } from './dto/create-notification-massage.input';
 import { UpdateNotificationMassageInput } from './dto/update-notification-massage.input';
+import { Status } from 'src/global/enum/status';
 
 @Resolver(() => NotificationMassage)
 export class NotificationMassageResolver {
@@ -44,5 +45,12 @@ export class NotificationMassageResolver {
     @Mutation(() => NotificationMassage)
     removeNotificationMassage(@Args('id', { type: () => Int }) id: number) {
         return this.notificationMassageService.remove(id);
+    }
+
+    @Query(() => String)
+    async getMassageByStatus(
+        @Args('status', { type: () => Status }) status: number,
+    ) {
+        return await this.notificationMassageService.getMassageByStatus(status);
     }
 }

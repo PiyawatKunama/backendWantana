@@ -136,6 +136,7 @@ type Query {
   findOneByPrimaryId(id: Int!): [Order!]!
   notificationMassages: [NotificationMassage!]!
   getNotificationMassage(id: Int!): NotificationMassage!
+  getMassageByStatus(status: status!): String!
 }
 
 type Mutation {
@@ -278,7 +279,7 @@ input CreateNotificationMassageInput {
 }
 
 input UpdateNotificationMassageInput {
-  status: status!
+  status: status
   Massage: String
   id: Int!
   key: String
