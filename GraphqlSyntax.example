@@ -199,3 +199,15 @@ query {
     }
   }
 }
+
+
+//create line message
+mutation{
+  createNotificationMassage(createNotificationMassageInput:{status:IN, Massage:"cloth In"}){
+    id
+    key
+    status
+    Massage
+  }
+}
+
