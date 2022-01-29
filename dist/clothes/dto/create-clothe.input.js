@@ -25,6 +25,14 @@ __decorate([
     (0, graphql_1.Field)(() => graphql_1.Int),
     __metadata("design:type", Number)
 ], CreateClotheInput.prototype, "sortClotheId", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => graphql_1.Int),
+    __metadata("design:type", Number)
+], CreateClotheInput.prototype, "problemClotheId", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => graphql_1.Int),
+    __metadata("design:type", Number)
+], CreateClotheInput.prototype, "specialClothId", void 0);
 CreateClotheInput = __decorate([
     (0, graphql_1.InputType)()
 ], CreateClotheInput);

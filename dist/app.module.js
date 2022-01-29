@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const problem_clothes_module_1 = require("./problem-clothes/problem-clothes.module");
 const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
 const typeorm_1 = require("@nestjs/typeorm");
@@ -43,6 +44,7 @@ AppModule = __decorate([
             clothes_module_1.ClothesModule,
             sort_clothes_module_1.SortClothesModule,
             type_clothes_module_1.TypeClothesModule,
+            problem_clothes_module_1.ProblemClothesModule,
             orders_module_1.OrdersModule,
             notification_massage_module_1.NotificationMassageModule,
         ],

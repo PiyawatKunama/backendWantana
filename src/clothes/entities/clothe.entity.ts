@@ -1,3 +1,4 @@
+import { ProblemClothe } from './../../problem-clothes/entities/problem-clothe.entity';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Order } from 'src/orders/entities/order.entity';
 import { SortClothe } from 'src/sort-clothes/entities/sort-clothe.entity';
@@ -12,6 +13,7 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
+import { SpecialClothe } from 'src/special-clothes/entities/special-clothe.entity';
 
 @Entity()
 @ObjectType()
@@ -49,6 +51,18 @@ export class Clothe {
     })
     @Field(() => SortClothe)
     sortClothe: SortClothe;
+
+    @ManyToOne(() => ProblemClothe, (problemClothe) => problemClothe.clothes, {
+        onDelete: 'CASCADE',
+    })
+    @Field(() => ProblemClothe)
+    problemClothe: ProblemClothe;
+
+    @ManyToOne(() => SpecialClothe, (SpecialClothe) => SpecialClothe.clothes, {
+        onDelete: 'CASCADE',
+    })
+    @Field(() => SpecialClothe)
+    specialClothe: SpecialClothe;
 
     @ManyToMany(() => Order, (order) => order.clothes)
     @JoinTable({

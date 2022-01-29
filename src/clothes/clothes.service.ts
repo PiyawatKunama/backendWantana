@@ -1,3 +1,4 @@
+import { ProblemClothesService } from './../problem-clothes/problem-clothes.service';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import generateKey from 'src/global/generateKey';
@@ -8,6 +9,7 @@ import { CreateClotheInput } from './dto/create-clothe.input';
 import { UpdateClotheInput } from './dto/update-clothe.input';
 import { Clothe } from './entities/clothe.entity';
 import { Relations } from './relations';
+import { SpecialClothesService } from 'src/special-clothes/special-clothes.service';
 
 @Entity()
 @Injectable()
@@ -17,6 +19,8 @@ export class ClothesService {
         private clothesRepository: Repository<Clothe>,
         private typeClothesService: TypeClothesService,
         private sortClothesService: SortClothesService,
+        private problemClothesService: ProblemClothesService,
+        private specialClothesService: SpecialClothesService,
     ) {}
 
     async create(createClotheInput: CreateClotheInput) {
@@ -31,6 +35,16 @@ export class ClothesService {
             createClotheInput.sortClotheId,
         );
         newClothe.sortClothe = sortClothe;
+
+        const problemClothe = await this.problemClothesService.findOne(
+            createClotheInput.problemClotheId,
+        );
+        newClothe.problemClothe = problemClothe;
+
+        const specialClothe = await this.specialClothesService.findOne(
+            createClotheInput.specialClothId,
+        );
+        newClothe.specialClothe = specialClothe;
 
         const findLastRecord = await this.clothesRepository.find({
             order: { id: 'DESC' },

@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClothesService = void 0;
+const problem_clothes_service_1 = require("./../problem-clothes/problem-clothes.service");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const generateKey_1 = require("../global/generateKey");
@@ -21,11 +22,14 @@ const type_clothes_service_1 = require("../type-clothes/type-clothes.service");
 const typeorm_2 = require("typeorm");
 const clothe_entity_1 = require("./entities/clothe.entity");
 const relations_1 = require("./relations");
+const special_clothes_service_1 = require("../special-clothes/special-clothes.service");
 let ClothesService = class ClothesService {
-    constructor(clothesRepository, typeClothesService, sortClothesService) {
+    constructor(clothesRepository, typeClothesService, sortClothesService, problemClothesService, specialClothesService) {
         this.clothesRepository = clothesRepository;
         this.typeClothesService = typeClothesService;
         this.sortClothesService = sortClothesService;
+        this.problemClothesService = problemClothesService;
+        this.specialClothesService = specialClothesService;
     }
     async create(createClotheInput) {
         const newClothe = this.clothesRepository.create(createClotheInput);
@@ -33,6 +37,10 @@ let ClothesService = class ClothesService {
         newClothe.typeClothe = typeClothe;
         const sortClothe = await this.sortClothesService.findOne(createClotheInput.sortClotheId);
         newClothe.sortClothe = sortClothe;
+        const problemClothe = await this.problemClothesService.findOne(createClotheInput.problemClotheId);
+        newClothe.problemClothe = problemClothe;
+        const specialClothe = await this.specialClothesService.findOne(createClotheInput.specialClothId);
+        newClothe.specialClothe = specialClothe;
         const findLastRecord = await this.clothesRepository.find({
             order: { id: 'DESC' },
             take: 1,
@@ -60,7 +68,9 @@ ClothesService = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(clothe_entity_1.Clothe)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         type_clothes_service_1.TypeClothesService,
-        sort_clothes_service_1.SortClothesService])
+        sort_clothes_service_1.SortClothesService,
+        problem_clothes_service_1.ProblemClothesService,
+        special_clothes_service_1.SpecialClothesService])
 ], ClothesService);
 exports.ClothesService = ClothesService;
 //# sourceMappingURL=clothes.service.js.map

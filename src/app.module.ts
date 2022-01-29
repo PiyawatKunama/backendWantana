@@ -1,3 +1,4 @@
+import { ProblemClothesModule } from './problem-clothes/problem-clothes.module';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -42,6 +43,7 @@ import { NotificationMassageModule } from './notification-massage/notification-m
         ClothesModule,
         SortClothesModule,
         TypeClothesModule,
+        ProblemClothesModule,
         OrdersModule,
         NotificationMassageModule,
     ],

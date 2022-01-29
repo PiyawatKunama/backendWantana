@@ -1,1 +1,1 @@
-{"version":3,"file":"relations.js","sourceRoot":"","sources":["../../src/clothes/relations.ts"],"names":[],"mappings":";;;AAAa,QAAA,SAAS,GAAG;IACrB,SAAS,EAAE,CAAC,YAAY,EAAE,YAAY,EAAE,QAAQ,CAAC;CACpD,CAAC"}
+{"version":3,"file":"relations.js","sourceRoot":"","sources":["../../src/clothes/relations.ts"],"names":[],"mappings":";;;AAAa,QAAA,SAAS,GAAG;IACrB,SAAS,EAAE;QACP,YAAY;QACZ,YAAY;QACZ,QAAQ;QACR,eAAe;QACf,eAAe;KAClB;CACJ,CAAC"}

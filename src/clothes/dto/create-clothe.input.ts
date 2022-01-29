@@ -10,4 +10,10 @@ export class CreateClotheInput {
 
     @Field(() => Int)
     sortClotheId: number;
+
+    @Field(() => Int)
+    problemClotheId: number;
+
+    @Field(() => Int)
+    specialClothId: number;
 }

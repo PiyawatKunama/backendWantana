@@ -10,11 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Clothe = void 0;
+const problem_clothe_entity_1 = require("./../../problem-clothes/entities/problem-clothe.entity");
 const graphql_1 = require("@nestjs/graphql");
 const order_entity_1 = require("../../orders/entities/order.entity");
 const sort_clothe_entity_1 = require("../../sort-clothes/entities/sort-clothe.entity");
 const type_clothe_entity_1 = require("../../type-clothes/entities/type-clothe.entity");
 const typeorm_1 = require("typeorm");
+const special_clothe_entity_1 = require("../../special-clothes/entities/special-clothe.entity");
 let Clothe = class Clothe {
     beforeInsertActions() {
         this.created_at = new Date();
@@ -61,6 +63,20 @@ __decorate([
     (0, graphql_1.Field)(() => sort_clothe_entity_1.SortClothe),
     __metadata("design:type", sort_clothe_entity_1.SortClothe)
 ], Clothe.prototype, "sortClothe", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => problem_clothe_entity_1.ProblemClothe, (problemClothe) => problemClothe.clothes, {
+        onDelete: 'CASCADE',
+    }),
+    (0, graphql_1.Field)(() => problem_clothe_entity_1.ProblemClothe),
+    __metadata("design:type", problem_clothe_entity_1.ProblemClothe)
+], Clothe.prototype, "problemClothe", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => special_clothe_entity_1.SpecialClothe, (SpecialClothe) => SpecialClothe.clothes, {
+        onDelete: 'CASCADE',
+    }),
+    (0, graphql_1.Field)(() => special_clothe_entity_1.SpecialClothe),
+    __metadata("design:type", special_clothe_entity_1.SpecialClothe)
+], Clothe.prototype, "specialClothe", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => order_entity_1.Order, (order) => order.clothes),
     (0, typeorm_1.JoinTable)({

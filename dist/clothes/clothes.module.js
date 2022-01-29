@@ -7,6 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClothesModule = void 0;
+const special_clothes_module_1 = require("./../special-clothes/special-clothes.module");
+const problem_clothes_module_1 = require("./../problem-clothes/problem-clothes.module");
 const common_1 = require("@nestjs/common");
 const clothes_service_1 = require("./clothes.service");
 const clothes_resolver_1 = require("./clothes.resolver");
@@ -22,6 +24,8 @@ ClothesModule = __decorate([
             typeorm_1.TypeOrmModule.forFeature([clothe_entity_1.Clothe]),
             type_clothes_module_1.TypeClothesModule,
             sort_clothes_module_1.SortClothesModule,
+            problem_clothes_module_1.ProblemClothesModule,
+            special_clothes_module_1.SpecialClothesModule
         ],
         providers: [clothes_resolver_1.ClothesResolver, clothes_service_1.ClothesService],
         exports: [clothes_service_1.ClothesService],

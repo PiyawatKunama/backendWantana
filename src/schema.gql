@@ -2,34 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type SortClothe {
+type Customer {
   id: Int!
   key: String
-  name: String!
-  clothes: [Clothe!]
+  idCard: String!
+  firstName: String!
+  lastName: String!
+  address: String!
+  phoneNumber: String!
+  lineUserId: String
+  email: String!
+  orders: [Order!]
 }
-
-type TypeClothe {
-  id: Int!
-  key: String
-  name: String!
-  clothes: [Clothe!]
-}
-
-type Clothe {
-  id: Int!
-  key: String
-  created_at: DateTime!
-  updated_at: DateTime!
-  typeClothe: TypeClothe!
-  sortClothe: SortClothe!
-  orders: [Order!]!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Employee {
   id: Int!
@@ -61,17 +45,49 @@ type Order {
   customer: Customer!
 }
 
-type Customer {
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type SortClothe {
   id: Int!
   key: String
-  idCard: String!
-  firstName: String!
-  lastName: String!
-  address: String!
-  phoneNumber: String!
-  lineUserId: String
-  email: String!
-  orders: [Order!]
+  name: String!
+  clothes: [Clothe!]
+}
+
+type TypeClothe {
+  id: Int!
+  key: String
+  name: String!
+  clothes: [Clothe!]
+}
+
+type SpecialClothe {
+  id: Int!
+  key: String
+  name: String!
+  clothes: [Clothe!]
+}
+
+type Clothe {
+  id: Int!
+  key: String
+  created_at: DateTime!
+  updated_at: DateTime!
+  typeClothe: TypeClothe!
+  sortClothe: SortClothe!
+  problemClothe: ProblemClothe!
+  specialClothe: SpecialClothe!
+  orders: [Order!]!
+}
+
+type ProblemClothe {
+  id: Int!
+  key: String
+  name: String!
+  clothes: [Clothe!]
 }
 
 type NotificationMassage {
@@ -92,6 +108,10 @@ type Query {
   typeClothe(id: Int!): TypeClothe!
   sortClothes: [SortClothe!]!
   sortClothe(id: Int!): SortClothe!
+  problemClothes: [ProblemClothe!]!
+  problemClothe(id: Int!): ProblemClothe!
+  specialClothes: [SpecialClothe!]!
+  specialClothe(id: Int!): SpecialClothe!
   orders: [Order!]!
   order(id: Int!): Order!
   notificationMassages: [NotificationMassage!]!
@@ -115,6 +135,12 @@ type Mutation {
   createSortClothe(createSortClotheInput: CreateSortClotheInput!): SortClothe!
   updateSortClothe(updateSortClotheInput: UpdateSortClotheInput!): SortClothe!
   removeSortClothe(id: Int!): SortClothe!
+  createProblemClothe(createProblemClotheInput: CreateProblemClotheInput!): ProblemClothe!
+  updateProblemClothe(updateProblemClotheInput: UpdateProblemClotheInput!): ProblemClothe!
+  removeProblemClothe(id: Int!): ProblemClothe!
+  createSpecialClothe(createSpecialClotheInput: CreateSpecialClotheInput!): SpecialClothe!
+  updateSpecialClothe(updateSpecialClotheInput: UpdateSpecialClotheInput!): SpecialClothe!
+  removeSpecialClothe(id: Int!): SpecialClothe!
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   removeOrder(id: Int!): Order!
@@ -170,12 +196,16 @@ input CreateClotheInput {
   id: Float
   typeClotheId: Int!
   sortClotheId: Int!
+  problemClotheId: Int!
+  specialClothId: Int!
 }
 
 input UpdateClotheInput {
   id: Int!
   typeClotheId: Int
   sortClotheId: Int
+  problemClotheId: Int
+  specialClothId: Int
 }
 
 input CreateTypeClotheInput {
@@ -192,6 +222,24 @@ input CreateSortClotheInput {
 }
 
 input UpdateSortClotheInput {
+  name: String!
+  id: Int!
+}
+
+input CreateProblemClotheInput {
+  name: String!
+}
+
+input UpdateProblemClotheInput {
+  name: String!
+  id: Int!
+}
+
+input CreateSpecialClotheInput {
+  name: String!
+}
+
+input UpdateSpecialClotheInput {
   name: String!
   id: Int!
 }
