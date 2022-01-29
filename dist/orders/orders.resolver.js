@@ -17,7 +17,6 @@ const graphql_1 = require("@nestjs/graphql");
 const orders_service_1 = require("./orders.service");
 const order_entity_1 = require("./entities/order.entity");
 const create_order_input_1 = require("./dto/create-order.input");
-const update_order_input_1 = require("./dto/update-order.input");
 let OrdersResolver = class OrdersResolver {
     constructor(ordersService) {
         this.ordersService = ordersService;
@@ -31,8 +30,8 @@ let OrdersResolver = class OrdersResolver {
     findOne(id) {
         return this.ordersService.findOne(id);
     }
-    updateOrder(updateOrderInput) {
-        return this.ordersService.update(updateOrderInput.id, updateOrderInput);
+    findOneByPrimaryId(id) {
+        return this.ordersService.findOneByPrimaryId(id);
     }
     removeOrder(id) {
         return this.ordersService.remove(id);
@@ -59,12 +58,12 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], OrdersResolver.prototype, "findOne", null);
 __decorate([
-    (0, graphql_1.Mutation)(() => order_entity_1.Order),
-    __param(0, (0, graphql_1.Args)('updateOrderInput')),
+    (0, graphql_1.Query)(() => [order_entity_1.Order]),
+    __param(0, (0, graphql_1.Args)('id', { type: () => graphql_1.Int })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [update_order_input_1.UpdateOrderInput]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
-], OrdersResolver.prototype, "updateOrder", null);
+], OrdersResolver.prototype, "findOneByPrimaryId", null);
 __decorate([
     (0, graphql_1.Mutation)(() => order_entity_1.Order),
     __param(0, (0, graphql_1.Args)('id', { type: () => graphql_1.Int })),

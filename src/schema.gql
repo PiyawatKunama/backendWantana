@@ -37,12 +37,19 @@ enum role {
 type Order {
   id: Int!
   key: String
-  status: String!
+  primaryOrderId: Int!
+  orderIndex: Int!
+  status: status!
   created_at: DateTime!
   updated_at: DateTime!
   clothes: [Clothe!]!
   employee: Employee!
   customer: Customer!
+}
+
+enum status {
+  IN
+  OUT
 }
 
 """
@@ -71,16 +78,27 @@ type SpecialClothe {
   clothes: [Clothe!]
 }
 
+type ClotheHasProblem {
+  id: Int!
+  status: status!
+  clothe: Clothe!
+  problemClothe: ProblemClothe!
+}
+
 type Clothe {
   id: Int!
   key: String
+  typeClotheId: Int
+  sortClotheId: Int
+  specialClotheId: Int
+  orderId: Int!
+  typeClothe: TypeClothe
+  sortClothe: SortClothe
+  clotheHasProblems: [ClotheHasProblem!]!
+  specialClothe: SpecialClothe
+  order: Order!
   created_at: DateTime!
   updated_at: DateTime!
-  typeClothe: TypeClothe!
-  sortClothe: SortClothe!
-  problemClothe: ProblemClothe!
-  specialClothe: SpecialClothe!
-  orders: [Order!]!
 }
 
 type ProblemClothe {
@@ -88,12 +106,13 @@ type ProblemClothe {
   key: String
   name: String!
   clothes: [Clothe!]
+  clotheHasProblems: [ClotheHasProblem!]!
 }
 
 type NotificationMassage {
   id: Int!
   key: String
-  status: Float!
+  status: status
   Massage: String
 }
 
@@ -108,12 +127,13 @@ type Query {
   typeClothe(id: Int!): TypeClothe!
   sortClothes: [SortClothe!]!
   sortClothe(id: Int!): SortClothe!
-  problemClothes: [ProblemClothe!]!
-  problemClothe(id: Int!): ProblemClothe!
   specialClothes: [SpecialClothe!]!
   specialClothe(id: Int!): SpecialClothe!
+  problemClothes: [ProblemClothe!]!
+  problemClothe(id: Int!): ProblemClothe!
   orders: [Order!]!
   order(id: Int!): Order!
+  findOneByPrimaryId(id: Int!): [Order!]!
   notificationMassages: [NotificationMassage!]!
   getNotificationMassage(id: Int!): NotificationMassage!
 }
@@ -127,7 +147,8 @@ type Mutation {
   updateEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
   removeEmployee(id: Int!): Employee!
   createClothe(createClotheInput: CreateClotheInput!): Clothe!
-  updateClothe(updateClotheInput: UpdateClotheInput!): Clothe!
+  createClotheHasProblem(createClotheProblemInput: CreateClotheProblemInput!): String!
+  updateClothe(updateClotheInput: UpdateClotheInput!): String!
   removeClothe(id: Int!): Clothe!
   createTypeClothe(createTypeClotheInput: CreateTypeClotheInput!): TypeClothe!
   updateTypeClothe(updateTypeClotheInput: UpdateTypeClotheInput!): TypeClothe!
@@ -135,14 +156,13 @@ type Mutation {
   createSortClothe(createSortClotheInput: CreateSortClotheInput!): SortClothe!
   updateSortClothe(updateSortClotheInput: UpdateSortClotheInput!): SortClothe!
   removeSortClothe(id: Int!): SortClothe!
-  createProblemClothe(createProblemClotheInput: CreateProblemClotheInput!): ProblemClothe!
-  updateProblemClothe(updateProblemClotheInput: UpdateProblemClotheInput!): ProblemClothe!
-  removeProblemClothe(id: Int!): ProblemClothe!
   createSpecialClothe(createSpecialClotheInput: CreateSpecialClotheInput!): SpecialClothe!
   updateSpecialClothe(updateSpecialClotheInput: UpdateSpecialClotheInput!): SpecialClothe!
   removeSpecialClothe(id: Int!): SpecialClothe!
+  createProblemClothe(createProblemClotheInput: CreateProblemClotheInput!): ProblemClothe!
+  updateProblemClothe(updateProblemClotheInput: UpdateProblemClotheInput!): ProblemClothe!
+  removeProblemClothe(id: Int!): ProblemClothe!
   createOrder(createOrderInput: CreateOrderInput!): Order!
-  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   removeOrder(id: Int!): Order!
   createNotificationMassage(createNotificationMassageInput: CreateNotificationMassageInput!): NotificationMassage!
   updateNotificationMassage(updateNotificationMassageInput: UpdateNotificationMassageInput!): NotificationMassage!
@@ -193,19 +213,21 @@ input UpdateEmployeeInput {
 }
 
 input CreateClotheInput {
-  id: Float
-  typeClotheId: Int!
-  sortClotheId: Int!
-  problemClotheId: Int!
-  specialClothId: Int!
+  typeClotheId: Int
+  sortClotheId: Int
+  specialClothId: Int
+  orderId: Int!
+}
+
+input CreateClotheProblemInput {
+  status: status!
+  clotheIds: [Int!]!
+  problemClothes: Int!
 }
 
 input UpdateClotheInput {
-  id: Int!
-  typeClotheId: Int
-  sortClotheId: Int
-  problemClotheId: Int
-  specialClothId: Int
+  ids: [Int!]!
+  orderId: Int!
 }
 
 input CreateTypeClotheInput {
@@ -226,15 +248,6 @@ input UpdateSortClotheInput {
   id: Int!
 }
 
-input CreateProblemClotheInput {
-  name: String!
-}
-
-input UpdateProblemClotheInput {
-  name: String!
-  id: Int!
-}
-
 input CreateSpecialClotheInput {
   name: String!
 }
@@ -244,37 +257,29 @@ input UpdateSpecialClotheInput {
   id: Int!
 }
 
+input CreateProblemClotheInput {
+  name: String!
+}
+
+input UpdateProblemClotheInput {
+  name: String!
+  id: Int!
+}
+
 input CreateOrderInput {
-  id: Float
-  role: status
-  clotheIds: [Int!]!
   employeeId: Int!
   customerId: Int!
-}
-
-enum status {
-  STATUS_DEFAULT
-  STATUS_ONE
-  STATUS_TWO
-}
-
-input UpdateOrderInput {
-  id: Int!
-  role: status
-  clotheIds: [Int!]
-  employeeId: Int
-  customerId: Int
+  primaryOrderId: Int
 }
 
 input CreateNotificationMassageInput {
-  key: String
-  status: Float!
+  status: status!
   Massage: String
 }
 
 input UpdateNotificationMassageInput {
-  key: String
-  status: Float!
+  status: status!
   Massage: String
   id: Int!
+  key: String
 }

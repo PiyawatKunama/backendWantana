@@ -10,14 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateClotheInput = void 0;
-const create_clothe_input_1 = require("./create-clothe.input");
 const graphql_1 = require("@nestjs/graphql");
-let UpdateClotheInput = class UpdateClotheInput extends (0, graphql_1.PartialType)(create_clothe_input_1.CreateClotheInput) {
+let UpdateClotheInput = class UpdateClotheInput {
 };
+__decorate([
+    (0, graphql_1.Field)(() => [graphql_1.Int]),
+    __metadata("design:type", Array)
+], UpdateClotheInput.prototype, "ids", void 0);
 __decorate([
     (0, graphql_1.Field)(() => graphql_1.Int),
     __metadata("design:type", Number)
-], UpdateClotheInput.prototype, "id", void 0);
+], UpdateClotheInput.prototype, "orderId", void 0);
 UpdateClotheInput = __decorate([
     (0, graphql_1.InputType)()
 ], UpdateClotheInput);

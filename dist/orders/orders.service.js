@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrdersService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const clothes_service_1 = require("../clothes/clothes.service");
 const customers_service_1 = require("../customers/customers.service");
 const employees_service_1 = require("../employees/employees.service");
 const generateKey_1 = require("../global/generateKey");
@@ -23,49 +22,59 @@ const typeorm_2 = require("typeorm");
 const order_entity_1 = require("./entities/order.entity");
 const relations_1 = require("./relations");
 let OrdersService = class OrdersService {
-    constructor(ordersRepository, clothesService, employeesService, customersService) {
+    constructor(ordersRepository, employeesService, customersService) {
         this.ordersRepository = ordersRepository;
-        this.clothesService = clothesService;
         this.employeesService = employeesService;
         this.customersService = customersService;
     }
     async create(createOrderInput) {
         const newOrder = this.ordersRepository.create(createOrderInput);
-        if (createOrderInput.clotheIds) {
-            const clothe_types = await Promise.all(createOrderInput.clotheIds.map(async (order_typeId) => {
-                return await this.clothesService.findOne(order_typeId);
-            }));
-            newOrder.clothes = clothe_types;
-        }
-        const customer_type = await this.customersService.findOne(createOrderInput.customerId);
-        newOrder.customer = customer_type;
-        const employee_type = await this.employeesService.findOne(createOrderInput.employeeId);
-        newOrder.employee = employee_type;
-        const findLastRecord = await this.ordersRepository.find({
+        const customer = await this.customersService.findOne(createOrderInput.customerId);
+        newOrder.customer = customer;
+        const employee = await this.employeesService.findOne(createOrderInput.employeeId);
+        newOrder.employee = employee;
+        const lastRecord = await this.ordersRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
-        newOrder.key = (0, generateKey_1.default)(findLastRecord, 'OD');
+        if (createOrderInput.primaryOrderId) {
+            if (lastRecord[0]) {
+                const lastSupRecord = await this.ordersRepository.find({
+                    where: {
+                        primaryOrderId: createOrderInput.primaryOrderId,
+                    },
+                    order: { id: 'DESC' },
+                    take: 1,
+                });
+                newOrder.orderIndex = lastSupRecord[0].orderIndex + 1;
+                newOrder.primaryOrderId = createOrderInput.primaryOrderId;
+            }
+        }
+        else {
+            lastRecord[0]
+                ? (newOrder.primaryOrderId = lastRecord[0].id + 1)
+                : (newOrder.primaryOrderId = 1);
+        }
+        newOrder.key = (0, generateKey_1.default)(lastRecord, 'OD');
         return await this.ordersRepository.save(newOrder);
     }
     async findAll() {
         return await this.ordersRepository.find(relations_1.Relations);
     }
+    async findOneByPrimaryId(id) {
+        return await this.ordersRepository.find(Object.assign(Object.assign({}, relations_1.Relations), { where: { primaryOrderId: id } }));
+    }
     async findOne(id) {
         return await this.ordersRepository.findOneOrFail(id, relations_1.Relations);
     }
-    update(id, updateOrderInput) {
-        return `This action updates a #${id} order`;
-    }
-    remove(id) {
-        return `This action removes a #${id} order`;
+    async remove(id) {
+        return await this.ordersRepository.delete(id);
     }
 };
 OrdersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(order_entity_1.Order)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
-        clothes_service_1.ClothesService,
         employees_service_1.EmployeesService,
         customers_service_1.CustomersService])
 ], OrdersService);

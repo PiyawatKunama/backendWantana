@@ -2,18 +2,15 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateClotheInput {
-    @Field({ nullable: true })
-    id: number;
-
-    @Field(() => Int)
+    @Field(() => Int, { nullable: true })
     typeClotheId: number;
 
-    @Field(() => Int)
+    @Field(() => Int, { nullable: true })
     sortClotheId: number;
 
-    @Field(() => Int)
-    problemClotheId: number;
+    @Field(() => Int, { nullable: true })
+    specialClothId: number;
 
     @Field(() => Int)
-    specialClothId: number;
+    orderId: number;
 }

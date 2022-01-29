@@ -24,11 +24,11 @@ let SortClothesService = class SortClothesService {
     }
     async create(createSortClotheInput) {
         const newSortClothe = this.sortClothesRepository.create(createSortClotheInput);
-        const findLastRecord = await this.sortClothesRepository.find({
+        const lastRecord = await this.sortClothesRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
-        newSortClothe.key = (0, generateKey_1.default)(findLastRecord, 'SC');
+        newSortClothe.key = (0, generateKey_1.default)(lastRecord, 'SC');
         return await this.sortClothesRepository.save(newSortClothe);
     }
     async findAll() {

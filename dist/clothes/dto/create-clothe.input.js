@@ -14,25 +14,21 @@ const graphql_1 = require("@nestjs/graphql");
 let CreateClotheInput = class CreateClotheInput {
 };
 __decorate([
-    (0, graphql_1.Field)({ nullable: true }),
-    __metadata("design:type", Number)
-], CreateClotheInput.prototype, "id", void 0);
-__decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int),
+    (0, graphql_1.Field)(() => graphql_1.Int, { nullable: true }),
     __metadata("design:type", Number)
 ], CreateClotheInput.prototype, "typeClotheId", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int),
+    (0, graphql_1.Field)(() => graphql_1.Int, { nullable: true }),
     __metadata("design:type", Number)
 ], CreateClotheInput.prototype, "sortClotheId", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int),
+    (0, graphql_1.Field)(() => graphql_1.Int, { nullable: true }),
     __metadata("design:type", Number)
-], CreateClotheInput.prototype, "problemClotheId", void 0);
+], CreateClotheInput.prototype, "specialClothId", void 0);
 __decorate([
     (0, graphql_1.Field)(() => graphql_1.Int),
     __metadata("design:type", Number)
-], CreateClotheInput.prototype, "specialClothId", void 0);
+], CreateClotheInput.prototype, "orderId", void 0);
 CreateClotheInput = __decorate([
     (0, graphql_1.InputType)()
 ], CreateClotheInput);

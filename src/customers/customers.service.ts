@@ -17,12 +17,12 @@ export class CustomersService {
     async create(createCustomerInput: CreateCustomerInput): Promise<Customer> {
         const newCustomer = this.customersRepository.create(createCustomerInput);
 
-        const findLastRecord = await this.customersRepository.find({
+        const lastRecord = await this.customersRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
 
-        newCustomer.key = generateKey(findLastRecord, 'CU');
+        newCustomer.key = generateKey(lastRecord, 'CU');
 
         return await this.customersRepository.save(newCustomer);
     }

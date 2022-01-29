@@ -25,11 +25,11 @@ let CustomersService = class CustomersService {
     }
     async create(createCustomerInput) {
         const newCustomer = this.customersRepository.create(createCustomerInput);
-        const findLastRecord = await this.customersRepository.find({
+        const lastRecord = await this.customersRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
-        newCustomer.key = (0, generateKey_1.default)(findLastRecord, 'CU');
+        newCustomer.key = (0, generateKey_1.default)(lastRecord, 'CU');
         return await this.customersRepository.save(newCustomer);
     }
     async findAll() {

@@ -18,12 +18,12 @@ export class NotificationMassageService {
             createNotificationMassageInput,
         );
 
-        const findLastRecord = await this.notificationMassageRepository.find({
+        const lastRecord = await this.notificationMassageRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
 
-        newEmployee.key = generateKey(findLastRecord, 'NM');
+        newEmployee.key = generateKey(lastRecord, 'NM');
 
         return await this.notificationMassageRepository.save(newEmployee);
     }

@@ -2,8 +2,9 @@ export const Relations = {
     relations: [
         'typeClothe',
         'sortClothe',
-        'orders',
-        'problemClothe',
+        'order',
+        'clotheHasProblems',
+        'clotheHasProblems.problemClothe',
         'specialClothe',
     ],
 };

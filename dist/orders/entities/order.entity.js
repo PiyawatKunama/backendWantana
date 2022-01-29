@@ -14,12 +14,12 @@ const graphql_1 = require("@nestjs/graphql");
 const clothe_entity_1 = require("../../clothes/entities/clothe.entity");
 const customer_entity_1 = require("../../customers/entities/customer.entity");
 const employee_entity_1 = require("../../employees/entities/employee.entity");
+const status_1 = require("../../global/enum/status");
 const typeorm_1 = require("typeorm");
 let Order = class Order {
     beforeInsertActions() {
         this.created_at = new Date();
         this.updated_at = new Date();
-        this.status = 'STATUS_DEFAULT';
     }
 };
 __decorate([
@@ -34,8 +34,18 @@ __decorate([
 ], Order.prototype, "key", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, graphql_1.Field)(),
-    __metadata("design:type", String)
+    (0, graphql_1.Field)(() => graphql_1.Int),
+    __metadata("design:type", Number)
+], Order.prototype, "primaryOrderId", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 0 }),
+    (0, graphql_1.Field)(() => graphql_1.Int),
+    __metadata("design:type", Number)
+], Order.prototype, "orderIndex", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: status_1.Status.IN }),
+    (0, graphql_1.Field)(() => status_1.Status),
+    __metadata("design:type", Number)
 ], Order.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({
@@ -54,7 +64,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Order.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => clothe_entity_1.Clothe, (clothe) => clothe.orders),
+    (0, typeorm_1.OneToMany)(() => clothe_entity_1.Clothe, (clothe) => clothe.order),
     (0, graphql_1.Field)(() => [clothe_entity_1.Clothe]),
     __metadata("design:type", Array)
 ], Order.prototype, "clothes", void 0);

@@ -1,4 +1,3 @@
-import { ProblemClothe } from './../../problem-clothes/entities/problem-clothe.entity';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Order } from 'src/orders/entities/order.entity';
 import { SortClothe } from 'src/sort-clothes/entities/sort-clothe.entity';
@@ -8,12 +7,12 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinTable,
-    ManyToMany,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
 import { SpecialClothe } from 'src/special-clothes/entities/special-clothe.entity';
+import { ClotheHasProblem } from './clotheHasProblem.entity';
 
 @Entity()
 @ObjectType()
@@ -25,6 +24,56 @@ export class Clothe {
     @Column({ nullable: true })
     @Field({ nullable: true })
     key?: string;
+
+    @Column({ nullable: true })
+    @Field(() => Int, { nullable: true })
+    public typeClotheId: number;
+
+    @Column({ nullable: true })
+    @Field(() => Int, { nullable: true })
+    public sortClotheId: number;
+
+    @Column({ nullable: true })
+    @Field(() => Int, { nullable: true })
+    public specialClotheId: number;
+
+    @Column()
+    @Field(() => Int)
+    public orderId: number;
+
+    @ManyToOne(() => TypeClothe, (typeClothe) => typeClothe.clothes, {
+        onDelete: 'CASCADE',
+    })
+    @Field(() => TypeClothe, { nullable: true })
+    typeClothe: TypeClothe;
+
+    @ManyToOne(() => SortClothe, (sortClothe) => sortClothe.clothes, {
+        onDelete: 'CASCADE',
+    })
+    @Field(() => SortClothe, { nullable: true })
+    sortClothe: SortClothe;
+
+    @OneToMany(
+        () => ClotheHasProblem,
+        (clotheHasProblems) => clotheHasProblems.clothe,
+        {
+            onDelete: 'CASCADE',
+        },
+    )
+    @Field(() => [ClotheHasProblem])
+    clotheHasProblems: ClotheHasProblem;
+
+    @ManyToOne(() => SpecialClothe, (SpecialClothe) => SpecialClothe.clothes, {
+        onDelete: 'CASCADE',
+    })
+    @Field(() => SpecialClothe, { nullable: true })
+    specialClothe: SpecialClothe;
+
+    @ManyToOne(() => Order, (order) => order.clothes, {
+        onDelete: 'CASCADE',
+    })
+    @Field(() => Order)
+    order: Order;
 
     @CreateDateColumn({
         type: 'timestamp',
@@ -39,37 +88,6 @@ export class Clothe {
     })
     @Field()
     public updated_at: Date;
-
-    @ManyToOne(() => TypeClothe, (typeClothe) => typeClothe.clothes, {
-        onDelete: 'CASCADE',
-    })
-    @Field(() => TypeClothe)
-    typeClothe: TypeClothe;
-
-    @ManyToOne(() => SortClothe, (sortClothe) => sortClothe.clothes, {
-        onDelete: 'CASCADE',
-    })
-    @Field(() => SortClothe)
-    sortClothe: SortClothe;
-
-    @ManyToOne(() => ProblemClothe, (problemClothe) => problemClothe.clothes, {
-        onDelete: 'CASCADE',
-    })
-    @Field(() => ProblemClothe)
-    problemClothe: ProblemClothe;
-
-    @ManyToOne(() => SpecialClothe, (SpecialClothe) => SpecialClothe.clothes, {
-        onDelete: 'CASCADE',
-    })
-    @Field(() => SpecialClothe)
-    specialClothe: SpecialClothe;
-
-    @ManyToMany(() => Order, (order) => order.clothes)
-    @JoinTable({
-        name: 'order_details',
-    })
-    @Field(() => [Order])
-    orders: Order[];
 
     @BeforeInsert()
     beforeInsertActions() {

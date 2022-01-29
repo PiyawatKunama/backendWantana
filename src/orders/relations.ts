@@ -3,6 +3,8 @@ export const Relations = {
         'clothes',
         'clothes.typeClothe',
         'clothes.sortClothe',
+        'clothes.clotheHasProblems',
+        'clothes.clotheHasProblems.problemClothe',
         'employee',
         'customer',
     ],

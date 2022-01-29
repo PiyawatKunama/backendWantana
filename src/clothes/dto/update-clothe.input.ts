@@ -1,8 +1,10 @@
-import { CreateClotheInput } from './create-clothe.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 
 @InputType()
-export class UpdateClotheInput extends PartialType(CreateClotheInput) {
+export class UpdateClotheInput {
+    @Field(() => [Int])
+    ids: number[];
+
     @Field(() => Int)
-    id: number;
+    orderId: number;
 }

@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Status } from 'src/global/enum/status';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Status } from '../enum/status';
 
 @Entity()
 @ObjectType()
@@ -13,9 +13,9 @@ export class NotificationMassage {
     @Field({ nullable: true })
     key?: string;
 
-    @Column()
-    @Field()
-    status?: Status;
+    @Column({ nullable: true })
+    @Field(() => Status, { nullable: true })
+    status: Status;
 
     @Column({ nullable: true })
     @Field({ nullable: true })

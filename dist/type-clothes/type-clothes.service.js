@@ -24,11 +24,11 @@ let TypeClothesService = class TypeClothesService {
     }
     async create(createTypeClotheInput) {
         const newTypeClothe = this.typeClothesRepository.create(createTypeClotheInput);
-        const findLastRecord = await this.typeClothesRepository.find({
+        const lastRecord = await this.typeClothesRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
-        newTypeClothe.key = (0, generateKey_1.default)(findLastRecord, 'TC');
+        newTypeClothe.key = (0, generateKey_1.default)(lastRecord, 'TC');
         return await this.typeClothesRepository.save(newTypeClothe);
     }
     async findAll() {

@@ -20,12 +20,12 @@ export class SpecialClothesService {
             createSpecialClotheInput,
         );
 
-        const findLastRecord = await this.specialClothesRepository.find({
+        const lastRecord = await this.specialClothesRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
 
-        newSpecialClothe.key = generateKey(findLastRecord, 'SP');
+        newSpecialClothe.key = generateKey(lastRecord, 'SP');
 
         return await this.specialClothesRepository.save(newSpecialClothe);
     }

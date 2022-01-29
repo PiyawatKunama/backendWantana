@@ -1,6 +1,6 @@
 import { CreateNotificationMassageInput } from './create-notification-massage.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
-import { Status } from '../enum/status';
+import { Status } from 'src/global/enum/status';
 
 @InputType()
 export class UpdateNotificationMassageInput extends PartialType(
@@ -12,7 +12,7 @@ export class UpdateNotificationMassageInput extends PartialType(
     @Field({ nullable: true })
     key?: string;
 
-    @Field()
+    @Field(() => Status)
     status?: Status;
 
     @Field({ nullable: true })

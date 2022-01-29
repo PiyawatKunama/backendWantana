@@ -3,6 +3,7 @@ import { ClothesService } from './clothes.service';
 import { Clothe } from './entities/clothe.entity';
 import { CreateClotheInput } from './dto/create-clothe.input';
 import { UpdateClotheInput } from './dto/update-clothe.input';
+import { CreateClotheProblemInput } from './dto/create-clothe-problem.input';
 
 @Resolver(() => Clothe)
 export class ClothesResolver {
@@ -11,6 +12,15 @@ export class ClothesResolver {
     @Mutation(() => Clothe)
     createClothe(@Args('createClotheInput') createClotheInput: CreateClotheInput) {
         return this.clothesService.create(createClotheInput);
+    }
+
+    @Mutation(() => String)
+    async createClotheHasProblem(
+        @Args('createClotheProblemInput')
+        createClotheProblemInput: CreateClotheProblemInput,
+    ) {
+        await this.clothesService.createClotheHasProblem(createClotheProblemInput);
+        return 'add problem clothe success';
     }
 
     @Query(() => [Clothe], { name: 'clothes' })
@@ -23,12 +33,12 @@ export class ClothesResolver {
         return this.clothesService.findOne(id);
     }
 
-    @Mutation(() => Clothe)
+    @Mutation(() => String)
     async updateClothe(
         @Args('updateClotheInput') updateClotheInput: UpdateClotheInput,
     ) {
-        await this.clothesService.update(updateClotheInput.id, updateClotheInput);
-        return await this.clothesService.findOne(updateClotheInput.id);
+        this.clothesService.update(updateClotheInput.ids, updateClotheInput);
+        return 'Updated';
     }
 
     @Mutation(() => Clothe)

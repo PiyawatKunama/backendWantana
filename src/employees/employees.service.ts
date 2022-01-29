@@ -17,12 +17,12 @@ export class EmployeesService {
 
     async create(createEmployeeInput: CreateEmployeeInput): Promise<Employee> {
         const newEmployee = this.employeesRepository.create(createEmployeeInput);
-        const findLastRecord = await this.employeesRepository.find({
+        const lastRecord = await this.employeesRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
 
-        newEmployee.key = generateKey(findLastRecord, 'EM');
+        newEmployee.key = generateKey(lastRecord, 'EM');
 
         return await this.employeesRepository.save(newEmployee);
     }

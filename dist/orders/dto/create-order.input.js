@@ -11,21 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateOrderInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
-const status_1 = require("../enums/status");
 let CreateOrderInput = class CreateOrderInput {
 };
-__decorate([
-    (0, graphql_1.Field)({ nullable: true }),
-    __metadata("design:type", Number)
-], CreateOrderInput.prototype, "id", void 0);
-__decorate([
-    (0, graphql_1.Field)(() => status_1.Status, { nullable: true }),
-    __metadata("design:type", Number)
-], CreateOrderInput.prototype, "role", void 0);
-__decorate([
-    (0, graphql_1.Field)(() => [graphql_1.Int]),
-    __metadata("design:type", Array)
-], CreateOrderInput.prototype, "clotheIds", void 0);
 __decorate([
     (0, graphql_1.Field)(() => graphql_1.Int),
     __metadata("design:type", Number)
@@ -34,6 +21,10 @@ __decorate([
     (0, graphql_1.Field)(() => graphql_1.Int),
     __metadata("design:type", Number)
 ], CreateOrderInput.prototype, "customerId", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => graphql_1.Int, { nullable: true }),
+    __metadata("design:type", Number)
+], CreateOrderInput.prototype, "primaryOrderId", void 0);
 CreateOrderInput = __decorate([
     (0, graphql_1.InputType)()
 ], CreateOrderInput);

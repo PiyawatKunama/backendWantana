@@ -20,12 +20,12 @@ export class ProblemClothesService {
             createProblemClotheInput,
         );
 
-        const findLastRecord = await this.problemClothesRepository.find({
+        const lastRecord = await this.problemClothesRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
 
-        newProblemClothe.key = generateKey(findLastRecord, 'PC');
+        newProblemClothe.key = generateKey(lastRecord, 'PC');
 
         return await this.problemClothesRepository.save(newProblemClothe);
     }

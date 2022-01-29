@@ -10,6 +10,9 @@ import { UpdateClotheInput } from './dto/update-clothe.input';
 import { Clothe } from './entities/clothe.entity';
 import { Relations } from './relations';
 import { SpecialClothesService } from 'src/special-clothes/special-clothes.service';
+import { OrdersService } from 'src/orders/orders.service';
+import { CreateClotheProblemInput } from './dto/create-clothe-problem.input';
+import { ClotheHasProblem } from './entities/clotheHasProblem.entity';
 
 @Entity()
 @Injectable()
@@ -17,41 +20,64 @@ export class ClothesService {
     constructor(
         @InjectRepository(Clothe)
         private clothesRepository: Repository<Clothe>,
+        @InjectRepository(ClotheHasProblem)
+        private clotheHasProblemsRepository: Repository<ClotheHasProblem>,
         private typeClothesService: TypeClothesService,
         private sortClothesService: SortClothesService,
         private problemClothesService: ProblemClothesService,
         private specialClothesService: SpecialClothesService,
+        private ordersService: OrdersService,
     ) {}
+
+    async createClotheHasProblem(createClotheProblem: CreateClotheProblemInput) {
+        for (let i = 0; i < createClotheProblem.clotheIds.length; i++) {
+            const newClotheProblem = this.clotheHasProblemsRepository.create({
+                status: createClotheProblem.status,
+            });
+            const cloth = await this.findOne(createClotheProblem.clotheIds[i]);
+            newClotheProblem.clothe = cloth;
+
+            const problemClothe = await this.problemClothesService.findOne(
+                createClotheProblem.problemClothes,
+            );
+            newClotheProblem.problemClothe = problemClothe;
+
+            await this.clotheHasProblemsRepository.save(newClotheProblem);
+        }
+    }
 
     async create(createClotheInput: CreateClotheInput) {
         const newClothe = this.clothesRepository.create(createClotheInput);
 
-        const typeClothe = await this.typeClothesService.findOne(
-            createClotheInput.typeClotheId,
-        );
-        newClothe.typeClothe = typeClothe;
+        if (createClotheInput.typeClotheId) {
+            const typeClothe = await this.typeClothesService.findOne(
+                createClotheInput.typeClotheId,
+            );
+            newClothe.typeClothe = typeClothe;
+        }
+        if (createClotheInput.sortClotheId) {
+            const sortClothe = await this.sortClothesService.findOne(
+                createClotheInput.sortClotheId,
+            );
+            newClothe.sortClothe = sortClothe;
+        }
 
-        const sortClothe = await this.sortClothesService.findOne(
-            createClotheInput.sortClotheId,
-        );
-        newClothe.sortClothe = sortClothe;
+        if (createClotheInput.specialClothId) {
+            const specialClothe = await this.specialClothesService.findOne(
+                createClotheInput.specialClothId,
+            );
+            newClothe.specialClothe = specialClothe;
+        }
 
-        const problemClothe = await this.problemClothesService.findOne(
-            createClotheInput.problemClotheId,
-        );
-        newClothe.problemClothe = problemClothe;
+        const order = await this.ordersService.findOne(createClotheInput.orderId);
+        newClothe.order = order;
 
-        const specialClothe = await this.specialClothesService.findOne(
-            createClotheInput.specialClothId,
-        );
-        newClothe.specialClothe = specialClothe;
-
-        const findLastRecord = await this.clothesRepository.find({
+        const lastRecord = await this.clothesRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
 
-        newClothe.key = generateKey(findLastRecord, 'CL');
+        newClothe.key = generateKey(lastRecord, 'CL');
 
         return await this.clothesRepository.save(newClothe);
     }
@@ -64,9 +90,11 @@ export class ClothesService {
         return await this.clothesRepository.findOneOrFail(id, Relations);
     }
 
-    async update(id: number, updateClotheInput: UpdateClotheInput) {
+    update(ids: number[], updateClotheInput: UpdateClotheInput) {
         const updateClothe = this.clothesRepository.create(updateClotheInput);
-        return await this.clothesRepository.update(id, updateClothe);
+        ids.forEach(async (id) => {
+            await this.clothesRepository.update(id, updateClothe);
+        });
     }
 
     async remove(id: number) {

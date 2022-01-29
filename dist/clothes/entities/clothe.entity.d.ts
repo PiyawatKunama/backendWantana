@@ -1,17 +1,21 @@
-import { ProblemClothe } from './../../problem-clothes/entities/problem-clothe.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import { SortClothe } from 'src/sort-clothes/entities/sort-clothe.entity';
 import { TypeClothe } from 'src/type-clothes/entities/type-clothe.entity';
 import { SpecialClothe } from 'src/special-clothes/entities/special-clothe.entity';
+import { ClotheHasProblem } from './clotheHasProblem.entity';
 export declare class Clothe {
     id: number;
     key?: string;
-    created_at: Date;
-    updated_at: Date;
+    typeClotheId: number;
+    sortClotheId: number;
+    specialClotheId: number;
+    orderId: number;
     typeClothe: TypeClothe;
     sortClothe: SortClothe;
-    problemClothe: ProblemClothe;
+    clotheHasProblems: ClotheHasProblem;
     specialClothe: SpecialClothe;
-    orders: Order[];
+    order: Order;
+    created_at: Date;
+    updated_at: Date;
     beforeInsertActions(): void;
 }

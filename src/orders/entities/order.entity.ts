@@ -2,13 +2,14 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Clothe } from 'src/clothes/entities/clothe.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Employee } from 'src/employees/entities/employee.entity';
+import { Status } from 'src/global/enum/status';
 import {
     BeforeInsert,
     Column,
     CreateDateColumn,
     Entity,
-    ManyToMany,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -24,8 +25,16 @@ export class Order {
     key?: string;
 
     @Column()
-    @Field()
-    status: string;
+    @Field(() => Int)
+    primaryOrderId: number;
+
+    @Column({ default: 0 })
+    @Field(() => Int)
+    orderIndex: number;
+
+    @Column({ default: Status.IN })
+    @Field(() => Status)
+    status: Status;
 
     @CreateDateColumn({
         type: 'timestamp',
@@ -41,7 +50,7 @@ export class Order {
     @Field()
     public updated_at: Date;
 
-    @ManyToMany(() => Clothe, (clothe) => clothe.orders)
+    @OneToMany(() => Clothe, (clothe) => clothe.order)
     @Field(() => [Clothe])
     clothes: Clothe[];
 
@@ -61,6 +70,5 @@ export class Order {
     beforeInsertActions() {
         this.created_at = new Date();
         this.updated_at = new Date();
-        this.status = 'STATUS_DEFAULT';
     }
 }

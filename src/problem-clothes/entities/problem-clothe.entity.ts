@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Clothe } from 'src/clothes/entities/clothe.entity';
+import { ClotheHasProblem } from 'src/clothes/entities/clotheHasProblem.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -20,4 +21,14 @@ export class ProblemClothe {
     @OneToMany(() => Clothe, (clothe) => clothe.typeClothe)
     @Field(() => [Clothe], { nullable: true })
     clothes: Clothe[];
+
+    @OneToMany(
+        () => ClotheHasProblem,
+        (clotheHasProblems) => clotheHasProblems.problemClothe,
+        {
+            onDelete: 'CASCADE',
+        },
+    )
+    @Field(() => [ClotheHasProblem])
+    clotheHasProblems: ClotheHasProblem;
 }

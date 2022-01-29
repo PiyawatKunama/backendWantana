@@ -17,12 +17,12 @@ export class TypeClothesService {
         const newTypeClothe =
             this.typeClothesRepository.create(createTypeClotheInput);
 
-        const findLastRecord = await this.typeClothesRepository.find({
+        const lastRecord = await this.typeClothesRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
 
-        newTypeClothe.key = generateKey(findLastRecord, 'TC');
+        newTypeClothe.key = generateKey(lastRecord, 'TC');
 
         return await this.typeClothesRepository.save(newTypeClothe);
     }

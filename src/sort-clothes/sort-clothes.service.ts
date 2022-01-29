@@ -16,12 +16,12 @@ export class SortClothesService {
     async create(createSortClotheInput: CreateSortClotheInput) {
         const newSortClothe =
             this.sortClothesRepository.create(createSortClotheInput);
-        const findLastRecord = await this.sortClothesRepository.find({
+        const lastRecord = await this.sortClothesRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
 
-        newSortClothe.key = generateKey(findLastRecord, 'SC');
+        newSortClothe.key = generateKey(lastRecord, 'SC');
 
         return await this.sortClothesRepository.save(newSortClothe);
     }
