@@ -70,6 +70,10 @@ let OrdersService = class OrdersService {
     async remove(id) {
         return await this.ordersRepository.delete(id);
     }
+    async update(id, updateOrderInput) {
+        const updateOrder = this.ordersRepository.create(updateOrderInput);
+        await this.ordersRepository.update(id, updateOrder);
+    }
 };
 OrdersService = __decorate([
     (0, common_1.Injectable)(),

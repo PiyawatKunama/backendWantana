@@ -10,14 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateOrderInput = void 0;
-const create_order_input_1 = require("./create-order.input");
 const graphql_1 = require("@nestjs/graphql");
-let UpdateOrderInput = class UpdateOrderInput extends (0, graphql_1.PartialType)(create_order_input_1.CreateOrderInput) {
+const status_1 = require("../../global/enum/status");
+let UpdateOrderInput = class UpdateOrderInput {
 };
 __decorate([
     (0, graphql_1.Field)(() => graphql_1.Int),
     __metadata("design:type", Number)
 ], UpdateOrderInput.prototype, "id", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => status_1.Status, { nullable: true }),
+    __metadata("design:type", Number)
+], UpdateOrderInput.prototype, "status", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => Boolean, { nullable: true }),
+    __metadata("design:type", Boolean)
+], UpdateOrderInput.prototype, "isOutProcess", void 0);
 UpdateOrderInput = __decorate([
     (0, graphql_1.InputType)()
 ], UpdateOrderInput);

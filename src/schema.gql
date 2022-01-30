@@ -40,6 +40,7 @@ type Order {
   primaryOrderId: Int!
   orderIndex: Int!
   status: status!
+  isOutProcess: Boolean!
   created_at: DateTime!
   updated_at: DateTime!
   clothes: [Clothe!]!
@@ -165,6 +166,7 @@ type Mutation {
   removeProblemClothe(id: Int!): ProblemClothe!
   createOrder(createOrderInput: CreateOrderInput!): Order!
   removeOrder(id: Int!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   createNotificationMassage(createNotificationMassageInput: CreateNotificationMassageInput!): NotificationMassage!
   updateNotificationMassage(updateNotificationMassageInput: UpdateNotificationMassageInput!): NotificationMassage!
   removeNotificationMassage(id: Int!): NotificationMassage!
@@ -271,6 +273,12 @@ input CreateOrderInput {
   employeeId: Int!
   customerId: Int!
   primaryOrderId: Int
+}
+
+input UpdateOrderInput {
+  id: Int!
+  status: status
+  isOutProcess: Boolean
 }
 
 input CreateNotificationMassageInput {

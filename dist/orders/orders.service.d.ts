@@ -2,6 +2,7 @@ import { CustomersService } from 'src/customers/customers.service';
 import { EmployeesService } from 'src/employees/employees.service';
 import { Repository } from 'typeorm';
 import { CreateOrderInput } from './dto/create-order.input';
+import { UpdateOrderInput } from './dto/update-order.input';
 import { Order } from './entities/order.entity';
 export declare class OrdersService {
     private ordersRepository;
@@ -13,4 +14,5 @@ export declare class OrdersService {
     findOneByPrimaryId(id: number): Promise<Order[]>;
     findOne(id: number): Promise<Order>;
     remove(id: number): Promise<import("typeorm").DeleteResult>;
+    update(id: number, updateOrderInput: UpdateOrderInput): Promise<void>;
 }

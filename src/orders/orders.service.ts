@@ -5,6 +5,7 @@ import { EmployeesService } from 'src/employees/employees.service';
 import generateKey from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateOrderInput } from './dto/create-order.input';
+import { UpdateOrderInput } from './dto/update-order.input';
 import { Order } from './entities/order.entity';
 import { Relations } from './relations';
 
@@ -78,5 +79,10 @@ export class OrdersService {
 
     async remove(id: number) {
         return await this.ordersRepository.delete(id);
+    }
+
+    async update(id: number, updateOrderInput: UpdateOrderInput) {
+        const updateOrder = this.ordersRepository.create(updateOrderInput);
+        await this.ordersRepository.update(id, updateOrder);
     }
 }

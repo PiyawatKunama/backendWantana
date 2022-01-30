@@ -36,6 +36,10 @@ export class Order {
     @Field(() => Status)
     status: Status;
 
+    @Column({ default: false })
+    @Field(() => Boolean)
+    isOutProcess: boolean;
+
     @CreateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP(6)',

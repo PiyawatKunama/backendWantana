@@ -8,6 +8,7 @@ export declare class Order {
     primaryOrderId: number;
     orderIndex: number;
     status: Status;
+    isOutProcess: boolean;
     created_at: Date;
     updated_at: Date;
     clothes: Clothe[];
