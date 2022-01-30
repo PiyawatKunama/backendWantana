@@ -292,12 +292,3 @@ input UpdateNotificationMassageInput {
   id: Int!
   key: String
 }
-
-// update Order
-mutation {
-  updateOrder(updateOrderInput: { id: 1, status: OUT, isOutProcess: true }) {
-    id
-    status
-    isOutProcess
-  }
-}

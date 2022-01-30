@@ -158,8 +158,18 @@ mutation {
   }
 }
 
-
 // add problem to clothe
+mutation {
+  createClotheHasProblem(
+    createClotheProblemInput: {
+      status: IN
+      clotheIds: [1, 2]
+      problemClothes: 1
+    }
+  )
+}
+
+// find orders by primaryOrderId
 query {
   findOneByPrimaryId(id: 1) {
     id
