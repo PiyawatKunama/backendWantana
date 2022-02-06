@@ -6,7 +6,6 @@ export declare class Order {
     id: number;
     key?: string;
     primaryOrderId: number;
-    orderIndex: number;
     status: Status;
     isOutProcess: boolean;
     created_at: Date;

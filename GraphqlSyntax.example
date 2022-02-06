@@ -71,7 +71,6 @@ mutation {
   createOrder(createOrderInput: { employeeId: 1, customerId: 1 }) {
     key
     primaryOrderId
-    orderIndex
     status
     employee {
       key
@@ -108,7 +107,6 @@ mutation {
     id
     key
     primaryOrderId
-    orderIndex
     status
     employee {
       key

@@ -39,14 +39,13 @@ let OrdersService = class OrdersService {
         });
         if (createOrderInput.primaryOrderId) {
             if (lastRecord[0]) {
-                const lastSupRecord = await this.ordersRepository.find({
+                await this.ordersRepository.find({
                     where: {
                         primaryOrderId: createOrderInput.primaryOrderId,
                     },
                     order: { id: 'DESC' },
                     take: 1,
                 });
-                newOrder.orderIndex = lastSupRecord[0].orderIndex + 1;
                 newOrder.primaryOrderId = createOrderInput.primaryOrderId;
             }
         }

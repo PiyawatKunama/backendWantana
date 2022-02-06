@@ -38,7 +38,6 @@ type Order {
   id: Int!
   key: String
   primaryOrderId: Int!
-  orderIndex: Int!
   status: status!
   isOutProcess: Boolean!
   created_at: DateTime!

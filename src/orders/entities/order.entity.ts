@@ -28,10 +28,6 @@ export class Order {
     @Field(() => Int)
     primaryOrderId: number;
 
-    @Column({ default: 0 })
-    @Field(() => Int)
-    orderIndex: number;
-
     @Column({ default: Status.IN })
     @Field(() => Status)
     status: Status;
