@@ -48,6 +48,10 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Order.prototype, "isOutProcess", void 0);
 __decorate([
+    (0, graphql_1.Field)(() => graphql_1.Int, { nullable: true }),
+    __metadata("design:type", Number)
+], Order.prototype, "numClothe", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP(6)',

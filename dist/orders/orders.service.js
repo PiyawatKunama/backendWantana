@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const customers_service_1 = require("../customers/customers.service");
 const employees_service_1 = require("../employees/employees.service");
+const status_1 = require("../global/enum/status");
 const generateKey_1 = require("../global/generateKey");
 const typeorm_2 = require("typeorm");
 const order_entity_1 = require("./entities/order.entity");
@@ -62,8 +63,29 @@ let OrdersService = class OrdersService {
     }
     async findAllPrimaryOrder() {
         const orders = await this.ordersRepository.find(relations_1.Relations);
+        const numClothe = [];
+        let orderPrimary = 0;
+        let num = 0;
+        orders.forEach((order, index) => {
+            if (order.primaryOrderId != orderPrimary) {
+                if (orderPrimary) {
+                    numClothe.push(num);
+                    num = 0;
+                }
+                orderPrimary = order.primaryOrderId;
+            }
+            if (order.status === status_1.Status.IN) {
+                num += order.clothes.length;
+            }
+            if (index === orders.length - 1) {
+                numClothe.push(num);
+            }
+        });
+        let numUsed = 0;
         const primaryOrder = orders.filter((order) => {
             if (order.id === order.primaryOrderId) {
+                order.numClothe = numClothe[numUsed];
+                numUsed++;
                 return order;
             }
         });

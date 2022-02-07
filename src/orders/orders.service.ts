@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CustomersService } from 'src/customers/customers.service';
 import { EmployeesService } from 'src/employees/employees.service';
+import { Status } from 'src/global/enum/status';
 import generateKey from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateOrderInput } from './dto/create-order.input';
@@ -67,11 +68,36 @@ export class OrdersService {
 
     async findAllPrimaryOrder(): Promise<Order[]> {
         const orders = await this.ordersRepository.find(Relations);
+        const numClothe = [];
+        let orderPrimary = 0;
+        let num = 0;
+
+        orders.forEach((order, index) => {
+            if (order.primaryOrderId != orderPrimary) {
+                if (orderPrimary) {
+                    numClothe.push(num);
+                    num = 0;
+                }
+                orderPrimary = order.primaryOrderId;
+            }
+            if (order.status === Status.IN) {
+                num += order.clothes.length;
+            }
+
+            if (index === orders.length - 1) {
+                numClothe.push(num);
+            }
+        });
+
+        let numUsed = 0;
         const primaryOrder = orders.filter((order) => {
             if (order.id === order.primaryOrderId) {
+                order.numClothe = numClothe[numUsed];
+                numUsed++;
                 return order;
             }
         });
+
         return primaryOrder;
     }
 

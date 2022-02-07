@@ -36,6 +36,9 @@ export class Order {
     @Field(() => Boolean)
     isOutProcess: boolean;
 
+    @Field(() => Int, { nullable: true })
+    numClothe: number;
+
     @CreateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP(6)',
