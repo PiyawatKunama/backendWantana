@@ -4,6 +4,7 @@ import { NotificationMassage } from './entities/notification-massage.entity';
 import { CreateNotificationMassageInput } from './dto/create-notification-massage.input';
 import { UpdateNotificationMassageInput } from './dto/update-notification-massage.input';
 import { Status } from 'src/global/enum/status';
+import { NotificationMassageDatum } from './entities/notification-massage-datum.entity';
 
 @Resolver(() => NotificationMassage)
 export class NotificationMassageResolver {
@@ -24,6 +25,11 @@ export class NotificationMassageResolver {
     @Query(() => [NotificationMassage])
     notificationMassages() {
         return this.notificationMassageService.findAll();
+    }
+
+    @Query(() => [NotificationMassageDatum])
+    notificationMassageDatums() {
+        return this.notificationMassageService.findAllDatum();
     }
 
     @Query(() => NotificationMassage, { name: '' })

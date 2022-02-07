@@ -290,3 +290,16 @@ query {
     isDisable
   }
 }
+
+
+query{
+  notificationMassageDatums{
+    id
+    Massage
+    customer{
+      id
+      firstName
+      email
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { NotificationMassageDatum } from 'src/notification-massage/entities/notification-massage-datum.entity';
 import { Order } from 'src/orders/entities/order.entity';
 export declare class Customer {
     id: number;
@@ -10,4 +11,5 @@ export declare class Customer {
     lineUserId: string;
     email: string;
     orders: Order[];
+    notification_massage_datum: NotificationMassageDatum;
 }

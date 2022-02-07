@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Customer = void 0;
 const graphql_1 = require("@nestjs/graphql");
+const notification_massage_datum_entity_1 = require("../../notification-massage/entities/notification-massage-datum.entity");
 const order_entity_1 = require("../../orders/entities/order.entity");
 const typeorm_1 = require("typeorm");
 let Customer = class Customer {
@@ -65,6 +66,11 @@ __decorate([
     (0, graphql_1.Field)(() => [order_entity_1.Order], { nullable: true }),
     __metadata("design:type", Array)
 ], Customer.prototype, "orders", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => notification_massage_datum_entity_1.NotificationMassageDatum, (notification_massage_datum) => notification_massage_datum.customer),
+    (0, graphql_1.Field)(() => notification_massage_datum_entity_1.NotificationMassageDatum),
+    __metadata("design:type", notification_massage_datum_entity_1.NotificationMassageDatum)
+], Customer.prototype, "notification_massage_datum", void 0);
 Customer = __decorate([
     (0, typeorm_1.Entity)(),
     (0, graphql_1.ObjectType)()

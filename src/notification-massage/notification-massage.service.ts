@@ -5,6 +5,7 @@ import generateKey from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateNotificationMassageInput } from './dto/create-notification-massage.input';
 import { UpdateNotificationMassageInput } from './dto/update-notification-massage.input';
+import { NotificationMassageDatum } from './entities/notification-massage-datum.entity';
 import { NotificationMassage } from './entities/notification-massage.entity';
 
 @Injectable()
@@ -12,6 +13,8 @@ export class NotificationMassageService {
     constructor(
         @InjectRepository(NotificationMassage)
         private notificationMassageRepository: Repository<NotificationMassage>,
+        @InjectRepository(NotificationMassageDatum)
+        private notificationMassageDatumRepository: Repository<NotificationMassageDatum>,
     ) {}
 
     async create(createNotificationMassageInput: CreateNotificationMassageInput) {
@@ -31,6 +34,12 @@ export class NotificationMassageService {
 
     async findAll(): Promise<NotificationMassage[]> {
         return await this.notificationMassageRepository.find();
+    }
+
+    async findAllDatum(): Promise<NotificationMassageDatum[]> {
+        return await this.notificationMassageDatumRepository.find({
+            relations: ['customer'],
+        });
     }
 
     async findOne(id: number): Promise<NotificationMassage> {

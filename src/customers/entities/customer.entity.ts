@@ -1,6 +1,13 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { NotificationMassageDatum } from 'src/notification-massage/entities/notification-massage-datum.entity';
 import { Order } from 'src/orders/entities/order.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    Entity,
+    OneToMany,
+    OneToOne,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -44,4 +51,11 @@ export class Customer {
     @OneToMany(() => Order, (order) => order.customer)
     @Field(() => [Order], { nullable: true })
     orders: Order[];
+
+    @OneToOne(
+        () => NotificationMassageDatum,
+        (notification_massage_datum) => notification_massage_datum.customer,
+    )
+    @Field(() => NotificationMassageDatum)
+    notification_massage_datum: NotificationMassageDatum;
 }
