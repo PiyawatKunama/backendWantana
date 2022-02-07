@@ -4,8 +4,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinColumn,
-    OneToOne,
+    ManyToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -20,10 +19,6 @@ export class NotificationMassageDatum {
     @Field({ nullable: true })
     Massage: string;
 
-    @Column({ nullable: true })
-    @Field(() => Int, { nullable: true })
-    public customerId: number;
-
     @CreateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP(6)',
@@ -31,8 +26,7 @@ export class NotificationMassageDatum {
     @Field()
     public created_at: Date;
 
-    @OneToOne(() => Customer, (customer) => customer.notification_massage_datum)
+    @ManyToOne(() => Customer, (customer) => customer.notification_massage_datums)
     @Field(() => Customer)
-    @JoinColumn({ name: 'customerId' })
     customer: Customer;
 }

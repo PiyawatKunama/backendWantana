@@ -11,5 +11,5 @@ export declare class Customer {
     lineUserId: string;
     email: string;
     orders: Order[];
-    notification_massage_datum: NotificationMassageDatum;
+    notification_massage_datums: NotificationMassageDatum[];
 }

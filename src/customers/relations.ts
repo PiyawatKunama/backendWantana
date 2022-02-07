@@ -1,3 +1,3 @@
 export const Relations = {
-    relations: ['orders'],
+    relations: ['orders', 'notification_massage_datums'],
 };

@@ -5,7 +5,6 @@
 type NotificationMassageDatum {
   id: Int!
   Massage: String
-  customerId: Int
   created_at: DateTime!
   customer: Customer!
 }
@@ -26,7 +25,7 @@ type Customer {
   lineUserId: String
   email: String!
   orders: [Order!]
-  notification_massage_datum: NotificationMassageDatum!
+  notification_massage_datums: [NotificationMassageDatum!]!
 }
 
 type Employee {

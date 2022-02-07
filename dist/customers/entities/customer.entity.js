@@ -67,10 +67,10 @@ __decorate([
     __metadata("design:type", Array)
 ], Customer.prototype, "orders", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => notification_massage_datum_entity_1.NotificationMassageDatum, (notification_massage_datum) => notification_massage_datum.customer),
-    (0, graphql_1.Field)(() => notification_massage_datum_entity_1.NotificationMassageDatum),
-    __metadata("design:type", notification_massage_datum_entity_1.NotificationMassageDatum)
-], Customer.prototype, "notification_massage_datum", void 0);
+    (0, typeorm_1.OneToMany)(() => notification_massage_datum_entity_1.NotificationMassageDatum, (notification_massage_datum) => notification_massage_datum.customer),
+    (0, graphql_1.Field)(() => [notification_massage_datum_entity_1.NotificationMassageDatum]),
+    __metadata("design:type", Array)
+], Customer.prototype, "notification_massage_datums", void 0);
 Customer = __decorate([
     (0, typeorm_1.Entity)(),
     (0, graphql_1.ObjectType)()
