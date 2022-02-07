@@ -3,6 +3,7 @@ export const Relations = {
         'clothes',
         'clothes.typeClothe',
         'clothes.sortClothe',
+        'clothes.specialClothe',
         'clothes.clotheHasProblems',
         'clothes.clotheHasProblems.problemClothe',
         'employee',
