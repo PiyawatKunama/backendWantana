@@ -65,6 +65,16 @@ export class OrdersService {
         return await this.ordersRepository.find(Relations);
     }
 
+    async findAllPrimaryOrder(): Promise<Order[]> {
+        const orders = await this.ordersRepository.find(Relations);
+        const primaryOrder = orders.filter((order) => {
+            if (order.id === order.primaryOrderId) {
+                return order;
+            }
+        });
+        return primaryOrder;
+    }
+
     async findOneByPrimaryId(id: number): Promise<Order[]> {
         return await this.ordersRepository.find({
             ...Relations,

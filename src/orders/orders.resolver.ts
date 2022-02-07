@@ -24,6 +24,11 @@ export class OrdersResolver {
     }
 
     @Query(() => [Order])
+    primaryOrders() {
+        return this.ordersService.findAllPrimaryOrder();
+    }
+
+    @Query(() => [Order])
     findOneByPrimaryId(@Args('id', { type: () => Int }) id: number) {
         return this.ordersService.findOneByPrimaryId(id);
     }

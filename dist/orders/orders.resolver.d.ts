@@ -8,6 +8,7 @@ export declare class OrdersResolver {
     createOrder(createOrderInput: CreateOrderInput): Promise<Order>;
     findAll(): Promise<Order[]>;
     findOne(id: number): Promise<Order>;
+    primaryOrders(): Promise<Order[]>;
     findOneByPrimaryId(id: number): Promise<Order[]>;
     removeOrder(id: number): Promise<import("typeorm").DeleteResult>;
     updateOrder(updateOrderInput: UpdateOrderInput): Promise<Order>;

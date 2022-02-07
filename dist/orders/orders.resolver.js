@@ -31,6 +31,9 @@ let OrdersResolver = class OrdersResolver {
     findOne(id) {
         return this.ordersService.findOne(id);
     }
+    primaryOrders() {
+        return this.ordersService.findAllPrimaryOrder();
+    }
     findOneByPrimaryId(id) {
         return this.ordersService.findOneByPrimaryId(id);
     }
@@ -62,6 +65,12 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], OrdersResolver.prototype, "findOne", null);
+__decorate([
+    (0, graphql_1.Query)(() => [order_entity_1.Order]),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], OrdersResolver.prototype, "primaryOrders", null);
 __decorate([
     (0, graphql_1.Query)(() => [order_entity_1.Order]),
     __param(0, (0, graphql_1.Args)('id', { type: () => graphql_1.Int })),

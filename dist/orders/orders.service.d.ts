@@ -11,6 +11,7 @@ export declare class OrdersService {
     constructor(ordersRepository: Repository<Order>, employeesService: EmployeesService, customersService: CustomersService);
     create(createOrderInput: CreateOrderInput): Promise<Order>;
     findAll(): Promise<Order[]>;
+    findAllPrimaryOrder(): Promise<Order[]>;
     findOneByPrimaryId(id: number): Promise<Order[]>;
     findOne(id: number): Promise<Order>;
     remove(id: number): Promise<import("typeorm").DeleteResult>;

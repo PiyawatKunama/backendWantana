@@ -133,6 +133,7 @@ type Query {
   problemClothe(id: Int!): ProblemClothe!
   orders: [Order!]!
   order(id: Int!): Order!
+  primaryOrders: [Order!]!
   findOneByPrimaryId(id: Int!): [Order!]!
   notificationMassages: [NotificationMassage!]!
   getNotificationMassage(id: Int!): NotificationMassage!

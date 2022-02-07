@@ -60,6 +60,15 @@ let OrdersService = class OrdersService {
     async findAll() {
         return await this.ordersRepository.find(relations_1.Relations);
     }
+    async findAllPrimaryOrder() {
+        const orders = await this.ordersRepository.find(relations_1.Relations);
+        const primaryOrder = orders.filter((order) => {
+            if (order.id === order.primaryOrderId) {
+                return order;
+            }
+        });
+        return primaryOrder;
+    }
     async findOneByPrimaryId(id) {
         return await this.ordersRepository.find(Object.assign(Object.assign({}, relations_1.Relations), { where: { primaryOrderId: id } }));
     }
