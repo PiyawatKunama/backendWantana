@@ -6,6 +6,9 @@ export class UpdateSpecialClotheInput extends PartialType(CreateSpecialClotheInp
     @Field(() => Int)
     id: number;
 
-    @Field()
+    @Field({ nullable: true })
     name: string;
+
+    @Field(() => Boolean, { nullable: true })
+    isDisable: boolean;
 }

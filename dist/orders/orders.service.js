@@ -91,6 +91,9 @@ let OrdersService = class OrdersService {
         });
         return primaryOrder;
     }
+    async findByStatus(status) {
+        return await this.ordersRepository.find(Object.assign(Object.assign({}, relations_1.Relations), { where: { status } }));
+    }
     async findOneByPrimaryId(id) {
         return await this.ordersRepository.find(Object.assign(Object.assign({}, relations_1.Relations), { where: { primaryOrderId: id } }));
     }

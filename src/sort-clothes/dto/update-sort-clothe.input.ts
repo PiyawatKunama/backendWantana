@@ -8,4 +8,7 @@ export class UpdateSortClotheInput extends PartialType(CreateSortClotheInput) {
 
     @Field()
     name: string;
+
+    @Field(() => Boolean, { nullable: true })
+    isDisable: boolean;
 }

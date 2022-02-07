@@ -8,6 +8,7 @@ export declare class SortClothesService {
     create(createSortClotheInput: CreateSortClotheInput): Promise<SortClothe>;
     findAll(): Promise<SortClothe[]>;
     findOne(id: number): Promise<SortClothe>;
+    findAllByIsDisable(isDisable: boolean): Promise<SortClothe[]>;
     update(id: number, updateSortClotheInput: UpdateSortClotheInput): Promise<import("typeorm").UpdateResult>;
     remove(id: number): Promise<import("typeorm").DeleteResult>;
 }

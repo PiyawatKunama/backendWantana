@@ -7,6 +7,7 @@ export declare class TypeClothesService {
     constructor(typeClothesRepository: Repository<TypeClothe>);
     create(createTypeClotheInput: CreateTypeClotheInput): Promise<TypeClothe>;
     findAll(): Promise<TypeClothe[]>;
+    findAllByIsDisable(isDisable: boolean): Promise<TypeClothe[]>;
     findOne(id: number): Promise<TypeClothe>;
     update(id: number, updateTypeClotheInput: UpdateTypeClotheInput): Promise<import("typeorm").UpdateResult>;
     remove(id: number): Promise<import("typeorm").DeleteResult>;

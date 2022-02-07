@@ -19,9 +19,13 @@ __decorate([
     __metadata("design:type", Number)
 ], UpdateTypeClotheInput.prototype, "id", void 0);
 __decorate([
-    (0, graphql_1.Field)(),
+    (0, graphql_1.Field)({ nullable: true }),
     __metadata("design:type", String)
 ], UpdateTypeClotheInput.prototype, "name", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => Boolean, { nullable: true }),
+    __metadata("design:type", Boolean)
+], UpdateTypeClotheInput.prototype, "isDisable", void 0);
 UpdateTypeClotheInput = __decorate([
     (0, graphql_1.InputType)()
 ], UpdateTypeClotheInput);

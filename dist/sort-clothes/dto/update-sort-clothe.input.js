@@ -22,6 +22,10 @@ __decorate([
     (0, graphql_1.Field)(),
     __metadata("design:type", String)
 ], UpdateSortClotheInput.prototype, "name", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => Boolean, { nullable: true }),
+    __metadata("design:type", Boolean)
+], UpdateSortClotheInput.prototype, "isDisable", void 0);
 UpdateSortClotheInput = __decorate([
     (0, graphql_1.InputType)()
 ], UpdateSortClotheInput);

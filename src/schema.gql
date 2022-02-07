@@ -62,6 +62,7 @@ type SortClothe {
   id: Int!
   key: String
   name: String!
+  isDisable: Boolean!
   clothes: [Clothe!]
 }
 
@@ -69,6 +70,7 @@ type TypeClothe {
   id: Int!
   key: String
   name: String!
+  isDisable: Boolean!
   clothes: [Clothe!]
 }
 
@@ -76,6 +78,7 @@ type SpecialClothe {
   id: Int!
   key: String
   name: String!
+  isDisable: Boolean!
   clothes: [Clothe!]
 }
 
@@ -126,16 +129,20 @@ type Query {
   clothe(id: Int!): Clothe!
   typeClothes: [TypeClothe!]!
   typeClothe(id: Int!): TypeClothe!
+  typeClothesByIsDisable(isDisable: Boolean!): [TypeClothe!]!
   sortClothes: [SortClothe!]!
   sortClothe(id: Int!): SortClothe!
+  sortClothesByIsDisable(isDisable: Boolean!): [SortClothe!]!
   specialClothes: [SpecialClothe!]!
   specialClothe(id: Int!): SpecialClothe!
+  specialClothesByIsDisable(isDisable: Boolean!): [SpecialClothe!]!
   problemClothes: [ProblemClothe!]!
   problemClothe(id: Int!): ProblemClothe!
   orders: [Order!]!
   order(id: Int!): Order!
   primaryOrders: [Order!]!
   findOneByPrimaryId(id: Int!): [Order!]!
+  findOrderByStatus(status: status!): [Order!]!
   notificationMassages: [NotificationMassage!]!
   getNotificationMassage(id: Int!): NotificationMassage!
   getMassageByStatus(status: status!): String!
@@ -239,8 +246,9 @@ input CreateTypeClotheInput {
 }
 
 input UpdateTypeClotheInput {
-  name: String!
+  name: String
   id: Int!
+  isDisable: Boolean
 }
 
 input CreateSortClotheInput {
@@ -250,6 +258,7 @@ input CreateSortClotheInput {
 input UpdateSortClotheInput {
   name: String!
   id: Int!
+  isDisable: Boolean
 }
 
 input CreateSpecialClotheInput {
@@ -257,8 +266,9 @@ input CreateSpecialClotheInput {
 }
 
 input UpdateSpecialClotheInput {
-  name: String!
+  name: String
   id: Int!
+  isDisable: Boolean
 }
 
 input CreateProblemClotheInput {

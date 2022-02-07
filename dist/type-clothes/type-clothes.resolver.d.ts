@@ -8,6 +8,7 @@ export declare class TypeClothesResolver {
     createTypeClothe(createTypeClotheInput: CreateTypeClotheInput): Promise<TypeClothe>;
     findAll(): Promise<TypeClothe[]>;
     findOne(id: number): Promise<TypeClothe>;
+    typeClothesByIsDisable(isDisable: boolean): Promise<TypeClothe[]>;
     updateTypeClothe(updateTypeClotheInput: UpdateTypeClotheInput): Promise<TypeClothe>;
     removeTypeClothe(id: number): Promise<TypeClothe>;
 }

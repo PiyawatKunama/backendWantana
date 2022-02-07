@@ -26,6 +26,13 @@ export class SpecialClothesResolver {
         return this.specialClothesService.findOne(id);
     }
 
+    @Query(() => [SpecialClothe])
+    specialClothesByIsDisable(
+        @Args('isDisable', { type: () => Boolean }) isDisable: boolean,
+    ) {
+        return this.specialClothesService.findAllByIsDisable(isDisable);
+    }
+
     @Mutation(() => SpecialClothe)
     async updateSpecialClothe(
         @Args('updateSpecialClotheInput')

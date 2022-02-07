@@ -8,6 +8,7 @@ export declare class SortClothesResolver {
     createSortClothe(createSortClotheInput: CreateSortClotheInput): Promise<SortClothe>;
     findAll(): Promise<SortClothe[]>;
     findOne(id: number): Promise<SortClothe>;
+    sortClothesByIsDisable(isDisable: boolean): Promise<SortClothe[]>;
     updateSortClothe(updateSortClotheInput: UpdateSortClotheInput): Promise<SortClothe>;
     removeSortClothe(id: number): Promise<SortClothe>;
 }

@@ -17,6 +17,10 @@ export class SortClothe {
     @Field()
     name: string;
 
+    @Column({ default: false })
+    @Field(() => Boolean)
+    isDisable: boolean;
+
     @OneToMany(() => Clothe, (clothe) => clothe.sortClothe)
     @Field(() => [Clothe], { nullable: true })
     clothes: Clothe[];

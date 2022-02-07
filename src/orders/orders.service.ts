@@ -101,6 +101,13 @@ export class OrdersService {
         return primaryOrder;
     }
 
+    async findByStatus(status: Status) {
+        return await this.ordersRepository.find({
+            ...Relations,
+            where: { status },
+        });
+    }
+
     async findOneByPrimaryId(id: number): Promise<Order[]> {
         return await this.ordersRepository.find({
             ...Relations,

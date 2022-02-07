@@ -3,5 +3,6 @@ declare const UpdateTypeClotheInput_base: import("@nestjs/common").Type<Partial<
 export declare class UpdateTypeClotheInput extends UpdateTypeClotheInput_base {
     id: number;
     name: string;
+    isDisable: boolean;
 }
 export {};

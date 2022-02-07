@@ -32,7 +32,14 @@ export class SpecialClothesService {
 
     async findAll(): Promise<SpecialClothe[]> {
         return await this.specialClothesRepository.find({
-            relations: ['clothes'],
+            ...{ relations: ['clothes'] },
+        });
+    }
+
+    async findAllByIsDisable(isDisable: boolean) {
+        return await this.specialClothesRepository.find({
+            ...{ relations: ['clothes'] },
+            where: { isDisable },
         });
     }
 

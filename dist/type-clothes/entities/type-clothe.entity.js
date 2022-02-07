@@ -31,6 +31,11 @@ __decorate([
     __metadata("design:type", String)
 ], TypeClothe.prototype, "name", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ default: false }),
+    (0, graphql_1.Field)(() => Boolean),
+    __metadata("design:type", Boolean)
+], TypeClothe.prototype, "isDisable", void 0);
+__decorate([
     (0, typeorm_1.OneToMany)(() => clothe_entity_1.Clothe, (clothe) => clothe.typeClothe),
     (0, graphql_1.Field)(() => [clothe_entity_1.Clothe], { nullable: true }),
     __metadata("design:type", Array)

@@ -25,6 +25,13 @@ export class SortClothesResolver {
         return this.sortClothesService.findOne(id);
     }
 
+    @Query(() => [SortClothe])
+    sortClothesByIsDisable(
+        @Args('isDisable', { type: () => Boolean }) isDisable: boolean,
+    ) {
+        return this.sortClothesService.findAllByIsDisable(isDisable);
+    }
+
     @Mutation(() => SortClothe)
     async updateSortClothe(
         @Args('updateSortClotheInput') updateSortClotheInput: UpdateSortClotheInput,

@@ -17,6 +17,10 @@ export class SpecialClothe {
     @Field()
     name: string;
 
+    @Column({ default: false })
+    @Field(() => Boolean)
+    isDisable: boolean;
+
     @OneToMany(() => Clothe, (clothe) => clothe.specialClothe)
     @Field(() => [Clothe], { nullable: true })
     clothes: Clothe[];

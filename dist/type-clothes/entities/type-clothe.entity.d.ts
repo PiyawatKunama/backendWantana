@@ -3,5 +3,6 @@ export declare class TypeClothe {
     id: number;
     key?: string;
     name: string;
+    isDisable: boolean;
     clothes: Clothe[];
 }

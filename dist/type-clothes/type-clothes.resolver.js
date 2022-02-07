@@ -31,6 +31,9 @@ let TypeClothesResolver = class TypeClothesResolver {
     findOne(id) {
         return this.typeClothesService.findOne(id);
     }
+    typeClothesByIsDisable(isDisable) {
+        return this.typeClothesService.findAllByIsDisable(isDisable);
+    }
     async updateTypeClothe(updateTypeClotheInput) {
         await this.typeClothesService.update(updateTypeClotheInput.id, updateTypeClotheInput);
         return await this.typeClothesService.findOne(updateTypeClotheInput.id);
@@ -61,6 +64,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], TypeClothesResolver.prototype, "findOne", null);
+__decorate([
+    (0, graphql_1.Query)(() => [type_clothe_entity_1.TypeClothe]),
+    __param(0, (0, graphql_1.Args)('isDisable', { type: () => Boolean })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Boolean]),
+    __metadata("design:returntype", void 0)
+], TypeClothesResolver.prototype, "typeClothesByIsDisable", null);
 __decorate([
     (0, graphql_1.Mutation)(() => type_clothe_entity_1.TypeClothe),
     __param(0, (0, graphql_1.Args)('updateTypeClotheInput')),

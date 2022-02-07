@@ -255,3 +255,38 @@ query {
   getMassageByStatus(status: IN)
 }
 
+
+
+query {
+  findOrderByStatus(status: OUT) {
+    id
+    key
+  }
+}
+
+
+query {
+  specialClothesByIsDisable(isDisable: false) {
+    id
+    name
+    isDisable
+  }
+}
+
+
+query {
+  sortClothesByIsDisable(isDisable: false) {
+    id
+    name
+    isDisable
+  }
+}
+
+
+query {
+  typeClothesByIsDisable(isDisable: false) {
+    id
+    name
+    isDisable
+  }
+}

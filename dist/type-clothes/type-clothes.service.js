@@ -36,6 +36,9 @@ let TypeClothesService = class TypeClothesService {
             relations: ['clothes'],
         });
     }
+    async findAllByIsDisable(isDisable) {
+        return await this.typeClothesRepository.find(Object.assign({ relations: ['clothes'] }, { where: { isDisable } }));
+    }
     async findOne(id) {
         return await this.typeClothesRepository.findOneOrFail(id, {
             relations: ['clothes'],

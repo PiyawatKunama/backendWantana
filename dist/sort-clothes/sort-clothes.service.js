@@ -41,6 +41,9 @@ let SortClothesService = class SortClothesService {
             relations: ['clothes'],
         });
     }
+    async findAllByIsDisable(isDisable) {
+        return await this.sortClothesRepository.find(Object.assign({ relations: ['clothes'] }, { where: { isDisable } }));
+    }
     async update(id, updateSortClotheInput) {
         const updateSortClothe = this.sortClothesRepository.create(updateSortClotheInput);
         return await this.sortClothesRepository.update(id, updateSortClothe);

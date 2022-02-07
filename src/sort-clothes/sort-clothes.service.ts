@@ -38,6 +38,13 @@ export class SortClothesService {
         });
     }
 
+    async findAllByIsDisable(isDisable: boolean) {
+        return await this.sortClothesRepository.find({
+            ...{ relations: ['clothes'] },
+            where: { isDisable },
+        });
+    }
+
     async update(id: number, updateSortClotheInput: UpdateSortClotheInput) {
         const updateSortClothe =
             this.sortClothesRepository.create(updateSortClotheInput);

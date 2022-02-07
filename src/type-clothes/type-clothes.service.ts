@@ -33,6 +33,13 @@ export class TypeClothesService {
         });
     }
 
+    async findAllByIsDisable(isDisable: boolean) {
+        return await this.typeClothesRepository.find({
+            ...{ relations: ['clothes'] },
+            where: { isDisable },
+        });
+    }
+
     async findOne(id: number): Promise<TypeClothe> {
         return await this.typeClothesRepository.findOneOrFail(id, {
             relations: ['clothes'],
