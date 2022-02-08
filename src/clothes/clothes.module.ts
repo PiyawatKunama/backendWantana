@@ -1,5 +1,5 @@
 import { SpecialClothesModule } from './../special-clothes/special-clothes.module';
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ClothesService } from './clothes.service';
 import { ClothesResolver } from './clothes.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -17,7 +17,7 @@ import { ProblemClothesModule } from 'src/problem-clothes/problem-clothes.module
         SortClothesModule,
         SpecialClothesModule,
         ProblemClothesModule,
-        OrdersModule,
+        forwardRef(() => OrdersModule),
     ],
     providers: [ClothesResolver, ClothesService],
     exports: [ClothesService],

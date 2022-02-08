@@ -28,7 +28,7 @@ ClothesModule = __decorate([
             sort_clothes_module_1.SortClothesModule,
             special_clothes_module_1.SpecialClothesModule,
             problem_clothes_module_1.ProblemClothesModule,
-            orders_module_1.OrdersModule,
+            (0, common_1.forwardRef)(() => orders_module_1.OrdersModule),
         ],
         providers: [clothes_resolver_1.ClothesResolver, clothes_service_1.ClothesService],
         exports: [clothes_service_1.ClothesService],

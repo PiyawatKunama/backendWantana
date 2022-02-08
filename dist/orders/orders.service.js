@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrdersService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const clothes_service_1 = require("../clothes/clothes.service");
 const customers_service_1 = require("../customers/customers.service");
 const employees_service_1 = require("../employees/employees.service");
 const status_1 = require("../global/enum/status");
@@ -23,10 +24,11 @@ const typeorm_2 = require("typeorm");
 const order_entity_1 = require("./entities/order.entity");
 const relations_1 = require("./relations");
 let OrdersService = class OrdersService {
-    constructor(ordersRepository, employeesService, customersService) {
+    constructor(ordersRepository, employeesService, customersService, clothesService) {
         this.ordersRepository = ordersRepository;
         this.employeesService = employeesService;
         this.customersService = customersService;
+        this.clothesService = clothesService;
     }
     async create(createOrderInput) {
         const newOrder = this.ordersRepository.create(createOrderInput);
@@ -94,6 +96,109 @@ let OrdersService = class OrdersService {
     async findByStatus(status) {
         return await this.ordersRepository.find(Object.assign(Object.assign({}, relations_1.Relations), { where: { status } }));
     }
+    async filter(filterOrderInput) {
+        const { typeName, sortName, spacialName, haveProblems, customerName, isProcess, status, firstDate, lastDate, } = filterOrderInput;
+        const ordersQuery = this.ordersRepository
+            .createQueryBuilder('orders')
+            .leftJoinAndSelect('orders.customer', 'customer');
+        let clothes = [];
+        if (filterOrderInput) {
+            if (customerName) {
+                ordersQuery.andWhere('customer.firstName = :firstName', {
+                    firstName: customerName,
+                });
+            }
+            if (isProcess === true || isProcess === false) {
+                ordersQuery.andWhere('orders.isOutProcess = :isOutProcess', {
+                    isOutProcess: !isProcess,
+                });
+            }
+            if (status_1.Status[status]) {
+                ordersQuery.andWhere('orders.status = :status', {
+                    status,
+                });
+            }
+            if (firstDate) {
+                ordersQuery.andWhere('orders.created_at < :start_at', {
+                    start_at: firstDate,
+                });
+            }
+            if (lastDate) {
+                ordersQuery.andWhere('orders.created_at >= :end_at', {
+                    end_at: lastDate,
+                });
+            }
+            if (typeName ||
+                sortName ||
+                spacialName ||
+                haveProblems === true ||
+                haveProblems === false) {
+                let filterClothes = {};
+                if (typeName) {
+                    filterClothes = Object.assign(Object.assign({}, filterClothes), { typeName });
+                }
+                if (sortName) {
+                    filterClothes = Object.assign(Object.assign({}, filterClothes), { sortName });
+                }
+                if (spacialName) {
+                    filterClothes = Object.assign(Object.assign({}, filterClothes), { spacialName });
+                }
+                if (haveProblems === true || haveProblems === false) {
+                    filterClothes = Object.assign(Object.assign({}, filterClothes), { haveProblems });
+                }
+                clothes = await this.clothesService.filter(filterClothes);
+            }
+            else {
+                ordersQuery
+                    .leftJoinAndSelect('orders.clothes', 'clothes')
+                    .leftJoinAndSelect('clothes.typeClothe', 'typeClothe')
+                    .leftJoinAndSelect('clothes.sortClothe', 'sortClothe')
+                    .leftJoinAndSelect('clothes.specialClothe', 'specialClothe')
+                    .leftJoinAndSelect('clothes.clotheHasProblems', 'clotheHasProblems')
+                    .leftJoinAndSelect('clotheHasProblems.problemClothe', 'problemClothe');
+            }
+        }
+        const filterOrders = await ordersQuery.getMany();
+        if (typeName ||
+            sortName ||
+            spacialName ||
+            haveProblems === true ||
+            haveProblems === false) {
+            let orderId = 0;
+            const newCloths = [];
+            for (let i = 0; i < clothes.length; i++) {
+                if (clothes[i].order.id !== orderId) {
+                    newCloths.push(clothes[i]);
+                    if (orderId) {
+                        for (let j = 0; j < filterOrders.length; j++) {
+                            if (filterOrders[j].id === orderId) {
+                                filterOrders[j].clothes = newCloths;
+                                break;
+                            }
+                        }
+                    }
+                    orderId = clothes[i].order.id;
+                }
+                else {
+                    newCloths.push(clothes[i]);
+                    if (i === clothes.length - 1) {
+                        for (let j = 0; j < filterOrders.length; j++) {
+                            if (filterOrders[j].id === orderId) {
+                                filterOrders[j].clothes = newCloths;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (let j = 0; j < filterOrders.length; j++) {
+            if (!filterOrders[j].clothes) {
+                filterOrders[j].clothes = [];
+            }
+        }
+        return filterOrders;
+    }
     async findOneByPrimaryId(id) {
         return await this.ordersRepository.find(Object.assign(Object.assign({}, relations_1.Relations), { where: { primaryOrderId: id } }));
     }
@@ -111,9 +216,11 @@ let OrdersService = class OrdersService {
 OrdersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(order_entity_1.Order)),
+    __param(3, (0, common_1.Inject)((0, common_1.forwardRef)(() => clothes_service_1.ClothesService))),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         employees_service_1.EmployeesService,
-        customers_service_1.CustomersService])
+        customers_service_1.CustomersService,
+        clothes_service_1.ClothesService])
 ], OrdersService);
 exports.OrdersService = OrdersService;
 //# sourceMappingURL=orders.service.js.map

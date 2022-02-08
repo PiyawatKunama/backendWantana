@@ -19,6 +19,7 @@ const clothe_entity_1 = require("./entities/clothe.entity");
 const create_clothe_input_1 = require("./dto/create-clothe.input");
 const update_clothe_input_1 = require("./dto/update-clothe.input");
 const create_clothe_problem_input_1 = require("./dto/create-clothe-problem.input");
+const filter_input_1 = require("./dto/filter.input");
 let ClothesResolver = class ClothesResolver {
     constructor(clothesService) {
         this.clothesService = clothesService;
@@ -35,6 +36,9 @@ let ClothesResolver = class ClothesResolver {
     }
     findOne(id) {
         return this.clothesService.findOne(id);
+    }
+    filterClothe(filterInput) {
+        return this.clothesService.filter(filterInput);
     }
     async updateClothe(updateClotheInput) {
         this.clothesService.update(updateClotheInput.ids, updateClotheInput);
@@ -73,6 +77,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ClothesResolver.prototype, "findOne", null);
+__decorate([
+    (0, graphql_1.Query)(() => [clothe_entity_1.Clothe]),
+    __param(0, (0, graphql_1.Args)('filterInput', { type: () => filter_input_1.FilterClotheInput })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [filter_input_1.FilterClotheInput]),
+    __metadata("design:returntype", void 0)
+], ClothesResolver.prototype, "filterClothe", null);
 __decorate([
     (0, graphql_1.Mutation)(() => String),
     __param(0, (0, graphql_1.Args)('updateClotheInput')),

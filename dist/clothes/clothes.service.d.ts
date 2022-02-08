@@ -9,6 +9,7 @@ import { SpecialClothesService } from 'src/special-clothes/special-clothes.servi
 import { OrdersService } from 'src/orders/orders.service';
 import { CreateClotheProblemInput } from './dto/create-clothe-problem.input';
 import { ClotheHasProblem } from './entities/clotheHasProblem.entity';
+import { FilterClotheInput } from './dto/filter.input';
 export declare class ClothesService {
     private clothesRepository;
     private clotheHasProblemsRepository;
@@ -22,6 +23,7 @@ export declare class ClothesService {
     create(createClotheInput: CreateClotheInput): Promise<Clothe>;
     findAll(): Promise<Clothe[]>;
     findOne(id: number): Promise<Clothe>;
+    filter(filterClotheInput: FilterClotheInput): Promise<any>;
     update(ids: number[], updateClotheInput: UpdateClotheInput): void;
     remove(id: number): Promise<import("typeorm").DeleteResult>;
 }

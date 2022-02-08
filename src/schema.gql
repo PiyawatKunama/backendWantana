@@ -135,6 +135,7 @@ type Query {
   employee(id: Int!): Employee!
   clothes: [Clothe!]!
   clothe(id: Int!): Clothe!
+  filterClothe(filterInput: FilterClotheInput!): [Clothe!]!
   typeClothes: [TypeClothe!]!
   typeClothe(id: Int!): TypeClothe!
   typeClothesByIsDisable(isDisable: Boolean!): [TypeClothe!]!
@@ -150,11 +151,31 @@ type Query {
   order(id: Int!): Order!
   primaryOrders: [Order!]!
   findOneByPrimaryId(id: Int!): [Order!]!
+  filterOrder(filterInput: FilterInput!): [Order!]!
   findOrderByStatus(status: status!): [Order!]!
   notificationMassages: [NotificationMassage!]!
   notificationMassageDatums: [NotificationMassageDatum!]!
   getNotificationMassage(id: Int!): NotificationMassage!
   getMassageByStatus(status: status!): String!
+}
+
+input FilterClotheInput {
+  typeName: String
+  sortName: String
+  spacialName: String
+  haveProblems: Boolean
+}
+
+input FilterInput {
+  typeName: String
+  sortName: String
+  spacialName: String
+  customerName: String
+  haveProblems: Boolean
+  isProcess: Boolean
+  firstDate: DateTime
+  lastDate: DateTime
+  status: status
 }
 
 type Mutation {

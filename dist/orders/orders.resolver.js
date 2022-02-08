@@ -19,6 +19,7 @@ const order_entity_1 = require("./entities/order.entity");
 const create_order_input_1 = require("./dto/create-order.input");
 const update_order_input_1 = require("./dto/update-order.input");
 const status_1 = require("../global/enum/status");
+const filter_input_1 = require("./dto/filter.input");
 let OrdersResolver = class OrdersResolver {
     constructor(ordersService) {
         this.ordersService = ordersService;
@@ -37,6 +38,9 @@ let OrdersResolver = class OrdersResolver {
     }
     findOneByPrimaryId(id) {
         return this.ordersService.findOneByPrimaryId(id);
+    }
+    filterOrder(filterInput) {
+        return this.ordersService.filter(filterInput);
     }
     findOrderByStatus(status) {
         return this.ordersService.findByStatus(status);
@@ -82,6 +86,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], OrdersResolver.prototype, "findOneByPrimaryId", null);
+__decorate([
+    (0, graphql_1.Query)(() => [order_entity_1.Order]),
+    __param(0, (0, graphql_1.Args)('filterInput', { type: () => filter_input_1.FilterInput })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [filter_input_1.FilterInput]),
+    __metadata("design:returntype", void 0)
+], OrdersResolver.prototype, "filterOrder", null);
 __decorate([
     (0, graphql_1.Query)(() => [order_entity_1.Order]),
     __param(0, (0, graphql_1.Args)('status', { type: () => status_1.Status })),

@@ -1,11 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ClothesService } from 'src/clothes/clothes.service';
 import { CustomersService } from 'src/customers/customers.service';
 import { EmployeesService } from 'src/employees/employees.service';
 import { Status } from 'src/global/enum/status';
 import generateKey from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateOrderInput } from './dto/create-order.input';
+import { FilterInput } from './dto/filter.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { Order } from './entities/order.entity';
 import { Relations } from './relations';
@@ -17,6 +19,8 @@ export class OrdersService {
         private ordersRepository: Repository<Order>,
         private employeesService: EmployeesService,
         private customersService: CustomersService,
+        @Inject(forwardRef(() => ClothesService))
+        private clothesService: ClothesService,
     ) {}
 
     async create(createOrderInput: CreateOrderInput): Promise<Order> {
@@ -106,6 +110,135 @@ export class OrdersService {
             ...Relations,
             where: { status },
         });
+    }
+    async filter(filterOrderInput: FilterInput) {
+        const {
+            typeName,
+            sortName,
+            spacialName,
+            haveProblems,
+            customerName,
+            isProcess,
+            status,
+            firstDate,
+            lastDate,
+        } = filterOrderInput;
+
+        const ordersQuery = this.ordersRepository
+            .createQueryBuilder('orders')
+            .leftJoinAndSelect('orders.customer', 'customer');
+        let clothes: any = [];
+        if (filterOrderInput) {
+            if (customerName) {
+                ordersQuery.andWhere('customer.firstName = :firstName', {
+                    firstName: customerName,
+                });
+            }
+
+            if (isProcess === true || isProcess === false) {
+                ordersQuery.andWhere('orders.isOutProcess = :isOutProcess', {
+                    isOutProcess: !isProcess,
+                });
+            }
+
+            if (Status[status]) {
+                ordersQuery.andWhere('orders.status = :status', {
+                    status,
+                });
+            }
+
+            if (firstDate) {
+                ordersQuery.andWhere('orders.created_at < :start_at', {
+                    start_at: firstDate,
+                });
+            }
+            if (lastDate) {
+                ordersQuery.andWhere('orders.created_at >= :end_at', {
+                    end_at: lastDate,
+                });
+            }
+
+            if (
+                typeName ||
+                sortName ||
+                spacialName ||
+                haveProblems === true ||
+                haveProblems === false
+            ) {
+                let filterClothes = {};
+                if (typeName) {
+                    filterClothes = { ...filterClothes, typeName };
+                }
+                if (sortName) {
+                    filterClothes = { ...filterClothes, sortName };
+                }
+                if (spacialName) {
+                    filterClothes = { ...filterClothes, spacialName };
+                }
+                if (haveProblems === true || haveProblems === false) {
+                    filterClothes = { ...filterClothes, haveProblems };
+                }
+                clothes = await this.clothesService.filter(filterClothes);
+            } else {
+                ordersQuery
+                    .leftJoinAndSelect('orders.clothes', 'clothes')
+                    .leftJoinAndSelect('clothes.typeClothe', 'typeClothe')
+                    .leftJoinAndSelect('clothes.sortClothe', 'sortClothe')
+                    .leftJoinAndSelect('clothes.specialClothe', 'specialClothe')
+                    .leftJoinAndSelect(
+                        'clothes.clotheHasProblems',
+                        'clotheHasProblems',
+                    )
+                    .leftJoinAndSelect(
+                        'clotheHasProblems.problemClothe',
+                        'problemClothe',
+                    );
+            }
+        }
+
+        const filterOrders = await ordersQuery.getMany();
+
+        if (
+            typeName ||
+            sortName ||
+            spacialName ||
+            haveProblems === true ||
+            haveProblems === false
+        ) {
+            let orderId = 0;
+            const newCloths = [];
+            for (let i = 0; i < clothes.length; i++) {
+                if (clothes[i].order.id !== orderId) {
+                    newCloths.push(clothes[i]);
+                    if (orderId) {
+                        for (let j = 0; j < filterOrders.length; j++) {
+                            if (filterOrders[j].id === orderId) {
+                                filterOrders[j].clothes = newCloths;
+                                break;
+                            }
+                        }
+                    }
+                    orderId = clothes[i].order.id;
+                } else {
+                    newCloths.push(clothes[i]);
+                    if (i === clothes.length - 1) {
+                        for (let j = 0; j < filterOrders.length; j++) {
+                            if (filterOrders[j].id === orderId) {
+                                filterOrders[j].clothes = newCloths;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (let j = 0; j < filterOrders.length; j++) {
+            if (!filterOrders[j].clothes) {
+                filterOrders[j].clothes = [];
+            }
+        }
+
+        return filterOrders;
     }
 
     async findOneByPrimaryId(id: number): Promise<Order[]> {

@@ -304,3 +304,44 @@ query{
   }
 }
 
+
+query {
+  filterOrder(
+    filterInput: {
+      typeName: ""
+      sortName: ""
+      spacialName: ""
+      customerName: ""
+      haveProblems: null
+      isProcess: null
+      status: OUT
+      firstDate: "2023-11-15"
+      lastDate: "2019-11-15"
+    }
+  ) {
+    id
+    key
+    created_at
+    customer {
+      firstName
+    }
+    clothes {
+      id
+      typeClothe {
+        name
+      }
+      sortClothe {
+        name
+      }
+      specialClothe {
+        name
+      }
+      clotheHasProblems {
+        id
+        problemClothe {
+          name
+        }
+      }
+    }
+  }
+}

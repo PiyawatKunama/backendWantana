@@ -76,6 +76,55 @@ let ClothesService = class ClothesService {
     async findOne(id) {
         return await this.clothesRepository.findOneOrFail(id, relations_1.Relations);
     }
+    async filter(filterClotheInput) {
+        const clothesQuery = this.clothesRepository
+            .createQueryBuilder('clothes')
+            .leftJoinAndSelect('clothes.order', 'order')
+            .leftJoinAndSelect('clothes.typeClothe', 'typeClothe')
+            .leftJoinAndSelect('clothes.sortClothe', 'sortClothe')
+            .leftJoinAndSelect('clothes.specialClothe', 'specialClothe')
+            .leftJoinAndSelect('clothes.clotheHasProblems', 'clotheHasProblems')
+            .leftJoinAndSelect('clotheHasProblems.problemClothe', 'problemClothe');
+        if (filterClotheInput) {
+            const { typeName, sortName, spacialName } = filterClotheInput;
+            if (typeName) {
+                clothesQuery.andWhere('typeClothe.name = :name', {
+                    name: typeName,
+                });
+            }
+            if (sortName) {
+                clothesQuery.andWhere('sortClothe.name = :name', {
+                    name: sortName,
+                });
+            }
+            if (spacialName) {
+                clothesQuery.andWhere('specialClothe.name = :name', {
+                    name: spacialName,
+                });
+            }
+        }
+        const queryClothe = await clothesQuery.getMany();
+        let filterClothe = queryClothe;
+        if (filterClotheInput.haveProblems === true) {
+            if (queryClothe.length) {
+                filterClothe = queryClothe.filter((clothe) => {
+                    if (clothe.clotheHasProblems.length) {
+                        return clothe;
+                    }
+                });
+            }
+        }
+        if (filterClotheInput.haveProblems === false) {
+            if (queryClothe.length) {
+                filterClothe = queryClothe.filter((clothe) => {
+                    if (!clothe.clotheHasProblems.length) {
+                        return clothe;
+                    }
+                });
+            }
+        }
+        return filterClothe;
+    }
     update(ids, updateClotheInput) {
         const updateClothe = this.clothesRepository.create(updateClotheInput);
         ids.forEach(async (id) => {
@@ -91,6 +140,7 @@ ClothesService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(clothe_entity_1.Clothe)),
     __param(1, (0, typeorm_1.InjectRepository)(clotheHasProblem_entity_1.ClotheHasProblem)),
+    __param(6, (0, common_1.Inject)((0, common_1.forwardRef)(() => orders_service_1.OrdersService))),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         typeorm_2.Repository,
         type_clothes_service_1.TypeClothesService,

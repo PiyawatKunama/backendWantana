@@ -4,6 +4,7 @@ import { Order } from './entities/order.entity';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { Status } from 'src/global/enum/status';
+import { FilterInput } from './dto/filter.input';
 
 @Resolver(() => Order)
 export class OrdersResolver {
@@ -32,6 +33,13 @@ export class OrdersResolver {
     @Query(() => [Order])
     findOneByPrimaryId(@Args('id', { type: () => Int }) id: number) {
         return this.ordersService.findOneByPrimaryId(id);
+    }
+
+    @Query(() => [Order])
+    filterOrder(
+        @Args('filterInput', { type: () => FilterInput }) filterInput: FilterInput,
+    ) {
+        return this.ordersService.filter(filterInput);
     }
 
     @Query(() => [Order])

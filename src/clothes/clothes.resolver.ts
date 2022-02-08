@@ -4,6 +4,7 @@ import { Clothe } from './entities/clothe.entity';
 import { CreateClotheInput } from './dto/create-clothe.input';
 import { UpdateClotheInput } from './dto/update-clothe.input';
 import { CreateClotheProblemInput } from './dto/create-clothe-problem.input';
+import { FilterClotheInput } from './dto/filter.input';
 
 @Resolver(() => Clothe)
 export class ClothesResolver {
@@ -31,6 +32,14 @@ export class ClothesResolver {
     @Query(() => Clothe, { name: 'clothe' })
     findOne(@Args('id', { type: () => Int }) id: number) {
         return this.clothesService.findOne(id);
+    }
+
+    @Query(() => [Clothe])
+    filterClothe(
+        @Args('filterInput', { type: () => FilterClotheInput })
+        filterInput: FilterClotheInput,
+    ) {
+        return this.clothesService.filter(filterInput);
     }
 
     @Mutation(() => String)

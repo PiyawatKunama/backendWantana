@@ -1,5 +1,5 @@
 import { ProblemClothesService } from './../problem-clothes/problem-clothes.service';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import generateKey from 'src/global/generateKey';
 import { SortClothesService } from 'src/sort-clothes/sort-clothes.service';
@@ -13,6 +13,7 @@ import { SpecialClothesService } from 'src/special-clothes/special-clothes.servi
 import { OrdersService } from 'src/orders/orders.service';
 import { CreateClotheProblemInput } from './dto/create-clothe-problem.input';
 import { ClotheHasProblem } from './entities/clotheHasProblem.entity';
+import { FilterClotheInput } from './dto/filter.input';
 
 @Entity()
 @Injectable()
@@ -26,6 +27,7 @@ export class ClothesService {
         private sortClothesService: SortClothesService,
         private problemClothesService: ProblemClothesService,
         private specialClothesService: SpecialClothesService,
+        @Inject(forwardRef(() => OrdersService))
         private ordersService: OrdersService,
     ) {}
 
@@ -88,6 +90,63 @@ export class ClothesService {
 
     async findOne(id: number): Promise<Clothe> {
         return await this.clothesRepository.findOneOrFail(id, Relations);
+    }
+
+    async filter(filterClotheInput: FilterClotheInput) {
+        const clothesQuery = this.clothesRepository
+            .createQueryBuilder('clothes')
+            .leftJoinAndSelect('clothes.order', 'order')
+            .leftJoinAndSelect('clothes.typeClothe', 'typeClothe')
+            .leftJoinAndSelect('clothes.sortClothe', 'sortClothe')
+            .leftJoinAndSelect('clothes.specialClothe', 'specialClothe')
+            .leftJoinAndSelect('clothes.clotheHasProblems', 'clotheHasProblems')
+            .leftJoinAndSelect('clotheHasProblems.problemClothe', 'problemClothe');
+
+        if (filterClotheInput) {
+            const { typeName, sortName, spacialName } = filterClotheInput;
+
+            if (typeName) {
+                clothesQuery.andWhere('typeClothe.name = :name', {
+                    name: typeName,
+                });
+            }
+
+            if (sortName) {
+                clothesQuery.andWhere('sortClothe.name = :name', {
+                    name: sortName,
+                });
+            }
+
+            if (spacialName) {
+                clothesQuery.andWhere('specialClothe.name = :name', {
+                    name: spacialName,
+                });
+            }
+        }
+
+        const queryClothe: any = await clothesQuery.getMany();
+
+        let filterClothe = queryClothe;
+        if (filterClotheInput.haveProblems === true) {
+            if (queryClothe.length) {
+                filterClothe = queryClothe.filter((clothe) => {
+                    if (clothe.clotheHasProblems.length) {
+                        return clothe;
+                    }
+                });
+            }
+        }
+        if (filterClotheInput.haveProblems === false) {
+            if (queryClothe.length) {
+                filterClothe = queryClothe.filter((clothe) => {
+                    if (!clothe.clotheHasProblems.length) {
+                        return clothe;
+                    }
+                });
+            }
+        }
+
+        return filterClothe;
     }
 
     update(ids: number[], updateClotheInput: UpdateClotheInput) {
