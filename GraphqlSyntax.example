@@ -304,44 +304,72 @@ query{
   }
 }
 
+<< ------------------------------------------------------- >> 
+  //filter order
 
-query {
-  filterOrder(
+    << ------------------------------------------------------- >> 
+    //filter order example
+    ตัวอย่าง การใส่ filterInput 
+    หากไม่ต้องการ filter typeName and sortName  ทำได้ 3 แบบ
+
     filterInput: {
-      typeName: ""
-      sortName: ""
-      spacialName: ""
-      customerName: ""
-      haveProblems: null
-      isProcess: null
-      status: OUT
-      firstDate: "2023-11-15"
-      lastDate: "2019-11-15"
+          typeName: null
+          sortName: null
+          status: OUT
     }
-  ) {
-    id
-    key
-    created_at
-    customer {
-      firstName
+
+    filterInput: {
+        status: OUT
     }
-    clothes {
-      id
-      typeClothe {
-        name
-      }
-      sortClothe {
-        name
-      }
-      specialClothe {
-        name
-      }
-      clotheHasProblems {
+
+    filterInput: {
+          typeName: ""
+          sortName: ""
+          status: OUT
+    }
+    
+    << ------------------------------------------------------- >> 
+    //filter order syntax
+    query {
+      filterOrder(
+        filterInput: {
+          typeName: ""
+          sortName: ""
+          spacialName: ""
+          customerName: ""
+          haveProblems: null
+          isProcess: null
+          status: OUT
+          firstDate: "2023-11-15"
+          lastDate: "2019-11-15"
+        }
+      ) {
         id
-        problemClothe {
-          name
+        key
+        created_at
+        customer {
+          firstName
+        }
+        clothes {
+          id
+          typeClothe {
+            name
+          }
+          sortClothe {
+            name
+          }
+          specialClothe {
+            name
+          }
+          clotheHasProblems {
+            id
+            problemClothe {
+              name
+            }
+          }
         }
       }
     }
-  }
-}
+    << ------------------------------------------------------- >> 
+
+<< ------------------------------------------------------- >> 
