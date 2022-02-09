@@ -54,8 +54,8 @@ let OrdersService = class OrdersService {
         }
         else {
             lastRecord[0]
-                ? (newOrder.primaryOrderId = lastRecord[0].id + 1)
-                : (newOrder.primaryOrderId = 1);
+                ? (newOrder.primaryOrderId = lastRecord[0].id + 5)
+                : (newOrder.primaryOrderId = 5);
         }
         newOrder.key = (0, generateKey_1.default)(lastRecord, 'OD');
         return await this.ordersRepository.save(newOrder);

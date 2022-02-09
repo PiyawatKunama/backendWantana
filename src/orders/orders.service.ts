@@ -56,9 +56,12 @@ export class OrdersService {
                 newOrder.primaryOrderId = createOrderInput.primaryOrderId;
             }
         } else {
+            // lastRecord[0]
+            //     ? (newOrder.primaryOrderId = lastRecord[0].id + 1)
+            //     : (newOrder.primaryOrderId = 1);
             lastRecord[0]
-                ? (newOrder.primaryOrderId = lastRecord[0].id + 1)
-                : (newOrder.primaryOrderId = 1);
+                ? (newOrder.primaryOrderId = lastRecord[0].id + 5)
+                : (newOrder.primaryOrderId = 5);
         }
 
         newOrder.key = generateKey(lastRecord, 'OD');
