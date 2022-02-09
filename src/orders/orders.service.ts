@@ -72,14 +72,14 @@ export class OrdersService {
 
     async findAllPrimaryOrder(): Promise<Order[]> {
         const orders = await this.ordersRepository.find(Relations);
-        const numClothe = [];
+        const numClothes = [];
         let orderPrimary = 0;
         let num = 0;
 
         orders.forEach((order, index) => {
             if (order.primaryOrderId != orderPrimary) {
                 if (orderPrimary) {
-                    numClothe.push(num);
+                    numClothes.push({ orderPrimary, num });
                     num = 0;
                 }
                 orderPrimary = order.primaryOrderId;
@@ -89,15 +89,19 @@ export class OrdersService {
             }
 
             if (index === orders.length - 1) {
-                numClothe.push(num);
+                numClothes.push({ orderPrimary, num });
             }
         });
 
-        let numUsed = 0;
         const primaryOrder = orders.filter((order) => {
-            if (order.id === order.primaryOrderId) {
-                order.numClothe = numClothe[numUsed];
-                numUsed++;
+            if (order.primaryOrderId === order.id) {
+                let eachNumClothe = 0;
+                numClothes.forEach((numClothe) => {
+                    if (numClothe.orderPrimary === orderPrimary) {
+                        eachNumClothe = numClothe.num;
+                    }
+                });
+                order.numClothe = eachNumClothe;
                 return order;
             }
         });
