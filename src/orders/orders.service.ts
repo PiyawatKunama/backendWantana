@@ -74,23 +74,27 @@ export class OrdersService {
     async findAllPrimaryOrder(): Promise<Order[]> {
         const orders = await this.ordersRepository.find(Relations);
         const numClothes = [];
-        let orderPrimary = 0;
-        let num = 0;
 
-        orders.forEach((order, index) => {
-            if (order.primaryOrderId != orderPrimary) {
-                if (orderPrimary) {
-                    numClothes.push({ orderPrimary, num });
-                    num = 0;
-                }
-                orderPrimary = order.primaryOrderId;
-            }
+        orders.forEach((order) => {
             if (order.status === Status.IN) {
-                num += order.clothes.length;
-            }
+                const num = order.clothes.length;
 
-            if (index === orders.length - 1) {
-                numClothes.push({ orderPrimary, num });
+                let primaryOrder: any;
+                for (let i = 0; i < numClothes.length; i++) {
+                    if (numClothes[i].orderPrimary === order.primaryOrderId) {
+                        primaryOrder = {
+                            ...numClothes[i],
+                            num: numClothes[i].num + num,
+                        };
+                        numClothes[i] = primaryOrder;
+
+                        break;
+                    }
+                }
+                if (!primaryOrder) {
+                    primaryOrder = { orderPrimary: +order.primaryOrderId, num };
+                    numClothes.push(primaryOrder);
+                }
             }
         });
 
@@ -98,7 +102,7 @@ export class OrdersService {
             if (order.primaryOrderId === order.id) {
                 let eachNumClothe = 0;
                 numClothes.forEach((numClothe) => {
-                    if (numClothe.orderPrimary === orderPrimary) {
+                    if (numClothe.orderPrimary === order.primaryOrderId) {
                         eachNumClothe = numClothe.num;
                     }
                 });
