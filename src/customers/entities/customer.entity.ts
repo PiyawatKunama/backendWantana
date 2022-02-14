@@ -1,7 +1,13 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { NotificationMassageDatum } from 'src/notification-massage/entities/notification-massage-datum.entity';
 import { Order } from 'src/orders/entities/order.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    OneToMany,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -52,4 +58,18 @@ export class Customer {
     )
     @Field(() => [NotificationMassageDatum])
     notification_massage_datums: NotificationMassageDatum[];
+
+    @CreateDateColumn({
+        type: 'timestamp',
+        default: () => 'CURRENT_TIMESTAMP(6)',
+    })
+    @Field()
+    public created_at: Date;
+
+    @CreateDateColumn({
+        type: 'timestamp',
+        default: () => 'CURRENT_TIMESTAMP(6)',
+    })
+    @Field()
+    public updated_at: Date;
 }
