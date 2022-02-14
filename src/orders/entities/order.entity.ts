@@ -10,11 +10,13 @@ import {
     Entity,
     ManyToOne,
     OneToMany,
+    PrimaryColumn,
 } from 'typeorm';
 
 @Entity()
 @ObjectType()
 export class Order {
+    @PrimaryColumn()
     @Field(() => Int)
     id: number;
 
