@@ -24,7 +24,7 @@ const generateKey = (findLastRecord: any[], tableKey: string) => {
 const generateId = (findLastRecord: any[]) => {
     const { id } = findLastRecord[0];
 
-    return id;
+    return id++;
 };
 
 export { generateKey, generateId };
