@@ -4,7 +4,7 @@ import { ClothesService } from 'src/clothes/clothes.service';
 import { CustomersService } from 'src/customers/customers.service';
 import { EmployeesService } from 'src/employees/employees.service';
 import { Status } from 'src/global/enum/status';
-import generateKey from 'src/global/generateKey';
+import { generateId, generateKey } from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateOrderInput } from './dto/create-order.input';
 import { FilterInput } from './dto/filter.input';
@@ -56,15 +56,13 @@ export class OrdersService {
                 newOrder.primaryOrderId = createOrderInput.primaryOrderId;
             }
         } else {
-            // lastRecord[0]
-            //     ? (newOrder.primaryOrderId = lastRecord[0].id + 1)
-            //     : (newOrder.primaryOrderId = 1);
             lastRecord[0]
-                ? (newOrder.primaryOrderId = lastRecord[0].id + 5)
-                : (newOrder.primaryOrderId = 5);
+                ? (newOrder.primaryOrderId = lastRecord[0].id + 1)
+                : (newOrder.primaryOrderId = 1);
         }
 
         newOrder.key = generateKey(lastRecord, 'OD');
+        newOrder.id = generateId(lastRecord);
 
         return await this.ordersRepository.save(newOrder);
     }

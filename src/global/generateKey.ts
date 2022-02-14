@@ -20,4 +20,11 @@ const generateKey = (findLastRecord: any[], tableKey: string) => {
         +lastRecord.key.substring(4) + 1
     }`;
 };
-export default generateKey;
+
+const generateId = (findLastRecord: any[]) => {
+    const { id } = findLastRecord[0];
+
+    return id;
+};
+
+export { generateKey, generateId };
