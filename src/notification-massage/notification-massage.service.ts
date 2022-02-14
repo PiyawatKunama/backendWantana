@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Status } from 'src/global/enum/status';
-import generateKey from 'src/global/generateKey';
+import { generateKey } from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateNotificationMassageInput } from './dto/create-notification-massage.input';
 import { UpdateNotificationMassageInput } from './dto/update-notification-massage.input';

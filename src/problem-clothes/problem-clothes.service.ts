@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import generateKey from 'src/global/generateKey';
+import { generateKey } from 'src/global/generateKey';
 import { Repository } from 'typeorm';
 import { CreateProblemClotheInput } from './dto/create-problem-clothe.input';
 import { UpdateProblemClotheInput } from './dto/update-problem-clothe.input';

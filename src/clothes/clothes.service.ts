@@ -1,7 +1,7 @@
 import { ProblemClothesService } from './../problem-clothes/problem-clothes.service';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import generateKey from 'src/global/generateKey';
+import { generateKey } from 'src/global/generateKey';
 import { SortClothesService } from 'src/sort-clothes/sort-clothes.service';
 import { TypeClothesService } from 'src/type-clothes/type-clothes.service';
 import { Entity, Repository } from 'typeorm';
