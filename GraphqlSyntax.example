@@ -400,3 +400,10 @@ mutation{
 }
 
 เอาแต่คนที่ยังลาออก / soft delete
+
+query{
+  deletedEmployees{
+    id
+  }
+}
+

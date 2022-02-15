@@ -57,7 +57,7 @@ export class Employee {
     orders: Order[];
 
     @Column({ default: null })
-    @Field(() => Date)
+    @Field(() => Date, { nullable: true })
     deleted_at: Date;
 
     @CreateDateColumn({
