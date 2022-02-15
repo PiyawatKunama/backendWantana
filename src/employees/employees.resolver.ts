@@ -20,6 +20,11 @@ export class EmployeesResolver {
         return this.employeesService.findAll();
     }
 
+    @Query(() => [Employee], { name: 'deletedEmployees' })
+    findAllDeleted() {
+        return this.employeesService.findAllDeleted();
+    }
+
     @Query(() => Employee, { name: 'employee' })
     findOne(@Args('id', { type: () => Int }) id: number) {
         return this.employeesService.findOne(id);
@@ -40,6 +45,13 @@ export class EmployeesResolver {
     async removeEmployee(@Args('id', { type: () => Int }) id: number) {
         const removeData = await this.employeesService.findOne(id);
         await this.employeesService.remove(id);
+        return removeData;
+    }
+
+    @Mutation(() => Employee)
+    async softRemoveEmployee(@Args('id', { type: () => Int }) id: number) {
+        const removeData = await this.employeesService.findOne(id);
+        await this.employeesService.softDelete(id);
         return removeData;
     }
 }

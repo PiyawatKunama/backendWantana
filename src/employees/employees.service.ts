@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Customer } from 'src/customers/entities/customer.entity';
 import { generateKey } from 'src/global/generateKey';
-import { Repository } from 'typeorm';
+import { IsNull, Not, Repository } from 'typeorm';
 import { CreateEmployeeInput } from './dto/create-employee.input';
 import { UpdateEmployeeInput } from './dto/update-employee.input';
 import { Employee } from './entities/employee.entity';
@@ -28,7 +27,21 @@ export class EmployeesService {
     }
 
     async findAll(): Promise<Employee[]> {
-        return await this.employeesRepository.find(Relations);
+        return await this.employeesRepository.find({
+            ...Relations,
+            where: {
+                deleted_at: IsNull(),
+            },
+        });
+    }
+
+    async findAllDeleted(): Promise<Employee[]> {
+        return await this.employeesRepository.find({
+            ...Relations,
+            where: {
+                deleted_at: Not(IsNull()),
+            },
+        });
     }
 
     async findOne(id: number): Promise<Employee> {
@@ -38,6 +51,11 @@ export class EmployeesService {
     async update(id: number, updateEmployeeInput: UpdateEmployeeInput) {
         const updateEmployee = this.employeesRepository.create(updateEmployeeInput);
         return await this.employeesRepository.update(id, updateEmployee);
+    }
+
+    async softDelete(id: number) {
+        const date = new Date();
+        return await this.employeesRepository.update(id, { deleted_at: date });
     }
 
     async remove(id: number) {

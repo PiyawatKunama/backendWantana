@@ -56,6 +56,10 @@ export class Employee {
     @Field(() => [Order], { nullable: true })
     orders: Order[];
 
+    @Column({ default: null })
+    @Field(() => Date)
+    deleted_at: Date;
+
     @CreateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP(6)',

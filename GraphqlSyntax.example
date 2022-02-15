@@ -373,3 +373,30 @@ query{
     << ------------------------------------------------------- >> 
 
 << ------------------------------------------------------- >> 
+
+
+ลาออก === soft delete
+
+mutation{
+  softRemoveEmployee(id:1){
+    id
+  }
+}
+
+ลบจาก database จริงๆ
+
+mutation{
+  removeEmployee(id:1){
+    id
+  }
+}
+
+เอาแต่คนที่ยังไม่ ลาออก / soft delete
+
+mutation{
+  softRemoveEmployee(id:1){
+    id
+  }
+}
+
+เอาแต่คนที่ยังลาออก / soft delete

@@ -26,6 +26,8 @@ type Customer {
   email: String!
   orders: [Order!]
   notification_massage_datums: [NotificationMassageDatum!]!
+  created_at: DateTime!
+  updated_at: DateTime!
 }
 
 type Employee {
@@ -40,6 +42,9 @@ type Employee {
   password: String!
   role: role!
   orders: [Order!]
+  deleted_at: DateTime!
+  created_at: DateTime!
+  updated_at: DateTime!
 }
 
 enum role {
@@ -132,6 +137,7 @@ type Query {
   customers: [Customer!]!
   customer(id: Int!): Customer!
   employees: [Employee!]!
+  deletedEmployees: [Employee!]!
   employee(id: Int!): Employee!
   clothes: [Clothe!]!
   clothe(id: Int!): Clothe!
@@ -186,6 +192,7 @@ type Mutation {
   createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
   updateEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
   removeEmployee(id: Int!): Employee!
+  softRemoveEmployee(id: Int!): Employee!
   createClothe(createClotheInput: CreateClotheInput!): Clothe!
   createClotheHasProblem(createClotheProblemInput: CreateClotheProblemInput!): String!
   updateClothe(updateClotheInput: UpdateClotheInput!): String!
