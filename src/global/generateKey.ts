@@ -5,16 +5,26 @@ const generateKey = (findLastRecord: any[], tableKey: string) => {
     let fillNumber = '';
 
     if (lastRecord) {
-        fillNumber = defaultNumber.substring(
-            (+lastRecord.key.substring(4) + 1).toString().length,
-        );
+        if (!lastRecord.subData) {
+            fillNumber = defaultNumber.substring(
+                (+lastRecord.key.substring(4) + 1).toString().length,
+            );
+        } else {
+            fillNumber = defaultNumber.substring(
+                (+lastRecord.key.substring(4)).toString().length,
+            );
+        }
     } else {
         fillNumber = defaultNumber.substring(1);
         lastRecord = { key: 'CL000000' };
     }
 
     const date = new Date();
-    const shortYearTH = (date.getFullYear() + 543).toString().substring(2);
+    let shortYearTH = '';
+    if (tableKey === 'OD') {
+        shortYearTH = (date.getFullYear() + 543).toString().substring(2);
+        fillNumber = `0${fillNumber}`;
+    }
 
     return `${tableKey}${shortYearTH}${fillNumber}${
         +lastRecord.key.substring(4) + 1
