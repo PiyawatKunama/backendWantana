@@ -8,4 +8,7 @@ export class UpdateProblemClotheInput extends PartialType(CreateProblemClotheInp
 
     @Field()
     name: string;
+
+    @Field(() => Boolean, { nullable: true })
+    isDisable?: boolean;
 }
