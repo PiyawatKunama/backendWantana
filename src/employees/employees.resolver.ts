@@ -54,4 +54,11 @@ export class EmployeesResolver {
         await this.employeesService.softDelete(id);
         return removeData;
     }
+
+    @Mutation(() => Employee)
+    async restoreEmployee(@Args('id', { type: () => Int }) id: number) {
+        const removeData = await this.employeesService.findOne(id);
+        await this.employeesService.restore(id);
+        return removeData;
+    }
 }

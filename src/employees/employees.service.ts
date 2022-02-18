@@ -58,6 +58,10 @@ export class EmployeesService {
         return await this.employeesRepository.update(id, { deleted_at: date });
     }
 
+    async restore(id: number) {
+        return await this.employeesRepository.update(id, { deleted_at: null });
+    }
+
     async remove(id: number) {
         return await this.employeesRepository.delete(id);
     }

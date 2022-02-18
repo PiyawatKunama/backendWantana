@@ -20,7 +20,7 @@ export class Customer {
     @Field({ nullable: true })
     key?: string;
 
-    @Column()
+    @Column({ unique: true })
     @Field()
     idCard: string;
 

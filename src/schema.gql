@@ -48,6 +48,7 @@ type Employee {
 }
 
 enum role {
+  HEAD_ADMIN
   ADMIN
   SUB_ADMIN
 }
@@ -193,6 +194,7 @@ type Mutation {
   updateEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
   removeEmployee(id: Int!): Employee!
   softRemoveEmployee(id: Int!): Employee!
+  restoreEmployee(id: Int!): Employee!
   createClothe(createClotheInput: CreateClotheInput!): Clothe!
   createClotheHasProblem(createClotheProblemInput: CreateClotheProblemInput!): String!
   updateClothe(updateClotheInput: UpdateClotheInput!): String!
