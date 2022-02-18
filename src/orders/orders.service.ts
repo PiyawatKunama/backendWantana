@@ -61,8 +61,13 @@ export class OrdersService {
                 : (newOrder.primaryOrderId = 1);
         }
 
-        newOrder.key = generateKey(lastRecord, 'OD');
         newOrder.id = generateId(lastRecord);
+
+        if (createOrderInput.primaryOrderId) {
+            lastRecord[0].id = lastRecord[0].primaryOrderId - 1;
+        }
+
+        newOrder.key = generateKey(lastRecord, 'OD');
 
         return await this.ordersRepository.save(newOrder);
     }
