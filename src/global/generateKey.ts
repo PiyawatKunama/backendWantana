@@ -1,7 +1,10 @@
 const generateKey = (findLastRecord: any[], tableKey: string) => {
     let lastRecord: any = findLastRecord[0];
 
-    const defaultNumber = '0000';
+    let defaultNumber = '0000';
+    if (tableKey === 'CL') {
+        defaultNumber = '000000';
+    }
     let fillNumber = '';
 
     if (lastRecord) {
