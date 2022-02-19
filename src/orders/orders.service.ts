@@ -38,29 +38,37 @@ export class OrdersService {
 
         newOrder.employee = employee;
 
-        const lastRecord = await this.ordersRepository.find({
+        const lastRecord: any = await this.ordersRepository.find({
             order: { id: 'DESC' },
             take: 1,
         });
 
         if (createOrderInput.primaryOrderId) {
             if (lastRecord[0]) {
-                await this.ordersRepository.find({
+                const primaryOrder = await this.ordersRepository.find({
                     where: {
                         primaryOrderId: createOrderInput.primaryOrderId,
                     },
                     order: { id: 'DESC' },
                     take: 1,
                 });
-
+                lastRecord[0].key = primaryOrder[0].key;
                 newOrder.primaryOrderId = createOrderInput.primaryOrderId;
             }
         } else {
             lastRecord[0]
                 ? (newOrder.primaryOrderId = lastRecord[0].id + 1)
                 : (newOrder.primaryOrderId = 1);
+
+            const lastOderByKey = await this.ordersRepository.find({
+                order: { key: 'DESC' },
+                take: 1,
+            });
+
+            lastRecord[0].key = lastOderByKey[0].key;
         }
 
+        lastRecord[0].primaryOrderId = createOrderInput.primaryOrderId;
         newOrder.id = generateId(lastRecord);
 
         if (createOrderInput.primaryOrderId) {

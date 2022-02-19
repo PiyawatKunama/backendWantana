@@ -27,6 +27,11 @@ const generateKey = (findLastRecord: any[], tableKey: string) => {
     if (tableKey === 'OD') {
         shortYearTH = (date.getFullYear() + 543).toString().substring(2);
         fillNumber = `0${fillNumber}`;
+        if (lastRecord.primaryOrderId) {
+            return lastRecord.key;
+        } else {
+            return `${tableKey}${+lastRecord.key.substring(2) + 1}`;
+        }
     }
 
     return `${tableKey}${shortYearTH}${fillNumber}${

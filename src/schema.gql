@@ -123,6 +123,7 @@ type ProblemClothe {
   id: Int!
   key: String
   name: String!
+  isDisable: Boolean!
   clothes: [Clothe!]
   clotheHasProblems: [ClotheHasProblem!]!
 }
@@ -317,6 +318,7 @@ input CreateProblemClotheInput {
 input UpdateProblemClotheInput {
   name: String!
   id: Int!
+  isDisable: Boolean
 }
 
 input CreateOrderInput {
