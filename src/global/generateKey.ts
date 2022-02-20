@@ -30,7 +30,7 @@ const generateKey = (findLastRecord: any[], tableKey: string) => {
         if (lastRecord.primaryOrderId) {
             return lastRecord.key;
         } else {
-            return `${tableKey}${+lastRecord.key.substring(2) + 1}`;
+            return `${tableKey}${fillNumber}${+lastRecord.key.substring(4) + 1}`;
         }
     }
 

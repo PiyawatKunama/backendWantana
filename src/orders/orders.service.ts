@@ -65,10 +65,14 @@ export class OrdersService {
                 take: 1,
             });
 
-            lastRecord[0].key = lastOderByKey[0].key;
+            if (lastOderByKey.length) {
+                lastRecord[0].key = lastOderByKey[0].key;
+            }
         }
 
-        lastRecord[0].primaryOrderId = createOrderInput.primaryOrderId;
+        if (lastRecord.length) {
+            lastRecord[0].primaryOrderId = createOrderInput.primaryOrderId;
+        }
         newOrder.id = generateId(lastRecord);
 
         if (createOrderInput.primaryOrderId) {
