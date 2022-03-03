@@ -16,7 +16,16 @@ export class UpdateCustomerInput extends PartialType(CreateCustomerInput) {
     lastName: string;
 
     @Field({ nullable: true })
-    address: string;
+    houseNo: string;
+
+    @Field({ nullable: true })
+    proVince: string;
+
+    @Field({ nullable: true })
+    disTrict: string;
+
+    @Field(() => Int)
+    postalCode: number;
 
     @Field({ nullable: true })
     phoneNumber: string;

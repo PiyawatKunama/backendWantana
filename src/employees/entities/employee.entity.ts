@@ -34,7 +34,19 @@ export class Employee {
 
     @Column()
     @Field()
-    address: string;
+    houseNo: string; //Street Name, Building, House No.
+
+    @Column()
+    @Field()
+    proVince: string;
+
+    @Column()
+    @Field()
+    disTrict: string;
+
+    @Column()
+    @Field(() => Int)
+    postalCode: number;
 
     @Column()
     @Field()

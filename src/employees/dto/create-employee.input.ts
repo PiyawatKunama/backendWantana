@@ -13,7 +13,16 @@ export class CreateEmployeeInput {
     lastName: string;
 
     @Field()
-    address: string;
+    houseNo: string; //Street Name, Building, House No.
+
+    @Field()
+    proVince: string;
+
+    @Field()
+    disTrict: string;
+
+    @Field(() => Int)
+    postalCode: number;
 
     @Field()
     phoneNumber: string;

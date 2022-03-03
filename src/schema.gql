@@ -20,7 +20,10 @@ type Customer {
   idCard: String!
   firstName: String!
   lastName: String!
-  address: String!
+  houseNo: String!
+  proVince: String!
+  disTrict: String!
+  postalCode: Int!
   phoneNumber: String!
   lineUserId: String
   email: String!
@@ -36,7 +39,10 @@ type Employee {
   idCard: String!
   firstName: String!
   lastName: String!
-  address: String!
+  houseNo: String!
+  proVince: String!
+  disTrict: String!
+  postalCode: Int!
   phoneNumber: String!
   email: String!
   password: String!
@@ -224,7 +230,10 @@ input CreateCustomerInput {
   idCard: String!
   firstName: String!
   lastName: String!
-  address: String!
+  houseNo: String!
+  proVince: String!
+  disTrict: String!
+  postalCode: Int!
   phoneNumber: String!
   email: String!
 }
@@ -233,7 +242,10 @@ input UpdateCustomerInput {
   idCard: String
   firstName: String
   lastName: String
-  address: String
+  houseNo: String
+  proVince: String
+  disTrict: String
+  postalCode: Int!
   phoneNumber: String
   email: String
   id: Int!
@@ -244,7 +256,10 @@ input CreateEmployeeInput {
   idCard: String!
   firstName: String!
   lastName: String!
-  address: String!
+  houseNo: String!
+  proVince: String!
+  disTrict: String!
+  postalCode: Int!
   phoneNumber: String!
   email: String!
   password: String!
@@ -255,7 +270,10 @@ input UpdateEmployeeInput {
   idCard: String
   firstName: String
   lastName: String
-  address: String
+  houseNo: String
+  proVince: String
+  disTrict: String
+  postalCode: Int!
   phoneNumber: String
   email: String
   password: String
