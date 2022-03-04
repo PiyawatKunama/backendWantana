@@ -34,7 +34,7 @@ export class Customer {
 
     @Column()
     @Field()
-    houseNo: string; //Street Name, Building, House No.
+    address: string; //Street Name, Building, House No.
 
     @Column()
     @Field()

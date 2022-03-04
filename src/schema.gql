@@ -20,7 +20,7 @@ type Customer {
   idCard: String!
   firstName: String!
   lastName: String!
-  houseNo: String!
+  address: String!
   proVince: String!
   disTrict: String!
   postalCode: Int!
@@ -39,7 +39,7 @@ type Employee {
   idCard: String!
   firstName: String!
   lastName: String!
-  houseNo: String!
+  address: String!
   proVince: String!
   disTrict: String!
   postalCode: Int!
@@ -230,7 +230,7 @@ input CreateCustomerInput {
   idCard: String!
   firstName: String!
   lastName: String!
-  houseNo: String!
+  address: String!
   proVince: String!
   disTrict: String!
   postalCode: Int!
@@ -242,7 +242,7 @@ input UpdateCustomerInput {
   idCard: String
   firstName: String
   lastName: String
-  houseNo: String
+  address: String
   proVince: String
   disTrict: String
   postalCode: Int!
@@ -256,7 +256,7 @@ input CreateEmployeeInput {
   idCard: String!
   firstName: String!
   lastName: String!
-  houseNo: String!
+  address: String!
   proVince: String!
   disTrict: String!
   postalCode: Int!
@@ -270,7 +270,7 @@ input UpdateEmployeeInput {
   idCard: String
   firstName: String
   lastName: String
-  houseNo: String
+  address: String
   proVince: String
   disTrict: String
   postalCode: Int!

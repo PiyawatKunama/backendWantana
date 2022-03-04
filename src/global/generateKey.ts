@@ -35,6 +35,16 @@ const generateKey = (findLastRecord: any[], tableKey: string) => {
             }`;
         }
     }
+    if (tableKey === 'CU') {
+        shortYearTH = (date.getFullYear() + 543).toString().substring(2);
+        fillNumber = `${fillNumber}`;
+        if (lastRecord.primaryOrderId) {
+            return lastRecord.key;
+        }
+        else {
+            return `${tableKey}${shortYearTH}${fillNumber}${+lastRecord.key.substring(4) + 1}`;
+        }
+    }
 
     return `${tableKey}0${fillNumber}${+lastRecord.key.substring(4) + 1}`;
 };

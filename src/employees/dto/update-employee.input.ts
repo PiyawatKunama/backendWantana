@@ -17,7 +17,7 @@ export class UpdateEmployeeInput extends PartialType(CreateEmployeeInput) {
     lastName: string;
 
     @Field({ nullable: true })
-    houseNo: string;
+    address: string;
 
     @Field({ nullable: true })
     proVince: string;

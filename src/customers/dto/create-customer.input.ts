@@ -12,7 +12,7 @@ export class CreateCustomerInput {
     lastName: string;
 
     @Field()
-    houseNo: string; //Street Name, Building, House No.
+    address: string; //Street Name, Building, House No.
 
     @Field()
     proVince: string;
