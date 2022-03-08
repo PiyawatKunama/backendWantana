@@ -38,11 +38,15 @@ export class Customer {
 
     @Column()
     @Field()
-    proVince: string;
-
+    subDistrict: string;
+    
     @Column()
     @Field()
     disTrict: string;
+    
+    @Column()
+    @Field()
+    proVince: string;
 
     @Column()
     @Field(() => Int)

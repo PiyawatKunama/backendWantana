@@ -20,6 +20,9 @@ export class CreateCustomerInput {
     @Field()
     disTrict: string;
 
+    @Field()
+    subDistrict: string;
+
     @Field(() => Int)
     postalCode: number;
 

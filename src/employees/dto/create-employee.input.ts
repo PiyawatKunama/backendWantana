@@ -19,7 +19,10 @@ export class CreateEmployeeInput {
     proVince: string;
 
     @Field()
-    disTrict: string;
+    tambon: string;
+
+    @Field()
+    subDistrict: string;
 
     @Field(() => Int)
     postalCode: number;

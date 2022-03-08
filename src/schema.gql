@@ -21,8 +21,9 @@ type Customer {
   firstName: String!
   lastName: String!
   address: String!
-  proVince: String!
+  subDistrict: String!
   disTrict: String!
+  proVince: String!
   postalCode: Int!
   phoneNumber: String!
   lineUserId: String
@@ -42,6 +43,7 @@ type Employee {
   address: String!
   proVince: String!
   disTrict: String!
+  subDistrict: String!
   postalCode: Int!
   phoneNumber: String!
   email: String!
@@ -233,6 +235,7 @@ input CreateCustomerInput {
   address: String!
   proVince: String!
   disTrict: String!
+  subDistrict: String!
   postalCode: Int!
   phoneNumber: String!
   email: String!
@@ -245,6 +248,7 @@ input UpdateCustomerInput {
   address: String
   proVince: String
   disTrict: String
+  subDistrict: String
   postalCode: Int!
   phoneNumber: String
   email: String
@@ -258,7 +262,8 @@ input CreateEmployeeInput {
   lastName: String!
   address: String!
   proVince: String!
-  disTrict: String!
+  tambon: String!
+  subDistrict: String!
   postalCode: Int!
   phoneNumber: String!
   email: String!
@@ -272,13 +277,15 @@ input UpdateEmployeeInput {
   lastName: String
   address: String
   proVince: String
-  disTrict: String
+  tambon: String
+  subDistrict: String
   postalCode: Int!
   phoneNumber: String
   email: String
   password: String
   role: role
   id: Int
+  disTrict: String
 }
 
 input CreateClotheInput {

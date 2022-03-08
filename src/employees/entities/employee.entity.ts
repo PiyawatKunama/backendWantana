@@ -45,6 +45,10 @@ export class Employee {
     disTrict: string;
 
     @Column()
+    @Field()
+    subDistrict: string;
+
+    @Column()
     @Field(() => Int)
     postalCode: number;
 

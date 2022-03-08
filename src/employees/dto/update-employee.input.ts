@@ -25,6 +25,9 @@ export class UpdateEmployeeInput extends PartialType(CreateEmployeeInput) {
     @Field({ nullable: true })
     disTrict: string;
 
+    @Field({ nullable: true })
+    subDistrict: string;
+
     @Field(() => Int)
     postalCode: number;
 

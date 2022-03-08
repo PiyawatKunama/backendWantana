@@ -23,6 +23,9 @@ export class UpdateCustomerInput extends PartialType(CreateCustomerInput) {
 
     @Field({ nullable: true })
     disTrict: string;
+    
+    @Field({ nullable: true })
+    subDistrict: string;
 
     @Field(() => Int)
     postalCode: number;
