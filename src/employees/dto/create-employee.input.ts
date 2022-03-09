@@ -19,7 +19,7 @@ export class CreateEmployeeInput {
     proVince: string;
 
     @Field()
-    tambon: string;
+    disTrict: string;
 
     @Field()
     subDistrict: string;

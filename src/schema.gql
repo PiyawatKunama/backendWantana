@@ -262,7 +262,7 @@ input CreateEmployeeInput {
   lastName: String!
   address: String!
   proVince: String!
-  tambon: String!
+  disTrict: String!
   subDistrict: String!
   postalCode: Int!
   phoneNumber: String!
@@ -277,7 +277,7 @@ input UpdateEmployeeInput {
   lastName: String
   address: String
   proVince: String
-  tambon: String
+  disTrict: String
   subDistrict: String
   postalCode: Int!
   phoneNumber: String
@@ -285,7 +285,6 @@ input UpdateEmployeeInput {
   password: String
   role: role
   id: Int
-  disTrict: String
 }
 
 input CreateClotheInput {
